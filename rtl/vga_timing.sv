@@ -71,28 +71,28 @@ always_comb begin
         vcount_nxt = vcount;
     end
 
-    if((hcount_nxt >= HOR_SYNC_START) && (hcount_nxt < (HOR_SYNC_START + HOR_SYNC_TIME))) begin 
+    if((hcount_nxt >= HOR_SYNC_START) && (hcount_nxt < HOR_SYNC_END)) begin 
         hsync_nxt = 1;
     end
     else begin 
         hsync_nxt = '0; 
     end
 
-    if((hcount_nxt >= (HOR_BLANK_START)) && (hcount_nxt <= (HOR_TOTAL_TIME - 1))) begin 
+    if((hcount_nxt >= (HOR_BLANK_START)) && (hcount_nxt <= HOR_BLANK_END )) begin 
         hblnk_nxt = 1;
     end
     else begin 
         hblnk_nxt = '0;
     end
 
-    if((vcount_nxt >= (VER_SYNC_START)) && (vcount_nxt < (VER_SYNC_START + VER_SYNC_TIME)))begin 
+    if((vcount_nxt >= (VER_SYNC_START)) && (vcount_nxt < VER_SYNC_END))begin 
         vsync_nxt = 1;
     end
     else begin 
         vsync_nxt = '0;
     end
 
-    if((vcount_nxt >= (VER_BLANK_START)) && (vcount_nxt <= (VER_TOTAL_TIME - 1))) begin 
+    if((vcount_nxt >= (VER_BLANK_START)) && (vcount_nxt <= VER_BLANK_END)) begin 
         vblnk_nxt = 1;
     end
     else begin 
