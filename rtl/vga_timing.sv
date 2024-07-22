@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2023  AGH University of Science and Technology
  * MTM UEC2
- * Author: Piotr Kaczmarczyk
+ * Author: Tomasz Maslanka, Jakub Brzazgacz
  *
  * Description:
  * Vga timing controller.
@@ -12,12 +12,7 @@
 module vga_timing (
     input  logic clk,
     input  logic rst,
-    output logic [10:0] vcount,
-    output logic vsync,
-    output logic vblnk,
-    output logic [10:0] hcount,
-    output logic hsync,
-    output logic hblnk
+    vga_if.out out
 );
 
 import vga_pkg::*;
@@ -38,37 +33,37 @@ logic hblnk_nxt;
  */
  always_ff @(posedge clk) begin
     if (rst) begin
-        vcount <= '0;
-        vsync  <= '0;
-        vblnk  <= '0;
-        hcount <= '0;
-        hsync  <= '0;
-        hblnk  <= '0;
+        out.vcount <= '0;
+        out.vsync  <= '0;
+        out.vblnk  <= '0;
+        out.hcount <= '0;
+        out.hsync  <= '0;
+        out.hblnk  <= '0;
     end 
     else begin
-        vcount <= vcount_nxt;
-        vsync  <= vsync_nxt;
-        vblnk  <= vblnk_nxt;
-        hcount <= hcount_nxt;
-        hsync  <= hsync_nxt;
-        hblnk  <= hblnk_nxt;
+        out.vcount <= vcount_nxt;
+        out.vsync  <= vsync_nxt;
+        out.vblnk  <= vblnk_nxt;
+        out.hcount <= hcount_nxt;
+        out.hsync  <= hsync_nxt;
+        out.hblnk  <= hblnk_nxt;
     end
 end
 
 always_comb begin
-    if(hcount == (HOR_TOTAL_TIME - 1)) begin
+    if(out.hcount == (HOR_TOTAL_TIME - 1)) begin
         hcount_nxt = '0;
-        if(vcount == (VER_TOTAL_TIME - 1)) begin 
+        if(out.vcount == (VER_TOTAL_TIME - 1)) begin 
             vcount_nxt = '0;
         end
         else begin
-            vcount_nxt = vcount + 1;
+            vcount_nxt = out.vcount + 1;
         end
     end
 
     else begin
-        hcount_nxt = hcount + 1;
-        vcount_nxt = vcount;
+        hcount_nxt = out.hcount + 1;
+        vcount_nxt = out.vcount;
     end
 
     if((hcount_nxt >= HOR_SYNC_START) && (hcount_nxt < HOR_SYNC_END)) begin 
