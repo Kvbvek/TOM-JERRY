@@ -31,12 +31,10 @@ module top_vga (
 
 // VGA signals from timing
 vga_if timing();
-
 // VGA signals from background
 vga_if bg();
 
 vga_if tomctrl();
-
 vga_if drawtom();
 
 /**
