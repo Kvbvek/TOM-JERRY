@@ -13,9 +13,7 @@
 		output logic [11:0] data
 	);
 
-	 (* rom_style = "block" *) // block || distributed
-
-	logic [11:0] rom [4999:0]; // rom memory
+	logic [11:0] rom [4999:0];
 
 	initial
 		$readmemh("../../rtl/data/tom.dat", rom);

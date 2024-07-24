@@ -1,6 +1,6 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2024-07-24 18:29:11
+Created: 2024-07-24 19:33:36
 
 ----SYNTHESIS----
 WARNING: [Synth 8-3848] Net out\.rgb in module/entity vga_timing does not have driver. [/home/student/jbrzazgacz/UEC2/p1/p_0.0.5/TOM-JERRY/rtl/vga_timing.sv:15]
