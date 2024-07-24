@@ -1,4 +1,3 @@
-
 // file: clk_wiz_0.v
 // 
 // (c) Copyright 2008 - 2013 Xilinx, Inc. All rights reserved.

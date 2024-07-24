@@ -58,6 +58,7 @@ clk_wiz_0_clk_wiz u_clk_wiz_0(
     .clk(clk),
     .clk65(pclk),
     .clk100(clk100),
+    .reset(0),
     .locked(locked)
     );
 

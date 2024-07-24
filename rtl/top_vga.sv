@@ -35,14 +35,17 @@ vga_if timing();
 // VGA signals from background
 vga_if bg();
 
+vga_if tomctrl();
+
+vga_if drawtom();
 
 /**
  * Signals assignments
  */
 
-assign vs = bg.vsync;
-assign hs = bg.hsync;
-assign {r,g,b} = bg.rgb;
+assign vs = drawtom.vsync;
+assign hs = drawtom.hsync;
+assign {r,g,b} = drawtom.rgb;
 
 
 /**
@@ -61,6 +64,38 @@ draw_bg u_draw_bg (
 
     .in(timing),
     .out(bg)
+);
+
+logic [19:0] address_wire;
+logic [9:0] tom_x_wire;
+logic [9:0] tom_y_wire;
+
+tom_ctrl u_tom_ctrl(
+    .clk,
+    .rst,
+
+    .tom_x(tom_x_wire),
+    .tom_y(tom_y_wire)
+);
+
+logic [11:0] data_wire;
+
+tom_rom u_tom_rom(
+    .clk,
+    .address(address_wire),
+    .data(data_wire)
+
+);
+
+draw_tom u_draw_tom (
+    .clk,
+    .rst,
+    .tom_x(tom_x_wire),
+    .tom_y(tom_y_wire),
+    .data(data_wire),
+    .in(bg),
+    .out(drawtom),
+    .address(address_wire)
 );
 
 endmodule
