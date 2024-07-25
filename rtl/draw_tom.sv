@@ -85,9 +85,9 @@ logic [11:0] rgb_d;
     imag_x_nxt = in.hcount - tom_x;
     imag_y_nxt = tom_y - in.vcount;
     address_nxt = imag_y * TOM_WIDTH + imag_x;
-     if((in.vcount <= tom_y) && (in.vcount > (tom_y - TOM_HEIGHT))  && (in.hcount > tom_x) && (in.hcount <= tom_x + TOM_WIDTH)) begin
+     if((in.vcount <= tom_y) && (in.vcount > (tom_y - TOM_HEIGHT))  && (in.hcount > tom_x + 2) && (in.hcount <= tom_x + 2 + TOM_WIDTH)) begin
         /* if(data == 12'hf_f_f) begin
-            rgb_nxt = in.rgb;
+            rgb_nxt = rgb_d;
         end
         else begin 
             rgb_nxt = data;
