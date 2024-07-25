@@ -16,13 +16,10 @@
      input logic [11:0] data,
      input logic [9:0] tom_x,
      input logic [9:0] tom_y,
-    vga_if in,
+    vga_if.in in,
 
     output logic [19:0] address,
-    vga_if out
- 
-     /* input logic [9:0] x_tom,
-     input logic [9:0] y_tom */
+    vga_if.out out
      
  );
  
@@ -37,17 +34,13 @@
 logic [11:0] rgb_nxt;
 logic [19:0] address_nxt;
 
-logic [10:0] vcount_d, hcount_d;
+logic [10:0] vcount_d, hcount_d, imag_x, imag_y, imag_x_nxt, imag_y_nxt;
 logic [11:0] rgb_d;
 
- 
- /**
-  * Internal logic
-  */
 
  delay #(
         .WIDTH (38),
-        .CLK_DEL(2)
+        .CLK_DEL(3)
     ) u_delay (
         .clk (clk),
         .rst (rst),
@@ -66,6 +59,10 @@ logic [11:0] rgb_d;
         out.rgb    <= '0;
 
          address    <= '0;
+
+         imag_x <= '0;
+         imag_y <= '0;
+
     end else begin
         out.vcount <= vcount_d;
         out.vsync  <= vsync_d;
@@ -76,12 +73,19 @@ logic [11:0] rgb_d;
         out.rgb    <= rgb_nxt;
 
          address    <= address_nxt;
+
+         imag_x <= imag_x_nxt;
+         imag_y <= imag_y_nxt;
     end
  end
  
+// logic
+
  always_comb begin
-    address_nxt = ((in.vcount - tom_y)) * (TOM_WIDTH) + ((in.hcount - tom_x));
-     if((in.vcount < (768 - tom_y)) && (in.vcount >= (768 - TOM_HEIGHT - tom_y))  && (in.hcount >= tom_x) && (in.hcount < tom_x + TOM_WIDTH)) begin
+    imag_x_nxt = in.hcount - tom_x;
+    imag_y_nxt = tom_y - in.vcount;
+    address_nxt = imag_y * TOM_WIDTH + imag_x;
+     if((in.vcount <= tom_y) && (in.vcount > (tom_y - TOM_HEIGHT))  && (in.hcount > tom_x) && (in.hcount <= tom_x + TOM_WIDTH)) begin
         /* if(data == 12'hf_f_f) begin
             rgb_nxt = in.rgb;
         end

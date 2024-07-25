@@ -14,11 +14,9 @@ module draw_bg (
     input  logic clk,
     input  logic rst,
 
-    vga_if.in in,
-
+    vga_if_norgb.in in,
     vga_if.out out
 
-    
 );
 
 import vga_pkg::*;

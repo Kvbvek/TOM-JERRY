@@ -17,5 +17,14 @@ interface vga_if;
         modport in (input vcount, hcount, vsync, hsync, vblnk, hblnk, rgb);
         modport out (output vcount, hcount, vsync, hsync, vblnk, hblnk, rgb);
 
+
 endinterface
-    
+
+interface vga_if_norgb;
+        logic [10:0] vcount, hcount;
+        logic vsync, vblnk, hsync, hblnk;
+
+        modport in (input vcount, hcount, vsync, hsync, vblnk, hblnk);
+        modport out (output vcount, hcount, vsync, hsync, vblnk, hblnk);
+
+endinterface

@@ -30,7 +30,7 @@ module top_vga (
  */
 
 // VGA signals from timing
-vga_if timing();
+vga_if_norgb timing();
 // VGA signals from background
 vga_if bg();
 
@@ -80,8 +80,8 @@ logic [11:0] data_wire;
 
 tom_rom u_tom_rom(
     .clk,
-    .address(address_wire),
-    .data(data_wire)
+    .addrA(address_wire),
+    .dout(data_wire)
 
 );
 
