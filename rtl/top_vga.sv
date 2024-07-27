@@ -17,11 +17,17 @@
 module top_vga (
     input  logic clk,
     input  logic rst,
+    input  logic clk100, 
+    
+    inout  logic kclk,
+    inout  logic kdata,
+    
     output logic vs,
     output logic hs,
     output logic [3:0] r,
     output logic [3:0] g,
-    output logic [3:0] b
+    output logic [3:0] b,
+    output logic oflag
 );
 
 
@@ -49,6 +55,15 @@ assign {r,g,b} = drawtom.rgb;
 /**
  * Submodules instances
  */
+
+ top u_keyboardtop(
+    .clk(clk100),
+    .PS2Clk(kclk),
+    .PS2Data(kdata),
+    
+    .tx(oflag)
+);
+
 
 vga_timing u_vga_timing (
     .clk,
@@ -95,5 +110,9 @@ draw_tom u_draw_tom (
     .out(drawtom),
     .address(address_wire)
 );
+
+
+
+
 
 endmodule

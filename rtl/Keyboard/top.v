@@ -22,8 +22,8 @@
 
 module top(
     input         clk,
-    input         PS2Data,
-    input         PS2Clk,
+    inout         PS2Data,
+    inout         PS2Clk,
     output        tx
 );
     wire        tready;
