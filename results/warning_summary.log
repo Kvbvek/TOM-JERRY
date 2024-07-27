@@ -1,6 +1,6 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2024-07-25 16:39:48
+Created: 2024-07-27 10:03:59
 
 ----SYNTHESIS----
 WARNING: [Synth 8-7129] Port PS2Clk in module top_vga_basys3 is either unconnected or has no load
@@ -10,4 +10,4 @@ WARNING: [Synth 8-7129] Port PS2Clk in module top_vga_basys3 is either unconnect
 WARNING: [Synth 8-7129] Port PS2Data in module top_vga_basys3 is either unconnected or has no load
 
 ----IMPLEMENTATION----
-WARNING: [DRC DPOP-2] MREG Output pipelining: DSP u_top_vga/u_draw_tom/address0 multiplier stage u_top_vga/u_draw_tom/address0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+CLEAR :)

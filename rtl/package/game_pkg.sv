@@ -9,8 +9,8 @@
 
  package game_pkg;
 
-    localparam TOM_WIDTH = 50;
-    localparam TOM_HEIGHT = 100;
+    localparam TOM_WIDTH = 32;
+    localparam TOM_HEIGHT = 50;
 
     //constants to add here
 

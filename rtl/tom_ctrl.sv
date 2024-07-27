@@ -26,8 +26,8 @@ module tom_ctrl (
 /**
  * Local variables and signals
  */
-parameter TOM_X_SPAWN = 50; // left x cord 
-parameter TOM_Y_SPAWN = 718; // upper y cord with vga logic, it meands y cords lower on down side
+localparam TOM_X_SPAWN = 50;
+localparam TOM_Y_SPAWN = 50;
 
 logic [9:0] tom_x_nxt;
 logic [9:0] tom_y_nxt;

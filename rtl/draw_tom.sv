@@ -83,16 +83,15 @@ logic [11:0] rgb_d;
 
  always_comb begin
     imag_x_nxt = in.hcount - tom_x;
-    imag_y_nxt = tom_y - in.vcount;
+    imag_y_nxt = in.vcount - tom_y;
     address_nxt = imag_y * TOM_WIDTH + imag_x;
-     if((in.vcount <= tom_y) && (in.vcount > (tom_y - TOM_HEIGHT))  && (in.hcount > tom_x + 2) && (in.hcount <= tom_x + 2 + TOM_WIDTH)) begin
-        /* if(data == 12'hf_f_f) begin
+     if((in.vcount >= tom_y) && (in.vcount < (tom_y + TOM_HEIGHT))  && (in.hcount > tom_x + 2) && (in.hcount <= tom_x + 2 + TOM_WIDTH)) begin
+        if(data == 12'hf_6_f) begin
             rgb_nxt = rgb_d;
         end
         else begin 
             rgb_nxt = data;
-        end */
-        rgb_nxt = data;
+        end
      end
      else begin
         rgb_nxt = rgb_d;
