@@ -17,6 +17,8 @@
 module top_vga (
     input  logic clk,
     input  logic rst,
+    input logic left_b,
+    input logic right_b,
     output logic vs,
     output logic hs,
     output logic [3:0] r,
@@ -71,6 +73,8 @@ logic [9:0] tom_y_wire;
 tom_ctrl u_tom_ctrl(
     .clk,
     .rst,
+    .left(left_b),
+    .right(right_b),
 
     .tom_x(tom_x_wire),
     .tom_y(tom_y_wire)
