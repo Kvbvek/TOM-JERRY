@@ -1,4 +1,4 @@
-# uec2_example_project_RnD
+# TOM-JERRY GAME
 
 ## Klonowanie repozytorium
 
