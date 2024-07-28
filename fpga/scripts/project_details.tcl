@@ -33,9 +33,10 @@ set xdc_files {
 set sv_files {
     ../rtl/package/vga_pkg.sv
     ../rtl/package/game_pkg.sv
+    ../rtl/package/functions_tasks_pkg.sv
     ../rtl/delay.sv
     ../rtl/interface/vga_if.sv
-    ../rtl/tom_ctrl.sv
+    ../rtl/move_ctrl.sv
     ../rtl/draw_tom.sv
     ../rtl/tom_rom.sv
     ../rtl/vga_timing.sv

@@ -58,6 +58,8 @@ end
 top_vga dut (
     .clk(clk),
     .rst(rst),
+    .left_b(1'b0),
+    .right_b(1'b0),
     .vs(vs),
     .hs(hs),
     .r(r),
