@@ -48,6 +48,12 @@ set sv_files {
 set verilog_files {
      ../fpga/rtl/clk_wiz_0_clk_wiz.v
      ../fpga/rtl/clk_wiz_0.v
+     ../rtl/Keyboard/top.v
+     ../rtl/Keyboard/bin2ascii.v
+     ../rtl/Keyboard/debouncer.v
+     ../rtl/Keyboard/PS2Receiver.v
+     ../rtl/Keyboard/uart_buf_con.v
+     ../rtl/Keyboard/uart_tx.v
 }
 
 # Specify VHDL design files location            -- EDIT

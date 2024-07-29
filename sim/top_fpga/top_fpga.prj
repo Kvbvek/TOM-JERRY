@@ -18,4 +18,10 @@ sv work ../../rtl/vga_pkg.sv \
         top_fpga_tb.sv
 
 # compile glbl module - required for IP simulation
-verilog work ../common/glbl.v
+verilog work ../common/glbl.v \
+             ../../rtl/Keyboard/top.v \
+             ../../rtl/Keyboard/bin2ascii.v \
+             ../../rtl/Keyboard/debouncer.v \
+             ../../rtl/Keyboard/PS2Receiver.v \
+             ../../rtl/Keyboard/uart_buf_con.v \
+             ../../rtl/Keyboard/uart_tx.v 
