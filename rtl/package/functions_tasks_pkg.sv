@@ -57,7 +57,18 @@ endtask
 
 endtask
 
-    
+/* task checkCollisionWithPlatforms(
+    input [9:0] x, input [9:0] y, input int height, input int width,
+    output result);
+    begin
+        if((in.vcount == 600) && ((in.hcount > 180) && (in.hcount < 650) || (in.hcount > 780) && (in.hcount < 920)) || 
+            (in.vcount == 460) && ((in.hcount > 0) && (in.hcount < 250) || (in.hcount > 500) && (in.hcount < 600)) || 
+            (in.vcount == 320) && ((in.hcount > 600) && (in.hcount < 975)) || 
+            (in.vcount == 220) && ((in.hcount > 125) && (in.hcount < 450)))
+
+        if((y == 220) && (x <=))
+    end
+endtask */
 endpackage
     
     

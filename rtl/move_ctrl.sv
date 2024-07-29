@@ -94,16 +94,20 @@ always_comb begin
                 y_tmp = TOM_Y_SPAWN;
                 spawned_nxt = 1;
                 state_nxt = IDLE;
+                y_jump_start_nxt = 0;
             end
             else begin
                 if((right && !left && !jump) || (!right && left && !jump)) begin
                     state_nxt = MOVING;
+                    y_jump_start_nxt = 0;
                 end
                 else if(jump) begin
                     state_nxt = JUMPING;
+                    y_jump_start_nxt = y;
                 end
                 else begin
                     state_nxt = IDLE;
+                    y_jump_start_nxt = 0;
                 end
                 x_tmp = x;
                 y_tmp = y;
@@ -112,7 +116,6 @@ always_comb begin
             counterx_nxt = 0;
             countery_stop_nxt = 500_000;
             countery_nxt = 0;
-            y_jump_start_nxt = 0;
         end
 
         MOVING: begin
@@ -139,20 +142,22 @@ always_comb begin
             else begin
                 counterx_nxt = 0;
                 x_tmp = x;
-                // todo else if there is no hard floor under current x cord then goes to falling
             end
-            if((right && !left && !jump) || (!right && left && !jump)) begin
-                state_nxt = MOVING;
-                y_jump_start_nxt = 0;
-            end
-            else if(jump) begin
-                state_nxt = JUMPING;
-                y_jump_start_nxt = y;
+            if((right && !left) || (!right && left)) begin // todo else if there is no hard floor under current x cord then goes to falling
+                if(jump) begin
+                    state_nxt = JUMPING;
+                    y_jump_start_nxt = y;
+                end
+                else begin
+                    state_nxt = MOVING;
+                    y_jump_start_nxt = 0;
+                end
             end
             else begin
                 state_nxt = IDLE;
                 y_jump_start_nxt = 0;
             end
+
             y_jump_start_nxt = 0;
             y_tmp = y;
             spawned_nxt = 1;
@@ -197,7 +202,7 @@ always_comb begin
                 countery_stop_nxt = countery_stop;
             end
 
-            if(y <= (y_jump_start - JUMP_HEIGHT)) begin //todo if model hits hard floor with head then goes to falling
+            if(y <= (y_jump_start - JUMP_HEIGHT)) begin
                 state_nxt = FALLING;
             end
             else begin
@@ -243,7 +248,7 @@ always_comb begin
                 countery_nxt = countery + 1;
                 countery_stop_nxt = countery_stop;
             end
-            if(y < 1023) begin //todo if model hits hard floor with head then goes to falling
+            if(y < 767 - TOM_HEIGHT) begin //todo if model hits hard floor with head then goes to falling
                 state_nxt = FALLING;
             end
             else begin
