@@ -57,9 +57,8 @@ assign JA1 = pclk_mirror;
  */
 clk_wiz_0_clk_wiz u_clk_wiz_0(
     .clk(clk),
-    .clk65(pclk),
+    .clk87(pclk),
     .clk100(clk100),
-    .reset(0),
     .locked(locked)
     );
 
