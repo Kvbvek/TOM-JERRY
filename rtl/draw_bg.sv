@@ -20,6 +20,7 @@ module draw_bg (
 );
 
 import vga_pkg::*;
+import game_pkg::*;
 
 
 /**
@@ -68,10 +69,10 @@ always_comb begin : bg_comb_blk
 
         
         else begin        
-            if((in.vcount > 595) && (in.vcount < 605) && ((in.hcount > 180) && (in.hcount < 650) || (in.hcount > 780) && (in.hcount < 920)) || 
-            (in.vcount > 455) && (in.vcount < 465) && ((in.hcount > 0) && (in.hcount < 250) || (in.hcount > 500) && (in.hcount < 600)) || 
-            (in.vcount > 315) && (in.vcount < 325) && ((in.hcount > 600) && (in.hcount < 975)) || 
-            (in.vcount > 215) && (in.vcount < 225) && ((in.hcount > 125) && (in.hcount < 450)))
+            if((in.vcount > P1_Y_START) && (in.vcount < P1_Y_END) && ((in.hcount > P1_X_START) && (in.hcount < P1_X_END) || (in.hcount > P2_X_START) && (in.hcount < P2_X_END)) || 
+            (in.vcount > P3_Y_START) && (in.vcount < P3_Y_END) && ((in.hcount > P3_X_START) && (in.hcount < P3_X_END) || (in.hcount > P4_X_START) && (in.hcount < P4_X_END)) || 
+            (in.vcount > P5_Y_START) && (in.vcount < P5_Y_END) && ((in.hcount > P5_X_START) && (in.hcount < P5_X_END)) || 
+            (in.vcount > P6_Y_START) && (in.vcount < P6_Y_END) && ((in.hcount > P6_X_START) && (in.hcount < P6_X_END)))
             begin
                 rgb_nxt = 12'h0_0_0;
             end

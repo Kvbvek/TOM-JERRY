@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////////////
 /*
- Module name:   x_ctrl
+ Module name:   move_ctrl
  Author:        Tomasz Maslanka, Jakub Brzazgacz
  Version:       1.0
- Last modified: 2024-07-28
+ Last modified: 2024-08-07
  Coding style: safe with FPGA sync reset
- Description:  Module for controlling movement left right of player
+ Description:  Module for controlling movement of player
  */
 //////////////////////////////////////////////////////////////////////////////
 
@@ -34,9 +34,9 @@ import functions_tasks_pkg::*;
 // coords as two lower values, meaning upper y cord and left x cord 
 localparam TOM_X_SPAWN = 500;
 localparam TOM_Y_SPAWN = 768 - 1 - TOM_HEIGHT - 200;
-localparam JUMP_HEIGHT = 100;
+localparam JUMP_HEIGHT = 200;
 
-localparam COUNTERX_STOP = 500_000;
+localparam COUNTERX_STOP = 400_000;
 
 localparam STATE_BITS = 2; // number of bits used for state register
 
@@ -53,10 +53,11 @@ state state_c, state_nxt;
 
 logic [19:0] counterx, counterx_nxt, countery, countery_nxt;
 logic [23:0] countery_stop, countery_stop_nxt;
-logic [9:0] x_tmp;//, x_nxt;
-logic [9:0] y_tmp, y_jump_start, y_jump_start_nxt; //y_nxt;
+logic [9:0] x_tmp, x_nxt;
+logic [9:0] y_tmp, y_jump_start, y_jump_start_nxt, y_nxt;
 logic spawned, spawned_nxt;
 
+// bit result;
 always_ff @(posedge clk) begin
     if (rst) begin
         x <= '0;
@@ -71,8 +72,8 @@ always_ff @(posedge clk) begin
         state_c <= IDLE;
     end 
     else begin
-        x <= x_tmp;
-        y <= y_tmp;
+        x <= x_nxt;
+        y <= y_nxt;
         y_jump_start <= y_jump_start_nxt;
 
         counterx <= counterx_nxt;
@@ -114,8 +115,11 @@ always_comb begin
                 spawned_nxt = 1;
             end
             counterx_nxt = 0;
-            countery_stop_nxt = 500_000;
+            countery_stop_nxt = 400_000;
             countery_nxt = 0;
+
+            correctCoordinateX(x_tmp, TOM_WIDTH, x_nxt);
+            correctCoordinateY(y_tmp, TOM_HEIGHT, y_nxt);
         end
 
         MOVING: begin
@@ -143,12 +147,13 @@ always_comb begin
                 counterx_nxt = 0;
                 x_tmp = x;
             end
-            if((right && !left) || (!right && left)) begin // todo else if there is no hard floor under current x cord then goes to falling
+            y_jump_start_nxt = 0;
+            if((right && !left) || (!right && left)) begin
                 if(jump) begin
                     state_nxt = JUMPING;
                     y_jump_start_nxt = y;
                 end
-                else begin
+                else begin // tu jesli nie ma podlogi pod soba to pojdzie do falling
                     state_nxt = MOVING;
                     y_jump_start_nxt = 0;
                 end
@@ -158,11 +163,14 @@ always_comb begin
                 y_jump_start_nxt = 0;
             end
 
-            y_jump_start_nxt = 0;
+            // y_jump_start_nxt = 0;
             y_tmp = y;
             spawned_nxt = 1;
             countery_nxt = 0;
-            countery_stop_nxt = 0;
+            countery_stop_nxt = countery_stop;
+
+            correctCoordinateX(x_tmp, TOM_WIDTH, x_nxt);
+            correctCoordinateY(y_tmp, TOM_HEIGHT, y_nxt);
         end
 
         JUMPING: begin
@@ -194,15 +202,20 @@ always_comb begin
             if(countery >= countery_stop) begin
                 y_tmp = y - 1;
                 countery_nxt = 0;
-                countery_stop_nxt = countery_stop + 10_000;
+                if(countery_stop >= 800_000) begin
+                    countery_stop_nxt = countery_stop;
+                end
+                else begin
+                    countery_stop_nxt = countery_stop + 10_000;
+                end
             end
             else begin
                 y_tmp = y;
                 countery_nxt = countery + 1;
                 countery_stop_nxt = countery_stop;
             end
-
-            if(y <= (y_jump_start - JUMP_HEIGHT)) begin
+            // checkCollisionWithPlatform(x_tmp, y_tmp, P1_X_START, P1_Y_COLLISION, TOM_WIDTH, TOM_HEIGHT, P1_LENGTH, result);
+            if((y <= (y_jump_start - JUMP_HEIGHT)) || (checkCollisionWithPlatform(x_tmp, y_tmp, P1_X_START, P1_Y_COLLISION, TOM_WIDTH, TOM_HEIGHT, P1_LENGTH) == 1)) begin
                 state_nxt = FALLING;
             end
             else begin
@@ -210,6 +223,9 @@ always_comb begin
             end
             spawned_nxt = 1;
             y_jump_start_nxt = y_jump_start;
+
+            correctCoordinateX(x_tmp, TOM_WIDTH, x_nxt);
+            correctCoordinateY(y_tmp, TOM_HEIGHT, y_nxt);
         end
 
         FALLING: begin
@@ -241,21 +257,31 @@ always_comb begin
             if(countery >= countery_stop) begin
                 y_tmp = y + 1;
                 countery_nxt = 0;
-                countery_stop_nxt = countery_stop - 10_000;
+                if(countery_stop <= 200_000) begin
+                    countery_stop_nxt = countery_stop;
+                end
+                else begin
+                    countery_stop_nxt = countery_stop + 20_000;
+                end
             end
             else begin
                 y_tmp = y;
                 countery_nxt = countery + 1;
                 countery_stop_nxt = countery_stop;
             end
-            if(y < 767 - TOM_HEIGHT) begin //todo if model hits hard floor with head then goes to falling
+            // checkCollisionWithPlatform(x_tmp, y_tmp, P1_X_START, P1_Y_COLLISION, TOM_WIDTH, TOM_HEIGHT, P1_LENGTH, result);
+            if((y < 767 - TOM_HEIGHT) && (checkCollisionWithPlatform(x_tmp, y_tmp, P1_X_START, P1_Y_COLLISION, TOM_WIDTH, TOM_HEIGHT, P1_LENGTH) == 0)) begin 
                 state_nxt = FALLING;
             end
             else begin
                 state_nxt = IDLE;
             end
             spawned_nxt = 1;
+            
             y_jump_start_nxt = 0;
+
+            correctCoordinateX(x_tmp, TOM_WIDTH, x_nxt);
+            correctCoordinateY(y_tmp, TOM_HEIGHT, y_nxt);
         end
 
         default: begin
@@ -267,6 +293,9 @@ always_comb begin
             countery_stop_nxt = 0;
             countery_nxt = 0;
             y_jump_start_nxt = 0;
+
+            correctCoordinateX(x_tmp, TOM_WIDTH, x_nxt);
+            correctCoordinateY(y_tmp, TOM_HEIGHT, y_nxt);
         end
     endcase
 end

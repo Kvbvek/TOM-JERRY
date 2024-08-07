@@ -71,16 +71,6 @@ logic [19:0] address_wire;
 logic [9:0] tom_x_wire;
 logic [9:0] tom_y_wire;
 
-/* tom_ctrl u_tom_ctrl(
-    .clk,
-    .rst,
-    .left(left_b),
-    .right(right_b),
-
-    .tom_x(tom_x_wire),
-    .tom_y(tom_y_wire)
-); */
-
 move_ctrl u_move_ctrl(
     .clk,
     .rst,
