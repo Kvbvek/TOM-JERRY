@@ -33,7 +33,7 @@ import functions_tasks_pkg::*;
 //------------------------------------------------------------------------------
 // coords as two lower values, meaning upper y cord and left x cord 
 localparam TOM_X_SPAWN = 500;
-localparam TOM_Y_SPAWN = 768 - 1 - TOM_HEIGHT - 200;
+localparam TOM_Y_SPAWN = 768 - 1 - TOM_HEIGHT;
 localparam JUMP_HEIGHT = 200;
 
 localparam COUNTERX_STOP = 400_000;
@@ -57,7 +57,6 @@ logic [9:0] x_tmp, x_nxt;
 logic [9:0] y_tmp, y_jump_start, y_jump_start_nxt, y_nxt;
 logic spawned, spawned_nxt;
 
-// bit result;
 always_ff @(posedge clk) begin
     if (rst) begin
         x <= '0;
@@ -118,14 +117,14 @@ always_comb begin
             countery_stop_nxt = 400_000;
             countery_nxt = 0;
 
-            correctCoordinateX(x_tmp, TOM_WIDTH, x_nxt);
-            correctCoordinateY(y_tmp, TOM_HEIGHT, y_nxt);
+            x_nxt = correctCoordinateX(x_tmp, TOM_WIDTH);
+            y_nxt = correctCoordinateY(y_tmp, TOM_HEIGHT);
         end
 
         MOVING: begin
-            if(right && !left && !jump) begin
+            if(right && !left) begin
                 if(counterx >= COUNTERX_STOP) begin
-                    x_tmp = x + 1;
+                    x_tmp = correctCoordinateX(x + 1, TOM_WIDTH);
                     counterx_nxt = 0;
                 end
                 else begin
@@ -133,9 +132,9 @@ always_comb begin
                     counterx_nxt = counterx + 1;
                 end
             end
-            else if(!right && left && !jump) begin
+            else if(!right && left) begin
                 if(counterx >= COUNTERX_STOP) begin
-                    x_tmp = x - 1;
+                    x_tmp = correctCoordinateX(x - 1, TOM_WIDTH);
                     counterx_nxt = 0;
                 end
                 else begin
@@ -147,16 +146,14 @@ always_comb begin
                 counterx_nxt = 0;
                 x_tmp = x;
             end
-            y_jump_start_nxt = 0;
-            if((right && !left) || (!right && left)) begin
-                if(jump) begin
-                    state_nxt = JUMPING;
-                    y_jump_start_nxt = y;
-                end
-                else begin // tu jesli nie ma podlogi pod soba to pojdzie do falling
-                    state_nxt = MOVING;
-                    y_jump_start_nxt = 0;
-                end
+            // ------------------------ //
+            if(jump) begin
+                state_nxt = JUMPING;
+                y_jump_start_nxt = y;
+            end
+            else if((right && !left) || (!right && left)) begin // todo jesli nie ma podlogi pod soba to pojdzie do falling
+                state_nxt = MOVING;
+                y_jump_start_nxt = 0;
             end
             else begin
                 state_nxt = IDLE;
@@ -169,14 +166,14 @@ always_comb begin
             countery_nxt = 0;
             countery_stop_nxt = countery_stop;
 
-            correctCoordinateX(x_tmp, TOM_WIDTH, x_nxt);
-            correctCoordinateY(y_tmp, TOM_HEIGHT, y_nxt);
+            x_nxt = correctCoordinateX(x_tmp, TOM_WIDTH);
+            y_nxt = correctCoordinateY(y_tmp, TOM_HEIGHT);
         end
 
         JUMPING: begin
             if(right && !left) begin
                 if(counterx >= COUNTERX_STOP) begin
-                    x_tmp = x + 1;
+                    x_tmp = correctCoordinateX(x + 1, TOM_WIDTH);
                     counterx_nxt = 0;
                 end
                 else begin
@@ -186,7 +183,7 @@ always_comb begin
             end
             else if(!right && left) begin
                 if(counterx >= COUNTERX_STOP) begin
-                    x_tmp = x - 1;
+                    x_tmp = correctCoordinateX(x - 1, TOM_WIDTH);
                     counterx_nxt = 0;
                 end
                 else begin
@@ -198,7 +195,7 @@ always_comb begin
                 x_tmp = x;
                 counterx_nxt = 0;
             end
-            
+            // ------------------------ //
             if(countery >= countery_stop) begin
                 y_tmp = y - 1;
                 countery_nxt = 0;
@@ -214,8 +211,7 @@ always_comb begin
                 countery_nxt = countery + 1;
                 countery_stop_nxt = countery_stop;
             end
-            // checkCollisionWithPlatform(x_tmp, y_tmp, P1_X_START, P1_Y_COLLISION, TOM_WIDTH, TOM_HEIGHT, P1_LENGTH, result);
-            if((y <= (y_jump_start - JUMP_HEIGHT)) || (checkCollisionWithPlatform(x_tmp, y_tmp, P1_X_START, P1_Y_COLLISION, TOM_WIDTH, TOM_HEIGHT, P1_LENGTH) == 1)) begin
+            if((y <= (y_jump_start - JUMP_HEIGHT)) || (checkCollisionWithAllPlatforms(x_tmp, y_tmp, TOM_WIDTH, TOM_HEIGHT) == 2'b01)) begin
                 state_nxt = FALLING;
             end
             else begin
@@ -224,14 +220,14 @@ always_comb begin
             spawned_nxt = 1;
             y_jump_start_nxt = y_jump_start;
 
-            correctCoordinateX(x_tmp, TOM_WIDTH, x_nxt);
-            correctCoordinateY(y_tmp, TOM_HEIGHT, y_nxt);
+            x_nxt = correctCoordinateX(x_tmp, TOM_WIDTH);
+            y_nxt = correctCoordinateY(y_tmp, TOM_HEIGHT);
         end
 
         FALLING: begin
             if(right && !left) begin
                 if(counterx >= COUNTERX_STOP) begin
-                    x_tmp = x + 1;
+                    x_tmp = correctCoordinateX(x + 1, TOM_WIDTH);
                     counterx_nxt = 0;
                 end
                 else begin
@@ -241,7 +237,7 @@ always_comb begin
             end
             else if(!right && left) begin
                 if(counterx >= COUNTERX_STOP) begin
-                    x_tmp = x - 1;
+                    x_tmp = correctCoordinateX(x - 1, TOM_WIDTH);
                     counterx_nxt = 0;
                 end
                 else begin
@@ -253,7 +249,7 @@ always_comb begin
                 x_tmp = x;
                 counterx_nxt = 0;
             end
-
+            // ------------------------ //
             if(countery >= countery_stop) begin
                 y_tmp = y + 1;
                 countery_nxt = 0;
@@ -261,7 +257,7 @@ always_comb begin
                     countery_stop_nxt = countery_stop;
                 end
                 else begin
-                    countery_stop_nxt = countery_stop + 20_000;
+                    countery_stop_nxt = countery_stop - 20_000;
                 end
             end
             else begin
@@ -269,8 +265,8 @@ always_comb begin
                 countery_nxt = countery + 1;
                 countery_stop_nxt = countery_stop;
             end
-            // checkCollisionWithPlatform(x_tmp, y_tmp, P1_X_START, P1_Y_COLLISION, TOM_WIDTH, TOM_HEIGHT, P1_LENGTH, result);
-            if((y < 767 - TOM_HEIGHT) && (checkCollisionWithPlatform(x_tmp, y_tmp, P1_X_START, P1_Y_COLLISION, TOM_WIDTH, TOM_HEIGHT, P1_LENGTH) == 0)) begin 
+            if((y < 767 - TOM_HEIGHT) && (checkCollisionWithAllPlatforms(x_tmp, y_tmp, TOM_WIDTH, TOM_HEIGHT) == 2'b00 || 
+                checkCollisionWithAllPlatforms(x_tmp, y_tmp, TOM_WIDTH, TOM_HEIGHT) == 2'b11)) begin 
                 state_nxt = FALLING;
             end
             else begin
@@ -280,8 +276,8 @@ always_comb begin
             
             y_jump_start_nxt = 0;
 
-            correctCoordinateX(x_tmp, TOM_WIDTH, x_nxt);
-            correctCoordinateY(y_tmp, TOM_HEIGHT, y_nxt);
+            x_nxt = correctCoordinateX(x_tmp, TOM_WIDTH);
+            y_nxt = correctCoordinateY(y_tmp, TOM_HEIGHT);
         end
 
         default: begin
@@ -294,8 +290,8 @@ always_comb begin
             countery_nxt = 0;
             y_jump_start_nxt = 0;
 
-            correctCoordinateX(x_tmp, TOM_WIDTH, x_nxt);
-            correctCoordinateY(y_tmp, TOM_HEIGHT, y_nxt);
+            x_nxt = correctCoordinateX(x_tmp, TOM_WIDTH);
+            y_nxt = correctCoordinateY(y_tmp, TOM_HEIGHT);
         end
     endcase
 end

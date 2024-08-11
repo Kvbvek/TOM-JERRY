@@ -9,9 +9,11 @@
 
  package game_pkg;
 
+   localparam COLOR_PINK = 12'hf_6_f;
+
     localparam TOM_WIDTH = 32;
     localparam TOM_HEIGHT = 50;
-
+    localparam TOM_BG_COLOR = COLOR_PINK;
     // map related constants
 
     // PLATFORMS
