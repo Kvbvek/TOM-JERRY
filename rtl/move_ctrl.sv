@@ -19,6 +19,7 @@
     input logic right,
     input logic jump,
 
+    // output logic [5:0] sprite_control,
     output logic [9:0] x,
     output logic [9:0] y
     
@@ -36,7 +37,7 @@ localparam TOM_X_SPAWN = 500;
 localparam TOM_Y_SPAWN = 768 - 1 - TOM_HEIGHT;
 localparam JUMP_HEIGHT = 200;
 
-localparam COUNTERX_STOP = 400_000;
+localparam COUNTERX_STOP = 350_000;
 
 localparam STATE_BITS = 2; // number of bits used for state register
 
@@ -56,6 +57,9 @@ logic [23:0] countery_stop, countery_stop_nxt;
 logic [9:0] x_tmp, x_nxt;
 logic [9:0] y_tmp, y_jump_start, y_jump_start_nxt, y_nxt;
 logic spawned, spawned_nxt;
+// logic [5:0] sprite_control_nxt;
+// logic sprite_right, sprite_right_nxt, sprite_jump, sprite_jump_nxt;
+// logic [3:0] sprite_counter, sprite_counter_nxt;
 
 always_ff @(posedge clk) begin
     if (rst) begin
@@ -68,6 +72,11 @@ always_ff @(posedge clk) begin
         countery_stop <= '0;
         spawned <= '0;
 
+        // sprite_right <= '0;
+        // sprite_jump <= '0;
+        // sprite_counter <= '0;
+        // sprite_control <= '0;
+
         state_c <= IDLE;
     end 
     else begin
@@ -79,6 +88,11 @@ always_ff @(posedge clk) begin
         countery <= countery_nxt;
         countery_stop <= countery_stop_nxt;
         spawned <= spawned_nxt;
+
+        // sprite_right <= sprite_right_nxt;
+        // sprite_jump <= sprite_jump_nxt;
+        // sprite_counter <= sprite_counter_nxt;
+        // sprite_control <= sprite_control_nxt;
 
         state_c <= state_nxt;
     end
@@ -95,26 +109,34 @@ always_comb begin
                 spawned_nxt = 1;
                 state_nxt = IDLE;
                 y_jump_start_nxt = 0;
+                countery_stop_nxt = 0;
+                
+                // sprite_control_nxt = 6'b100000;
             end
             else begin
                 if((right && !left && !jump) || (!right && left && !jump)) begin
                     state_nxt = MOVING;
                     y_jump_start_nxt = 0;
+                    countery_stop_nxt = 0;
                 end
                 else if(jump) begin
                     state_nxt = JUMPING;
                     y_jump_start_nxt = y;
+                    countery_stop_nxt = 200_000;
                 end
                 else begin
                     state_nxt = IDLE;
                     y_jump_start_nxt = 0;
+                    countery_stop_nxt = 0;
                 end
                 x_tmp = x;
                 y_tmp = y;
                 spawned_nxt = 1;
+
+                // sprite_control_nxt = {sprite_control[5],5'b00000};
             end
             counterx_nxt = 0;
-            countery_stop_nxt = 400_000;
+            // countery_stop_nxt = 200_000;
             countery_nxt = 0;
 
             x_nxt = correctCoordinateX(x_tmp, TOM_WIDTH);
@@ -126,45 +148,61 @@ always_comb begin
                 if(counterx >= COUNTERX_STOP) begin
                     x_tmp = correctCoordinateX(x + 1, TOM_WIDTH);
                     counterx_nxt = 0;
+                    // sprite_control_nxt[3:0] = (sprite_control[3:0] + 1) % 8;
                 end
                 else begin
                     x_tmp = x;
                     counterx_nxt = counterx + 1;
+                    // sprite_control_nxt[3:0] = sprite_control[3:0];
                 end
+                  // sprite_control_nxt[5:4] = 2'b10;
             end
             else if(!right && left) begin
                 if(counterx >= COUNTERX_STOP) begin
                     x_tmp = correctCoordinateX(x - 1, TOM_WIDTH);
                     counterx_nxt = 0;
+                    // sprite_control_nxt[3:0] = (sprite_control[3:0] + 1) % 8;
                 end
                 else begin
                     x_tmp = x;
                     counterx_nxt = counterx + 1;
+                    // sprite_control_nxt[3:0] = sprite_control[3:0];
                 end
+                // sprite_control_nxt[5:4] = 2'b10;
             end
             else begin
                 counterx_nxt = 0;
                 x_tmp = x;
+                // sprite_control_nxt = sprite_control;
             end
             // ------------------------ //
             if(jump) begin
                 state_nxt = JUMPING;
                 y_jump_start_nxt = y;
+                countery_stop_nxt = 200_000;
             end
             else if((right && !left) || (!right && left)) begin // todo jesli nie ma podlogi pod soba to pojdzie do falling
-                state_nxt = MOVING;
+                if(checkCollisionWithAllPlatforms(x_tmp, y_tmp, TOM_WIDTH, TOM_HEIGHT) == 2'b10) begin
+                    state_nxt = MOVING;
+                    countery_stop_nxt = 0;
+                end
+                else begin
+                    state_nxt = FALLING;
+                    countery_stop_nxt = 800_000;
+                end
                 y_jump_start_nxt = 0;
             end
             else begin
                 state_nxt = IDLE;
                 y_jump_start_nxt = 0;
+                countery_stop_nxt = 0;
             end
 
             // y_jump_start_nxt = 0;
             y_tmp = y;
             spawned_nxt = 1;
             countery_nxt = 0;
-            countery_stop_nxt = countery_stop;
+            // countery_stop_nxt = countery_stop;
 
             x_nxt = correctCoordinateX(x_tmp, TOM_WIDTH);
             y_nxt = correctCoordinateY(y_tmp, TOM_HEIGHT);
@@ -175,35 +213,42 @@ always_comb begin
                 if(counterx >= COUNTERX_STOP) begin
                     x_tmp = correctCoordinateX(x + 1, TOM_WIDTH);
                     counterx_nxt = 0;
+                    // sprite_control_nxt[3:0] = (sprite_control[3:0] + 1) % 8;
                 end
                 else begin
                     x_tmp = x;
                     counterx_nxt = counterx + 1;
+                     // sprite_control_nxt[3:0] = sprite_control[3:0];
                 end
+                // sprite_control_nxt[5:4] = 2'b11;
             end
             else if(!right && left) begin
                 if(counterx >= COUNTERX_STOP) begin
                     x_tmp = correctCoordinateX(x - 1, TOM_WIDTH);
                     counterx_nxt = 0;
+                     // sprite_control_nxt[3:0] = (sprite_control[3:0] + 1) % 8;
                 end
                 else begin
                     x_tmp = x;
                     counterx_nxt = counterx + 1;
+                    // sprite_control_nxt[3:0] = sprite_control[3:0];
                 end
+                // sprite_control_nxt[5:4] = 2'b01;
             end
             else begin
                 x_tmp = x;
                 counterx_nxt = 0;
+                // sprite_control_nxt[3:0] = sprite_control;
             end
             // ------------------------ //
             if(countery >= countery_stop) begin
                 y_tmp = y - 1;
                 countery_nxt = 0;
                 if(countery_stop >= 800_000) begin
-                    countery_stop_nxt = countery_stop;
+                    countery_stop_nxt = 800_000;
                 end
                 else begin
-                    countery_stop_nxt = countery_stop + 10_000;
+                    countery_stop_nxt = countery_stop + 20_000;
                 end
             end
             else begin
@@ -211,7 +256,8 @@ always_comb begin
                 countery_nxt = countery + 1;
                 countery_stop_nxt = countery_stop;
             end
-            if((y <= (y_jump_start - JUMP_HEIGHT)) || (checkCollisionWithAllPlatforms(x_tmp, y_tmp, TOM_WIDTH, TOM_HEIGHT) == 2'b01)) begin
+            // ------------------------ //
+            if((y < (y_jump_start - JUMP_HEIGHT)) || (checkCollisionWithAllPlatforms(x_tmp, y_tmp, TOM_WIDTH, TOM_HEIGHT) == 2'b01)) begin
                 state_nxt = FALLING;
             end
             else begin
@@ -229,25 +275,32 @@ always_comb begin
                 if(counterx >= COUNTERX_STOP) begin
                     x_tmp = correctCoordinateX(x + 1, TOM_WIDTH);
                     counterx_nxt = 0;
+                    // sprite_control_nxt[3:0] = (sprite_control[3:0] + 1) % 8;
                 end
                 else begin
                     x_tmp = x;
                     counterx_nxt = counterx + 1;
+                    // sprite_control_nxt[3:0] = sprite_control[3:0];
                 end
+                // sprite_control_nxt[5:4] = 2'b11;
             end
             else if(!right && left) begin
                 if(counterx >= COUNTERX_STOP) begin
                     x_tmp = correctCoordinateX(x - 1, TOM_WIDTH);
                     counterx_nxt = 0;
+                    // sprite_control_nxt[3:0] = (sprite_control[3:0] + 1) % 8;
                 end
                 else begin
                     x_tmp = x;
                     counterx_nxt = counterx + 1;
+                    // sprite_control_nxt[3:0] = sprite_control[3:0];
                 end
+                // sprite_control_nxt[5:4] = 2'b01;
             end
             else begin
                 x_tmp = x;
                 counterx_nxt = 0;
+                // sprite_control_nxt = sprite_control;
             end
             // ------------------------ //
             if(countery >= countery_stop) begin
@@ -265,9 +318,14 @@ always_comb begin
                 countery_nxt = countery + 1;
                 countery_stop_nxt = countery_stop;
             end
-            if((y < 767 - TOM_HEIGHT) && (checkCollisionWithAllPlatforms(x_tmp, y_tmp, TOM_WIDTH, TOM_HEIGHT) == 2'b00 || 
-                checkCollisionWithAllPlatforms(x_tmp, y_tmp, TOM_WIDTH, TOM_HEIGHT) == 2'b11)) begin 
-                state_nxt = FALLING;
+            // ------------------------ //
+            if(y < (767 - TOM_HEIGHT)) begin 
+                if(checkCollisionWithAllPlatforms(x_tmp, y_tmp, TOM_WIDTH, TOM_HEIGHT) == 2'b10) begin
+                    state_nxt = IDLE;
+                end
+                else begin
+                    state_nxt = FALLING;
+                end
             end
             else begin
                 state_nxt = IDLE;
@@ -289,6 +347,7 @@ always_comb begin
             countery_stop_nxt = 0;
             countery_nxt = 0;
             y_jump_start_nxt = 0;
+            // sprite_control_nxt = 6'b100000;
 
             x_nxt = correctCoordinateX(x_tmp, TOM_WIDTH);
             y_nxt = correctCoordinateY(y_tmp, TOM_HEIGHT);
