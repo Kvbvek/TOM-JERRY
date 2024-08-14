@@ -70,6 +70,7 @@ draw_bg u_draw_bg (
 logic [19:0] address_wire;
 logic [9:0] tom_x_wire;
 logic [9:0] tom_y_wire;
+logic [6:0] sprite_control_wire;
 
 move_ctrl u_move_ctrl(
     .clk,
@@ -78,16 +79,19 @@ move_ctrl u_move_ctrl(
     .right(right_b),
     .jump(jump_b),
 
+    .sprite_control(sprite_control_wire),
     .x(tom_x_wire),
     .y(tom_y_wire)
 );
 
 logic [11:0] data_wire;
 
-tom_rom u_tom_rom(
+tom_get_sprite u_tom_get_sprite(
     .clk,
+    .rst,
+    .sprite_control(sprite_control_wire),
     .addrA(address_wire),
-    .dout(data_wire)
+    .rgb(data_wire)
 
 );
 
