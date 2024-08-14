@@ -22,7 +22,6 @@
 
 module PS2Receiver(
     input clk,
-    input rst,
     inout kclk,
     inout kdata,
     output reg [15:0] keycode=0,
@@ -95,7 +94,7 @@ end
 
 reg pflag;
 always@(posedge clk) begin
-    if(rst) begin
+    if(keycode) begin
         kclk_out <= 1'b0;
         kclk_oe <= 1'b0;
         kdata_out <= 1'b0;

@@ -17,7 +17,6 @@
 module top_vga_basys3 (
     input  wire clk,
     input  wire btnC,
-    input  wire [15:0] keycode,
     inout  wire PS2Clk,
     inout  wire PS2Data,
     output wire RsTx,
@@ -87,7 +86,6 @@ top_vga u_top_vga (
     .clk(pclk),
     .rst(btnC),
     .clk100(clk100),
-    .keycode(keycode),
     .r(vgaRed),
     .g(vgaGreen),
     .b(vgaBlue),

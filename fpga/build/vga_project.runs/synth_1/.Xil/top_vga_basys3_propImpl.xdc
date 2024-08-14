@@ -1,8 +1,10 @@
-set_property SRC_FILE_INFO {cfile:/home/student/tmaslanka/uec2/projekt/v5/TOM-JERRY/fpga/constraints/top_vga_basys3.xdc rfile:../../../../constraints/top_vga_basys3.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:/home/student/tmaslanka/uec2/projekt/v6/TOM-JERRY/fpga/constraints/top_vga_basys3.xdc rfile:../../../../constraints/top_vga_basys3.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:7 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN W5 [get_ports clk]
 set_property src_info {type:XDC file:1 line:11 export:INPUT save:INPUT read:READ} [current_design]
 set_input_jitter [get_clocks -of_objects [get_ports clk]] 0.100
+set_property src_info {type:XDC file:1 line:115 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN U18 [get_ports btnC]
 set_property src_info {type:XDC file:1 line:130 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN J1 [get_ports {JA1}]
 set_property src_info {type:XDC file:1 line:240 export:INPUT save:INPUT read:READ} [current_design]

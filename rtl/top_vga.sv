@@ -18,7 +18,6 @@ module top_vga (
     input  logic clk,
     input  logic rst,
     input  logic clk100,
-    input  logic [15:0] keycode,
     inout  logic kclk,
     inout  logic kdata,
     output logic vs,
@@ -76,6 +75,9 @@ draw_bg u_draw_bg (
     .in(timing),
     .out(bg)
 );
+
+wire left_wire, right_wire, jump_wire;
+reg [15:0] keycode;
 
 decoder u_decoder(
     .clk,

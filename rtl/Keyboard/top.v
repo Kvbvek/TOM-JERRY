@@ -45,7 +45,6 @@ module top(
     
     PS2Receiver uut (
         .clk(CLK50MHZ),
-        .rst(rst),
         .kclk(PS2Clk),
         .kdata(PS2Data),
         .keycode(keycode),

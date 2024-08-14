@@ -19,7 +19,7 @@
     // output  reg [1:0] stay
  );
 
-    logic [1:0] r_nxt, l_nxt, j_nxt;
+    logic r_nxt, l_nxt, j_nxt;
 
 
     always_ff @(posedge clk) begin
