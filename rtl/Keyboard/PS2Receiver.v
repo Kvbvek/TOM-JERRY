@@ -22,8 +22,9 @@
 
 module PS2Receiver(
     input clk,
-    input kclk,
-    input kdata,
+    input rst,
+    inout kclk,
+    inout kdata,
     output reg [15:0] keycode=0,
     output reg oflag
     );
@@ -33,13 +34,35 @@ module PS2Receiver(
     reg [7:0]dataprev=0;
     reg [3:0]cnt=0;
     reg flag=0;
+
+    reg kclk_out ,kclk_oe;
+    wire kclk_in;
+    reg kdata_out, kdata_oe;
+    wire kdata_in;
+
+    IOBUF iobuf_kclk(
+        .I(kclk_out),
+        .T(~kclk_oe),
+        .IO(kclk),
+        .O(kclk_in)
+    );
+    
+
+
+    IOBUF iobuf_kdata(
+        .I(kdata_out),
+        .T(~kdata_oe),
+        .IO(kdata),
+        .O(kdata_in)
+    );
+    
     
 debouncer #(
     .COUNT_MAX(19),
     .COUNT_WIDTH(5)
 ) db_clk(
     .clk(clk),
-    .I(kclk),
+    .I(kclk_in),
     .O(kclkf)
 );
 debouncer #(
@@ -47,7 +70,7 @@ debouncer #(
    .COUNT_WIDTH(5)
 ) db_data(
     .clk(clk),
-    .I(kdata),
+    .I(kdata_in),
     .O(kdataf)
 );
     
@@ -72,7 +95,15 @@ end
 
 reg pflag;
 always@(posedge clk) begin
-    if (flag == 1'b1 && pflag == 1'b0) begin
+    if(rst) begin
+        kclk_out <= 1'b0;
+        kclk_oe <= 1'b0;
+        kdata_out <= 1'b0;
+        kdata_oe <= 1'b0;
+        oflag <= 1'b0;
+        keycode <= 16'b0;
+    end 
+    else if (flag == 1'b1 && pflag == 1'b0) begin
         keycode <= {dataprev, datacur};
         oflag <= 1'b1;
         dataprev <= datacur;

@@ -14,10 +14,11 @@
  module move_ctrl (
     input  logic clk,
     input  logic rst,
+    input  logic [1:0] stay,
     // todo input from keyboard
-    input logic left,
-    input logic right,
-    input logic jump,
+    input logic [1:0] left,
+    input logic [1:0] right,
+    input logic [1:0] jump,
 
     output logic [9:0] x,
     output logic [9:0] y

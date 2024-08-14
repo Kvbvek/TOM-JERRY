@@ -22,8 +22,8 @@
 
 module top(
     input         clk,
-    input         PS2Data,
-    input         PS2Clk,
+    inout         PS2Data,
+    inout         PS2Clk,
     output        tx
 );
     wire        tready;
@@ -45,6 +45,7 @@ module top(
     
     PS2Receiver uut (
         .clk(CLK50MHZ),
+        .rst(rst),
         .kclk(PS2Clk),
         .kdata(PS2Data),
         .keycode(keycode),
@@ -77,6 +78,8 @@ module top(
         .I(keycodev),
         .O(tbuf)
     );
+
+
     
     uart_buf_con tx_con (
         .clk    (clk   ),
@@ -96,5 +99,8 @@ module top(
         .tx     (tx),
         .ready  (tready)
     );
+
+    
+
     
 endmodule
