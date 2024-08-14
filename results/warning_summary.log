@@ -1,13 +1,16 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2024-08-08 09:30:53
+Created: 2024-08-14 15:06:00
 
 ----SYNTHESIS----
-WARNING: [Synth 8-7129] Port PS2Clk in module top_vga_basys3 is either unconnected or has no load
-WARNING: [Synth 8-7129] Port PS2Data in module top_vga_basys3 is either unconnected or has no load
+WARNING: [Synth 8-567] referenced signal 'keycodev' should be on the sensitivity list [rtl/Keyboard/top.v:56]
+WARNING: [Synth 8-3848] Net rst in module/entity top does not have driver. [rtl/Keyboard/top.v:48]
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
-WARNING: [Synth 8-7129] Port PS2Clk in module top_vga_basys3 is either unconnected or has no load
-WARNING: [Synth 8-7129] Port PS2Data in module top_vga_basys3 is either unconnected or has no load
 
 ----IMPLEMENTATION----
-CLEAR :)
+ERROR: [Place 30-58] IO placement is infeasible. Number of unplaced IO Ports (17) is greater than number of available sites (0).
+ERROR: [Place 30-58] IO placement is infeasible. Number of unplaced IO Ports (17) is greater than number of available sites (0).
+ERROR: [Place 30-374] IO placer failed to find a solution
+ERROR: [Place 30-99] Placer failed with error: 'IO Clock Placer failed'
+Please review all ERROR, CRITICAL WARNING, and WARNING messages during placement to understand the cause for failure.
+ERROR: [Common 17-69] Command failed: Placer could not place all instances

@@ -76,10 +76,6 @@ draw_bg u_draw_bg (
     .in(timing),
     .out(bg)
 );
-logic [1:0] left_wire;
-logic [1:0] right_wire;
-logic [1:0] jump_wire;
-logic [1:0] stay_wire;
 
 decoder u_decoder(
     .clk,
@@ -88,8 +84,7 @@ decoder u_decoder(
 
     .left(left_wire),
     .right(right_wire),
-    .jump(jump_wire),
-    .stay(stay_wire)
+    .jump(jump_wire)
 );
 
 logic [19:0] address_wire;
@@ -102,7 +97,6 @@ move_ctrl u_move_ctrl(
     .left(left_wire),
     .right(right_wire),
     .jump(jump_wire),
-    .stay(stay_wire),
 
     .x(tom_x_wire),
     .y(tom_y_wire)

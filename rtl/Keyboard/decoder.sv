@@ -12,44 +12,87 @@
  module decoder(
     input  logic clk,
     input  logic rst,
-    input  reg [15:0] keycode,
-    output  reg [1:0] right,
-    output  reg [1:0] left,
-    output  reg [1:0] jump,
-    output  reg [1:0] stay
+    input  logic [15:0] keycode,
+    output  logic right,
+    output  logic left,
+    output  logic jump
+    // output  reg [1:0] stay
  );
 
-    logic [1:0] right_nxt;
-    logic [1:0] left_nxt;
-    logic [1:0] jump_nxt;
-    logic [1:0] stay_nxt;
+    logic [1:0] r_nxt, l_nxt, j_nxt;
+
 
     always_ff @(posedge clk) begin
         if(rst)begin
-            right <= 2'b00;
-            left <= 2'b00;
-            jump <= 2'b00;
-            stay <= 2'b01;
+            right <= '0;
+            left <= '0;
+            jump <= '0;
         end
         else begin
-            right <= right_nxt;
-            left <= left_nxt;
-            jump <= jump_nxt;
-            stay <= stay_nxt;
+            right <= r_nxt;
+            left <= l_nxt;
+            jump <= j_nxt;
         end
     end
 
     always_comb begin
-        right_nxt = 2'b00;
-        left_nxt = 2'b00;
-        jump_nxt = 2'b00;
-        stay_nxt = 2'b01;
+        case(keycode[15:8])
+            8'hf0: begin
+                case(keycode[7:0])
+                    8'h1C: begin
+                        r_nxt = 0;
+                        l_nxt = left;
+                        j_nxt = jump;
+                    end
+                    8'h23: begin
+                        l_nxt = 0; 
+                        r_nxt = right; 
+                        j_nxt = jump;
+                    end
+                    8'h1D: begin 
+                        j_nxt = 0; 
+                        l_nxt = left; 
+                        r_nxt = right;
+                    end
+                    default: begin
+                        r_nxt = right;
+                        l_nxt = left;
+                        j_nxt = jump;
+                    end
+                endcase
+            end
 
-        case(keycode)
-            16'h1C: right_nxt = 2'b01;
-            16'h23: left_nxt = 2'b10;
-            16'h1D: jump_nxt = 2'b11;
-            default: stay_nxt = 2'b00;
+            8'h00: begin
+                case(keycode[7:0])
+                    8'h1C: begin
+                        r_nxt = 1;
+                        l_nxt = left;
+                        j_nxt = jump;
+                    end
+                    8'h23: begin
+                        l_nxt = 1; 
+                        r_nxt = right; 
+                        j_nxt = jump;
+                    end
+                    8'h1D: begin 
+                        j_nxt = 1; 
+                        l_nxt = left; 
+                        r_nxt = right;
+                    end
+                    default: begin
+                        r_nxt = right;
+                        l_nxt = left;
+                        j_nxt = jump;
+                    end
+                endcase
+            end
+
+            default: begin
+                r_nxt = right;
+                l_nxt = left;
+                j_nxt = jump;
+            end
+
         endcase
     end
 
