@@ -15,9 +15,9 @@
     input  logic clk,
     input  logic rst,
     // todo input from keyboard
-    input logic left,
-    input logic right,
-    input logic jump,
+    input logic  left,
+    input logic  right,
+    input logic  jump,
 
     output logic [6:0] sprite_control, // {prawo,skok,idle,licznik}
     output logic [9:0] x,

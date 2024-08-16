@@ -17,14 +17,15 @@
 module top_vga (
     input  logic clk,
     input  logic rst,
-    input logic left_b,
-    input logic right_b,
-    input logic jump_b,
+    input  logic clk100,
+    inout  logic kclk,
+    inout  logic kdata,
     output logic vs,
     output logic hs,
     output logic [3:0] r,
     output logic [3:0] g,
     output logic [3:0] b
+    // output logic oflag
 );
 
 
@@ -53,6 +54,26 @@ assign {r,g,b} = drawtom.rgb;
  * Submodules instances
  */
 
+logic [15:0] keycode;
+
+top u_keyboardTop(
+  .clk(clk100),
+  .PS2Clk(kclk),
+  .PS2Data(kdata),
+  .keyc(keycode)
+  
+);
+
+keycode_decoder u_keycode_decoder(
+.clk(clk),
+.rst(0),
+.keycode(keycode),
+
+.left(left_wire),
+.right(right_wire),
+.jump(jump_wire)
+);  
+
 vga_timing u_vga_timing (
     .clk,
     .rst,
@@ -75,9 +96,9 @@ logic [6:0] sprite_control_wire;
 move_ctrl u_move_ctrl(
     .clk,
     .rst,
-    .left(left_b),
-    .right(right_b),
-    .jump(jump_b),
+    .left(left_wire),
+    .right(right_wire),
+    .jump(jump_wire),
 
     .sprite_control(sprite_control_wire),
     .x(tom_x_wire),

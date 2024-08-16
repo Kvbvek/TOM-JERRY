@@ -28,10 +28,9 @@ module bin2ascii(
     parameter NBYTES = 2;
     genvar i;
     generate for (i=0; i<NBYTES*2; i=i+1)
-        always@(I)
-        if (I[4*i+3:4*i] >= 4'h0 && I[4*i+3:4*i] <= 4'h9)
-            O[8*i+7:8*i] = 8'd48 + I[4*i+3:4*i];
-        else
-            O[8*i+7:8*i] = 8'd55 + I[4*i+3:4*i];
+        always@(I) begin
+        if(I[4*i+3:4*i] >= 4'h0 && I[4*i+3:4*i] <= 4'h9) O[8*i+7:8*i] = 8'd48 + I[4*i+3:4*i];
+        else O[8*i+7:8*i] = 8'd55 + I[4*i+3:4*i];
+        end
     endgenerate
 endmodule
