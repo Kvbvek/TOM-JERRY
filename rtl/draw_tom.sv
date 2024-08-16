@@ -40,7 +40,7 @@ logic [11:0] rgb_d;
 
  delay #(
         .WIDTH (38),
-        .CLK_DEL(3)
+        .CLK_DEL(4)
     ) u_delay (
         .clk (clk),
         .rst (rst),

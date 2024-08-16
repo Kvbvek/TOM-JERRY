@@ -64,9 +64,9 @@ top u_keyboardTop(
   
 );
 
-keycode_decoder u_keycode_decoder(
+key_decoder_movement u_key_decoder_movement(
 .clk(clk),
-.rst(0),
+.rst(rst),
 .keycode(keycode),
 
 .left(left_wire),
@@ -93,7 +93,7 @@ logic [9:0] tom_x_wire;
 logic [9:0] tom_y_wire;
 logic [6:0] sprite_control_wire;
 
-move_ctrl u_move_ctrl(
+host_move_ctrl u_host_move_ctrl(
     .clk,
     .rst,
     .left(left_wire),

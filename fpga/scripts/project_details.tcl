@@ -36,8 +36,8 @@ set sv_files {
     ../rtl/package/functions_tasks_pkg.sv
     ../rtl/delay.sv
     ../rtl/interface/vga_if.sv
-    ../rtl/Keyboard/keycode_decoder.sv
-    ../rtl/move_ctrl.sv
+    ../rtl/Keyboard/key_decoder_movement.sv
+    ../rtl/host_move_ctrl.sv
     ../rtl/draw_tom.sv
     ../rtl/rom/read_rom.sv
     ../rtl/rom/tom/tom_get_sprite.sv

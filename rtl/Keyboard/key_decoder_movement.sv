@@ -9,7 +9,7 @@
  */
 //////////////////////////////////////////////////////////////////////////////
 
- module keycode_decoder(
+ module key_decoder_movement(
     input  logic clk,
     input  logic rst,
     input  logic [15:0] keycode,

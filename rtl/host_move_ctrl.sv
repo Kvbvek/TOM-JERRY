@@ -5,16 +5,16 @@
  Version:       1.0
  Last modified: 2024-08-07
  Coding style: safe with FPGA sync reset
- Description:  Module for controlling movement of player
+ Description:  Module for controlling movement of host
  */
 //////////////////////////////////////////////////////////////////////////////
 
 //`timescale 1 ns / 1 ps
 
- module move_ctrl (
+ module host_move_ctrl (
     input  logic clk,
     input  logic rst,
-    // todo input from keyboard
+
     input logic  left,
     input logic  right,
     input logic  jump,
@@ -103,7 +103,6 @@ always_comb begin
                 y_tmp = TOM_Y_SPAWN;
                 spawned_nxt = 1;
                 state_nxt = IDLE;
-                // y_jump_start_nxt = 0;
                 
                 sprite_control_nxt = 7'b1010000;
             end
@@ -111,15 +110,12 @@ always_comb begin
             else begin
                 if((right && !left && !jump) || (!right && left && !jump)) begin
                     state_nxt = MOVING;
-                    // y_jump_start_nxt = 0;
                 end
                 else if(jump) begin
                     state_nxt = JUMPING;
-                    // y_jump_start_nxt = y;
                 end
                 else begin
                     state_nxt = IDLE;
-                    // y_jump_start_nxt = 0;
                 end
                 x_tmp = x;
                 y_tmp = y;
@@ -188,7 +184,6 @@ always_comb begin
 
             if(jump) begin
                 state_nxt = JUMPING;
-                // y_jump_start_nxt = y;
             end
             else if((right && !left) || (!right && left)) begin
                 if(checkCollisionWithAllPlatforms(x_tmp, y_tmp, TOM_WIDTH, TOM_HEIGHT) == 2'b10 || ((y + TOM_HEIGHT) == 767)) begin
@@ -197,11 +192,9 @@ always_comb begin
                 else begin
                     state_nxt = FALLING;
                 end
-                // y_jump_start_nxt = 0;
             end
             else begin
                 state_nxt = IDLE;
-                // y_jump_start_nxt = 0;
             end
 
             y_jump_start_nxt = y;
