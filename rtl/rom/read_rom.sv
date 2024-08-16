@@ -7,10 +7,11 @@
  * Module reading data from ROM
  */
 
- module tom_rom
+ module read_rom
 	#(parameter
 		ADDR_WIDTH = 20,
-		DATA_WIDTH = 12
+		DATA_WIDTH = 12,
+        DATA_PATH = ""
 	)
 	(
 		input wire clk, // posedge active clock
@@ -20,10 +21,10 @@
 
 	(* rom_style = "block" *) // block || distributed
 
-	logic [DATA_WIDTH-1:0] rom [2**ADDR_WIDTH-1:0]; // rom memory
+	logic [DATA_WIDTH-1:0] rom [2**ADDR_WIDTH-1:0];
 
-	initial
-		$readmemh("../../rtl/data/tom_idle_right.dat", rom);
+    initial
+		$readmemh(DATA_PATH, rom);
 
 	always_ff @(posedge clk) begin : rom_read_blk
 			dout <= rom[addrA];

@@ -19,6 +19,7 @@ module top_vga_basys3 (
     input  wire btnC,
     inout  wire PS2Clk,
     inout  wire PS2Data,
+    // output wire RsTx,
     output wire Vsync,
     output wire Hsync,
     output wire [3:0] vgaRed,
@@ -84,11 +85,15 @@ ODDR pclk_oddr (
 top_vga u_top_vga (
     .clk(pclk),
     .rst(btnC),
+    .clk100(clk100),
     .r(vgaRed),
     .g(vgaGreen),
     .b(vgaBlue),
     .hs(Hsync),
-    .vs(Vsync)
+    .vs(Vsync),
+    .kclk(PS2Clk),
+    .kdata(PS2Data)
+    // .oflag(RsTx)
     
 );
 

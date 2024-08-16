@@ -33,11 +33,14 @@ set xdc_files {
 set sv_files {
     ../rtl/package/vga_pkg.sv
     ../rtl/package/game_pkg.sv
+    ../rtl/package/functions_tasks_pkg.sv
     ../rtl/delay.sv
     ../rtl/interface/vga_if.sv
-    ../rtl/tom_ctrl.sv
+    ../rtl/Keyboard/keycode_decoder.sv
+    ../rtl/move_ctrl.sv
     ../rtl/draw_tom.sv
-    ../rtl/tom_rom.sv
+    ../rtl/rom/read_rom.sv
+    ../rtl/rom/tom/tom_get_sprite.sv
     ../rtl/vga_timing.sv
     ../rtl/draw_bg.sv
     ../rtl/top_vga.sv
@@ -48,7 +51,14 @@ set sv_files {
 set verilog_files {
      ../fpga/rtl/clk_wiz_0_clk_wiz.v
      ../fpga/rtl/clk_wiz_0.v
+     ../rtl/Keyboard/top.v
+     ../rtl/Keyboard/bin2ascii.v
+     ../rtl/Keyboard/debouncer.v
+     ../rtl/Keyboard/PS2Receiver.v
+     ../rtl/Keyboard/uart_buf_con.v
+     ../rtl/Keyboard/uart_tx.v
 }
+
 
 # Specify VHDL design files location            -- EDIT
 # set vhdl_files {
@@ -57,5 +67,24 @@ set verilog_files {
 
 # Specify files for a memory initialization     -- EDIT
  set mem_files {
-     ../rtl/data/tom.dat
+     ../rtl/data/tom/right/tom_idle_r.dat
+     ../rtl/data/tom/right/tom_jump_r.dat
+     ../rtl/data/tom/right/tom_run_r_1.dat
+     ../rtl/data/tom/right/tom_run_r_2.dat
+     ../rtl/data/tom/right/tom_run_r_3.dat
+     ../rtl/data/tom/right/tom_run_r_4.dat
+     ../rtl/data/tom/right/tom_run_r_5.dat
+     ../rtl/data/tom/right/tom_run_r_6.dat
+     ../rtl/data/tom/right/tom_run_r_7.dat
+     ../rtl/data/tom/right/tom_run_r_8.dat
+     ../rtl/data/tom/left/tom_idle_l.dat
+     ../rtl/data/tom/left/tom_jump_l.dat
+     ../rtl/data/tom/left/tom_run_l_1.dat
+     ../rtl/data/tom/left/tom_run_l_2.dat
+     ../rtl/data/tom/left/tom_run_l_3.dat
+     ../rtl/data/tom/left/tom_run_l_4.dat
+     ../rtl/data/tom/left/tom_run_l_5.dat
+     ../rtl/data/tom/left/tom_run_l_6.dat
+     ../rtl/data/tom/left/tom_run_l_7.dat
+     ../rtl/data/tom/left/tom_run_l_8.dat
  }
