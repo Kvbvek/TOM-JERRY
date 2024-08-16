@@ -101,11 +101,11 @@ function logic [1:0] checkCollisionWithAllPlatforms(
     begin
         logic [1:0] result;
         result = (checkCollisionWithPlatform(x, y, P1_X_START, P1_Y_COLLISION, width, height, P1_LENGTH) | 
-        checkCollisionWithPlatform(x, y, P2_X_START, P2_Y_COLLISION, width, height, P2_LENGTH) |
-        checkCollisionWithPlatform(x, y, P3_X_START, P3_Y_COLLISION, width, height, P3_LENGTH) |
-        checkCollisionWithPlatform(x, y, P4_X_START, P4_Y_COLLISION, width, height, P4_LENGTH) |
-        checkCollisionWithPlatform(x, y, P5_X_START, P5_Y_COLLISION, width, height, P5_LENGTH) | 
-        checkCollisionWithPlatform(x, y, P6_X_START, P6_Y_COLLISION, width, height, P6_LENGTH));
+                  checkCollisionWithPlatform(x, y, P2_X_START, P2_Y_COLLISION, width, height, P2_LENGTH) |
+                  checkCollisionWithPlatform(x, y, P3_X_START, P3_Y_COLLISION, width, height, P3_LENGTH) |
+                  checkCollisionWithPlatform(x, y, P4_X_START, P4_Y_COLLISION, width, height, P4_LENGTH) |
+                  checkCollisionWithPlatform(x, y, P5_X_START, P5_Y_COLLISION, width, height, P5_LENGTH) | 
+                  checkCollisionWithPlatform(x, y, P6_X_START, P6_Y_COLLISION, width, height, P6_LENGTH));
         return result;
     end
 

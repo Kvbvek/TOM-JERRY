@@ -54,9 +54,9 @@
 
     localparam P6_X_START = 125;
     localparam P6_X_END = 450;
-    localparam P6_Y_START = 215;
-    localparam P6_Y_END = 225;
-    localparam P6_Y_COLLISION = 220;
+    localparam P6_Y_START = 265;
+    localparam P6_Y_END = 275;
+    localparam P6_Y_COLLISION = 270;
     localparam P6_LENGTH = 325;
     
     endpackage
