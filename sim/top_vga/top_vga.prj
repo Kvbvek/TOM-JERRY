@@ -12,7 +12,7 @@
 sv work ../../rtl/package/vga_pkg.sv \
         ../../rtl/package/game_pkg.sv \
         ../../rtl/package/functions_tasks_pkg.sv \
-        ../../rtl/Keyboard/decoder.sv \
+        ../../rtl/Keyboard/keycode_decoder.sv \
         ../../rtl/move_ctrl.sv \
         ../../rtl/interface/vga_if.sv \
         ../../rtl/draw_tom.sv \
