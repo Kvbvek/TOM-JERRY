@@ -41,37 +41,33 @@
 
     always_comb begin
         if(keycode[15:8] == 8'hf0) begin
-            case(keycode[7:0])
-                8'h1C: begin
+            if(keycode[7:0] == 8'h1C) begin
                     r_nxt = right;
                     l_nxt = 0;
                 end
-                8'h23: begin
+            else if(keycode[7:0] == 8'h23) begin
                     l_nxt = left; 
                     r_nxt = 0; 
                 end
-                default: begin
+            else begin
                     r_nxt = right;
                     l_nxt = left;
-                end
-            endcase
+            end
         end
 
         else begin
-            case(keycode[7:0])
-                8'h1C: begin
-                    r_nxt = left;
+            if(keycode[7:0] == 8'h1C) begin
+                    r_nxt = right;
                     l_nxt = 1;
                 end
-                8'h23: begin
+            else if(keycode[7:0] == 8'h23) begin
                     l_nxt = left; 
                     r_nxt = 1; 
                 end
-                default: begin
+            else begin
                     r_nxt = right;
                     l_nxt = left;
-                end
-            endcase
+            end
         end
 
         if((keycode[7:0] == 8'h1D) && keycode[15:8] != 8'hf0) begin
