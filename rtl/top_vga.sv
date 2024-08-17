@@ -25,7 +25,6 @@ module top_vga (
     output logic [3:0] r,
     output logic [3:0] g,
     output logic [3:0] b
-    // output logic oflag
 );
 
 
@@ -38,21 +37,46 @@ vga_if bg();
 vga_if tomctrl();
 vga_if drawtom();
 vga_if drawjerry();
+vga_if drawcheese();
+vga_if drawcheeseo();
+
+logic [15:0] keycode;
+
+logic [19:0] address_wire;
+logic [9:0] tom_x_wire;
+logic [9:0] tom_y_wire;
+logic [6:0] sprite_control_wire_t;
+
+logic [11:0] data_wire;
+
+pos_if hostp();
+
+logic [19:0] address_wire_j;
+logic [9:0] jerry_x_wire;
+logic [9:0] jerry_y_wire;
+logic [6:0] sprite_control_wire_j;
+
+logic [11:0] data_wire_j;
+
+pos_if jerryp();
+pos_if cheesep();
+
+logic [19:0] address_wire_c;
+
+logic [11:0] chrgb;
 
 /**
  * Signals assignments
  */
 
-assign vs = drawjerry.vsync;
-assign hs = drawjerry.hsync;
-assign {r,g,b} = drawjerry.rgb;
+assign vs = drawcheeseo.vsync;
+assign hs = drawcheeseo.hsync;
+assign {r,g,b} = drawcheeseo.rgb;
 
 
 /**
  * Submodules instances
  */
-
-logic [15:0] keycode;
 
 top u_keyboardTop(
   .clk(clk100),
@@ -86,11 +110,6 @@ draw_bg u_draw_bg (
     .out(bg)
 );
 
-logic [19:0] address_wire;
-logic [9:0] tom_x_wire;
-logic [9:0] tom_y_wire;
-logic [6:0] sprite_control_wire_t;
-
 host_move_ctrl u_host_move_ctrl(
     .clk,
     .rst,
@@ -102,8 +121,6 @@ host_move_ctrl u_host_move_ctrl(
     .x(tom_x_wire),
     .y(tom_y_wire)
 );
-
-logic [11:0] data_wire;
 
 tom_get_sprite u_tom_get_sprite(
     .clk,
@@ -122,13 +139,9 @@ draw_tom u_draw_tom (
     .data(data_wire),
     .in(bg),
     .out(drawtom),
-    .address(address_wire)
+    .address(address_wire),
+    .host_pos(hostp)
 );
-
-logic [19:0] address_wire_j;
-logic [9:0] jerry_x_wire;
-logic [9:0] jerry_y_wire;
-logic [6:0] sprite_control_wire_j;
 
 player_move_ctrl u_player_move_ctrl(
     .clk,
@@ -141,8 +154,6 @@ player_move_ctrl u_player_move_ctrl(
     .x(jerry_x_wire),
     .y(jerry_y_wire)
 );
-
-logic [11:0] data_wire_j;
 
 jerry_get_sprite u_jerry_get_sprite(
     .clk,
@@ -161,7 +172,53 @@ draw_jerry u_draw_jerry (
     .data(data_wire_j),
     .in(drawtom),
     .out(drawjerry),
-    .address(address_wire_j)
+    .address(address_wire_j),
+    .player_pos(jerryp)
+);
+
+cheese_taken u_cheese_taken(
+    .clk,
+    .rst,
+    .jerrypos(jerryp),
+    .cheesepos(cheesep),
+    .is_cheese_taken(is_cheese_taken_wire)
+);
+
+randomx_plat u_randomx_plat(
+    .clk,
+    .rst,
+    .rnd_generate(is_cheese_taken_wire),
+    .pout(cheesep)
+
+);
+
+delay #(
+        .WIDTH (38),
+        .CLK_DEL(2)
+) u_delay_ch (
+        .clk (clk),
+        .rst (rst),
+        .din ({drawjerry.vcount, drawjerry.vblnk, drawjerry.vsync, drawjerry.hcount, drawjerry.hblnk, drawjerry.hsync,drawjerry.rgb}),
+        .dout ({drawcheese.vcount, drawcheese.vblnk, drawcheese.vsync, drawcheese.hcount, drawcheese.hblnk, drawcheese.hsync,drawcheese.rgb})
+    );
+
+read_rom #(
+        .DATA_PATH ("../../rtl/data/cheese.dat")
+) read_rom_cheese (
+        .clk (clk),
+        .addrA(address_wire_c),
+        .dout (chrgb)
+    );
+
+draw_cheese u_draw_cheese(
+    .clk,
+    .rst,
+    .pin(cheesep),
+    .data(chrgb),
+    .in(drawcheese),
+    .out(drawcheeseo),
+    .address(address_wire_c)
+
 );
 
 endmodule

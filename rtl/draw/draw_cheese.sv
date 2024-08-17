@@ -4,18 +4,17 @@
  * Author: Tomasz Maslanka, Jakub Brzazgacz
  *
  * Description:
- * Module for drawing Jerry model on display
+ * Module for drawing cheese
  */
 
 
  `timescale 1 ns / 1 ps
 
- module draw_jerry (
+ module draw_cheese (
      input  logic clk,
      input  logic rst,
      input logic [11:0] data,
-     input logic [9:0] jerry_x,
-     input logic [9:0] jerry_y,
+     pos_if.in pin,
     vga_if.in in,
 
     output logic [19:0] address,
@@ -76,6 +75,7 @@ logic [11:0] rgb_d;
 
         //  imag_x <= imag_x_nxt;
         //  imag_y <= imag_y_nxt;
+
     end
  end
 
@@ -94,11 +94,11 @@ logic [11:0] rgb_d;
 // logic
 
  always_comb begin
-    imag_x_nxt = in.hcount - jerry_x;
-    imag_y_nxt = (in.vcount - jerry_y)*5;
+    imag_x_nxt = in.hcount - pin.x;
+    imag_y_nxt = (in.vcount - pin.y)*5;
     address_nxt = (imag_y * 5) + imag_x;
-     if((in.vcount >= jerry_y) && (in.vcount < (jerry_y + JERRY_HEIGHT))  && (in.hcount > jerry_x + 4) && (in.hcount <= jerry_x + 4 + JERRY_WIDTH)) begin
-        if(data == JERRY_BG_COLOR) begin
+     if((in.vcount >= pin.y) && (in.vcount < (pin.y + CHEESE_HEIGHT))  && (in.hcount > pin.x + 2) && (in.hcount <= pin.x + 2 + CHEESE_WIDTH)) begin
+        if(data == 12'hf_f_f) begin
             rgb_nxt = rgb_d;
         end
         else begin 

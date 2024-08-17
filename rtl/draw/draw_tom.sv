@@ -19,7 +19,8 @@
     vga_if.in in,
 
     output logic [19:0] address,
-    vga_if.out out
+    vga_if.out out,
+    pos_if.out host_pos
      
  );
  
@@ -37,6 +38,7 @@ logic [19:0] address_nxt;
 logic [10:0] vcount_d, hcount_d, imag_x, imag_y, imag_x_nxt, imag_y_nxt;
 logic [11:0] rgb_d;
 
+// pos_if host_nxt();
 
  delay #(
         .WIDTH (38),
@@ -63,6 +65,9 @@ logic [11:0] rgb_d;
          imag_x <= '0;
          imag_y <= '0;
 
+         host_pos.x <= '0;
+         host_pos.y <= '0;
+
     end else begin
         out.vcount <= vcount_d;
         out.vsync  <= vsync_d;
@@ -76,6 +81,9 @@ logic [11:0] rgb_d;
 
          imag_x <= imag_x_nxt;
          imag_y <= imag_y_nxt;
+
+         host_pos.x <= tom_x;
+         host_pos.y <= tom_y;
     end
  end
  

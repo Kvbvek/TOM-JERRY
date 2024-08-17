@@ -252,12 +252,12 @@ always_comb begin
             if(countery >= countery_jump_stop) begin
                 y_tmp = y - 1;
                 countery_nxt = 0;
-                if(y <= y_jump_start - 50) begin
+                if(y <= y_jump_start - 175) begin
                     if(countery_jump_stop >= 800_000) begin
                         countery_jump_stop_nxt = 800_000;
                     end
                     else begin
-                        countery_jump_stop_nxt = countery_jump_stop + 3_400;
+                        countery_jump_stop_nxt = countery_jump_stop + 20_000;
                     end
                 end
                 else begin
@@ -328,10 +328,10 @@ always_comb begin
                 y_tmp = y + 1;
                 countery_nxt = 0;
                 if(countery_fall_stop <= 150_000) begin
-                    countery_fall_stop_nxt = countery_fall_stop;
+                    countery_fall_stop_nxt = 150_000;
                 end
                 else begin
-                    countery_fall_stop_nxt = countery_fall_stop - 50_000;
+                    countery_fall_stop_nxt = countery_fall_stop - 20_000;
                 end
             end
             else begin

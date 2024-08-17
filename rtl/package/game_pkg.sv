@@ -18,6 +18,10 @@
     localparam JERRY_WIDTH = 25;
     localparam JERRY_HEIGHT = 32;
     localparam JERRY_BG_COLOR = 12'hf_7_f;
+
+    localparam CHEESE_WIDTH = 25;
+    localparam CHEESE_HEIGHT = 18;
+    localparam CHEESE_BG_COLOR = 12'hf_f_f;
     // map related constants
 
     // PLATFORMS

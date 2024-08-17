@@ -12,8 +12,6 @@
         input wire rst,
 		input wire [6:0] sprite_control,
         input wire [19:0] addrA,
-        // input wire [11:0] tom_idle_r, tom_jump_r, tom_run_r_1, tom_run_r_2, tom_run_r_3,
-        // tom_run_r_4, tom_run_r_5, tom_run_r_6, tom_run_r_6, tom_run_r_8, 
 		output logic [11:0] rgb
 	);
 

@@ -36,16 +36,20 @@ set sv_files {
     ../rtl/package/functions_tasks_pkg.sv
     ../rtl/delay.sv
     ../rtl/interface/vga_if.sv
+    ../rtl/interface/pos_if.sv
     ../rtl/Keyboard/key_decoder_movement.sv
+    ../rtl/cheese_taken.sv
+    ../rtl/randomx_plat.sv
     ../rtl/host_move_ctrl.sv
     ../rtl/player_move_ctrl.sv
-    ../rtl/draw_tom.sv
-    ../rtl/draw_jerry.sv
+    ../rtl/draw/draw_tom.sv
+    ../rtl/draw/draw_jerry.sv
+    ../rtl/draw/draw_cheese.sv
     ../rtl/rom/read_rom.sv
     ../rtl/rom/tom/tom_get_sprite.sv
     ../rtl/rom/jerry/jerry_get_sprite.sv
     ../rtl/vga_timing.sv
-    ../rtl/draw_bg.sv
+    ../rtl/draw/draw_bg.sv
     ../rtl/top_vga.sv
     rtl/top_vga_basys3.sv
 }
@@ -108,5 +112,6 @@ set verilog_files {
      ../rtl/data/jerry/left/jerry_run_l_6.dat
      ../rtl/data/jerry/left/jerry_run_l_7.dat
      ../rtl/data/jerry/left/jerry_run_l_8.dat
+     ../rtl/data/cheese.dat
 
  }
