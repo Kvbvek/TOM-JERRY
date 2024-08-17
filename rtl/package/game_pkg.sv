@@ -14,6 +14,10 @@
     localparam TOM_WIDTH = 32;
     localparam TOM_HEIGHT = 50;
     localparam TOM_BG_COLOR = COLOR_PINK;
+
+    localparam JERRY_WIDTH = 25;
+    localparam JERRY_HEIGHT = 32;
+    localparam JERRY_BG_COLOR = 12'hf_7_f;
     // map related constants
 
     // PLATFORMS
@@ -22,7 +26,7 @@
     localparam P1_Y_START = 595;
     localparam P1_Y_END = 605;
     localparam P1_Y_COLLISION = 600;
-    localparam P1_LENGTH = 380;
+    localparam P1_LENGTH = 470;
 
     localparam P2_X_START = 780;
     localparam P2_X_END = 920;
@@ -50,7 +54,7 @@
     localparam P5_Y_START = 315;
     localparam P5_Y_END = 325;
     localparam P5_Y_COLLISION = 320;
-    localparam P5_LENGTH = 275;
+    localparam P5_LENGTH = 375;
 
     localparam P6_X_START = 125;
     localparam P6_X_END = 450;

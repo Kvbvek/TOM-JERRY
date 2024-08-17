@@ -38,9 +38,12 @@ set sv_files {
     ../rtl/interface/vga_if.sv
     ../rtl/Keyboard/key_decoder_movement.sv
     ../rtl/host_move_ctrl.sv
+    ../rtl/player_move_ctrl.sv
     ../rtl/draw_tom.sv
+    ../rtl/draw_jerry.sv
     ../rtl/rom/read_rom.sv
     ../rtl/rom/tom/tom_get_sprite.sv
+    ../rtl/rom/jerry/jerry_get_sprite.sv
     ../rtl/vga_timing.sv
     ../rtl/draw_bg.sv
     ../rtl/top_vga.sv
@@ -87,4 +90,23 @@ set verilog_files {
      ../rtl/data/tom/left/tom_run_l_6.dat
      ../rtl/data/tom/left/tom_run_l_7.dat
      ../rtl/data/tom/left/tom_run_l_8.dat
+     ../rtl/data/jerry/right/jerry_idle_r.dat
+     ../rtl/data/jerry/right/jerry_run_r_1.dat
+     ../rtl/data/jerry/right/jerry_run_r_2.dat
+     ../rtl/data/jerry/right/jerry_run_r_3.dat
+     ../rtl/data/jerry/right/jerry_run_r_4.dat
+     ../rtl/data/jerry/right/jerry_run_r_5.dat
+     ../rtl/data/jerry/right/jerry_run_r_6.dat
+     ../rtl/data/jerry/right/jerry_run_r_7.dat
+     ../rtl/data/jerry/right/jerry_run_r_8.dat
+     ../rtl/data/jerry/left/jerry_idle_l.dat
+     ../rtl/data/jerry/left/jerry_run_l_1.dat
+     ../rtl/data/jerry/left/jerry_run_l_2.dat
+     ../rtl/data/jerry/left/jerry_run_l_3.dat
+     ../rtl/data/jerry/left/jerry_run_l_4.dat
+     ../rtl/data/jerry/left/jerry_run_l_5.dat
+     ../rtl/data/jerry/left/jerry_run_l_6.dat
+     ../rtl/data/jerry/left/jerry_run_l_7.dat
+     ../rtl/data/jerry/left/jerry_run_l_8.dat
+
  }

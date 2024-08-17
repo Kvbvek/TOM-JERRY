@@ -1,12 +1,9 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2024-08-16 17:32:35
+Created: 2024-08-17 12:05:32
 
 ----SYNTHESIS----
-ERROR: [Synth 8-439] module 'key_decoder_movement' not found [/home/student/jbrzazgacz/UEC2/p1/p_0.1.1/TOM-JERRY/rtl/top_vga.sv:67]
-ERROR: [Synth 8-6156] failed synthesizing module 'top_vga' [/home/student/jbrzazgacz/UEC2/p1/p_0.1.1/TOM-JERRY/rtl/top_vga.sv:17]
-ERROR: [Synth 8-6156] failed synthesizing module 'top_vga_basys3' [/home/student/jbrzazgacz/UEC2/p1/p_0.1.1/TOM-JERRY/fpga/rtl/top_vga_basys3.sv:17]
-ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
 
 ----IMPLEMENTATION----
-No implementation log file found!
+CLEAR :)

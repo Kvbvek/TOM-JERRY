@@ -33,21 +33,19 @@ module top_vga (
  * Local variables and signals
  */
 
-// VGA signals from timing
 vga_if_norgb timing();
-// VGA signals from background
 vga_if bg();
-
 vga_if tomctrl();
 vga_if drawtom();
+vga_if drawjerry();
 
 /**
  * Signals assignments
  */
 
-assign vs = drawtom.vsync;
-assign hs = drawtom.hsync;
-assign {r,g,b} = drawtom.rgb;
+assign vs = drawjerry.vsync;
+assign hs = drawjerry.hsync;
+assign {r,g,b} = drawjerry.rgb;
 
 
 /**
@@ -91,7 +89,7 @@ draw_bg u_draw_bg (
 logic [19:0] address_wire;
 logic [9:0] tom_x_wire;
 logic [9:0] tom_y_wire;
-logic [6:0] sprite_control_wire;
+logic [6:0] sprite_control_wire_t;
 
 host_move_ctrl u_host_move_ctrl(
     .clk,
@@ -100,7 +98,7 @@ host_move_ctrl u_host_move_ctrl(
     .right(right_wire),
     .jump(jump_wire),
 
-    .sprite_control(sprite_control_wire),
+    .sprite_control(sprite_control_wire_t),
     .x(tom_x_wire),
     .y(tom_y_wire)
 );
@@ -110,7 +108,7 @@ logic [11:0] data_wire;
 tom_get_sprite u_tom_get_sprite(
     .clk,
     .rst,
-    .sprite_control(sprite_control_wire),
+    .sprite_control(sprite_control_wire_t),
     .addrA(address_wire),
     .rgb(data_wire)
 
@@ -125,6 +123,45 @@ draw_tom u_draw_tom (
     .in(bg),
     .out(drawtom),
     .address(address_wire)
+);
+
+logic [19:0] address_wire_j;
+logic [9:0] jerry_x_wire;
+logic [9:0] jerry_y_wire;
+logic [6:0] sprite_control_wire_j;
+
+player_move_ctrl u_player_move_ctrl(
+    .clk,
+    .rst,
+    .left(left_wire),
+    .right(right_wire),
+    .jump(jump_wire),
+
+    .sprite_control(sprite_control_wire_j),
+    .x(jerry_x_wire),
+    .y(jerry_y_wire)
+);
+
+logic [11:0] data_wire_j;
+
+jerry_get_sprite u_jerry_get_sprite(
+    .clk,
+    .rst,
+    .sprite_control(sprite_control_wire_j),
+    .addrA(address_wire_j),
+    .rgb(data_wire_j)
+
+);
+
+draw_jerry u_draw_jerry (
+    .clk,
+    .rst,
+    .jerry_x(jerry_x_wire),
+    .jerry_y(jerry_y_wire),
+    .data(data_wire_j),
+    .in(drawtom),
+    .out(drawjerry),
+    .address(address_wire_j)
 );
 
 endmodule
