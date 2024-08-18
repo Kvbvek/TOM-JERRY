@@ -39,6 +39,8 @@ vga_if drawtom();
 vga_if drawjerry();
 vga_if drawcheese();
 vga_if drawcheeseo();
+vga_if drawgameover();
+
 
 logic [15:0] keycode;
 
@@ -65,13 +67,17 @@ logic [19:0] address_wire_c;
 
 logic [11:0] chrgb;
 
+logic [7:0] cheese_ctr_wire;
+
+logic [1:0] gameover_wire;
+
 /**
  * Signals assignments
  */
 
-assign vs = drawcheeseo.vsync;
-assign hs = drawcheeseo.hsync;
-assign {r,g,b} = drawcheeseo.rgb;
+assign vs = drawgameover.vsync;
+assign hs = drawgameover.hsync;
+assign {r,g,b} = drawgameover.rgb;
 
 
 /**
@@ -181,7 +187,8 @@ cheese_taken u_cheese_taken(
     .rst,
     .jerrypos(jerryp),
     .cheesepos(cheesep),
-    .is_cheese_taken(is_cheese_taken_wire)
+    .is_cheese_taken(is_cheese_taken_wire),
+    .cheese_ctr(cheese_ctr_wire)
 );
 
 randomx_plat u_randomx_plat(
@@ -219,6 +226,25 @@ draw_cheese u_draw_cheese(
     .out(drawcheeseo),
     .address(address_wire_c)
 
+);
+
+is_gameover u_is_gameover(
+    .clk,
+    .rst,
+    .cheese_ctr(cheese_ctr_wire),
+    .tompos(hostp),
+    .jerrypos(jerryp),
+    .gameover(gameover_wire)
+
+);
+
+draw_gameover u_draw_gameover(
+    .clk,
+    .rst,
+    .gameover(gameover_wire),
+    .in(drawcheeseo),
+    .out(drawgameover)
+    
 );
 
 endmodule

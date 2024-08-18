@@ -16,7 +16,8 @@
 
     pos_if.in jerrypos,
     pos_if.in cheesepos,
-    output logic is_cheese_taken
+    output logic is_cheese_taken,
+    output logic [7:0] cheese_ctr
      
  );
  
@@ -29,25 +30,35 @@ localparam OBJ_HEIGHT = 18;
   * Local variables and signals
   */
  logic is_cheese_taken_nxt;
+ logic [7:0] cheese_ctr_nxt;
 
 
  always_ff @(posedge clk) begin
     if (rst) begin
         is_cheese_taken <= '0;
+        cheese_ctr <= '0;
     end 
     else begin
         is_cheese_taken <= is_cheese_taken_nxt;
+        cheese_ctr <= cheese_ctr_nxt;
     end
  end
  
 // logic
 
  always_comb begin
-    if(checkCollisionWithPlatform(jerrypos.x, jerrypos.y, cheesepos.x, cheesepos.y, JERRY_WIDTH, JERRY_HEIGHT, 25) != 2'b00) begin
+    if(checkCollisionWithObject(jerrypos.x, jerrypos.y, cheesepos.x + 10, cheesepos.y, JERRY_WIDTH, JERRY_HEIGHT, 5) != 2'b00) begin
         is_cheese_taken_nxt = 1;
+        if(cheese_ctr > 20) begin
+            cheese_ctr_nxt = 1;
+        end
+        else begin
+            cheese_ctr_nxt = cheese_ctr + 1;
+        end
     end
     else begin
         is_cheese_taken_nxt = 0;
+        cheese_ctr_nxt = cheese_ctr;
     end
  end
  

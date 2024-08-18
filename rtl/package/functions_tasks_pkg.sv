@@ -62,11 +62,11 @@ endfunction
  endfunction
 
 /*
-@brief Function to check if there is collision between player model and single platform
-@param player x,y coordinates, width and height, platform coordinates and platform length
+@brief Function to check if there is collision between player model and second object for example platform
+@param player x,y coordinates, width and height, object coordinates and object length
 @return returns 2'b10 if collision from up, 2b'01 if from down, 2b'11 if from right or left, 2'b00 if no collision
   */
-function logic [1:0] checkCollisionWithPlatform(
+function logic [1:0] checkCollisionWithObject(
     input [9:0] x, y, x_plat_start, y_plat, input int width, height, plat_length
     // output bit result
     );
@@ -100,36 +100,16 @@ function logic [1:0] checkCollisionWithAllPlatforms(
     );
     begin
         logic [1:0] result;
-        result = (checkCollisionWithPlatform(x, y, P1_X_START, P1_Y_COLLISION, width, height, P1_LENGTH) | 
-                  checkCollisionWithPlatform(x, y, P2_X_START, P2_Y_COLLISION, width, height, P2_LENGTH) |
-                  checkCollisionWithPlatform(x, y, P3_X_START, P3_Y_COLLISION, width, height, P3_LENGTH) |
-                  checkCollisionWithPlatform(x, y, P4_X_START, P4_Y_COLLISION, width, height, P4_LENGTH) |
-                  checkCollisionWithPlatform(x, y, P5_X_START, P5_Y_COLLISION, width, height, P5_LENGTH) | 
-                  checkCollisionWithPlatform(x, y, P6_X_START, P6_Y_COLLISION, width, height, P6_LENGTH));
+        result = (checkCollisionWithObject(x, y, P1_X_START, P1_Y_COLLISION, width, height, P1_LENGTH) | 
+                  checkCollisionWithObject(x, y, P2_X_START, P2_Y_COLLISION, width, height, P2_LENGTH) |
+                  checkCollisionWithObject(x, y, P3_X_START, P3_Y_COLLISION, width, height, P3_LENGTH) |
+                  checkCollisionWithObject(x, y, P4_X_START, P4_Y_COLLISION, width, height, P4_LENGTH) |
+                  checkCollisionWithObject(x, y, P5_X_START, P5_Y_COLLISION, width, height, P5_LENGTH) | 
+                  checkCollisionWithObject(x, y, P6_X_START, P6_Y_COLLISION, width, height, P6_LENGTH));
         return result;
     end
 
 endfunction
-
-/*
-@brief Function to check if player felt from platform while moving
-@param player x,y coordinates, width and height
-@return returns 1 if player will fall, otherwise 0
-  */
-//  function bit playerFallFromPlatform(
-//     input [9:0] x, input [9:0] y, x_plat, x_plat_length input int width, height
-//     );
-//     begin
-//         bit result = (checkCollisionWithPlatform(x, y, P1_X_START, P1_Y_COLLISION, width, height, P1_LENGTH) | 
-//         checkCollisionWithPlatform(x, y, P2_X_START, P2_Y_COLLISION, width, height, P2_LENGTH) |
-//         checkCollisionWithPlatform(x, y, P3_X_START, P3_Y_COLLISION, width, height, P3_LENGTH) |
-//         checkCollisionWithPlatform(x, y, P4_X_START, P4_Y_COLLISION, width, height, P4_LENGTH) |
-//         checkCollisionWithPlatform(x, y, P5_X_START, P5_Y_COLLISION, width, height, P5_LENGTH) | 
-//         checkCollisionWithPlatform(x, y, P6_X_START, P6_Y_COLLISION, width, height, P6_LENGTH));
-//         return result;
-//     end
-
-// endfunction
 
 endpackage
     

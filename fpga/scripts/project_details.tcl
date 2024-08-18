@@ -40,11 +40,13 @@ set sv_files {
     ../rtl/Keyboard/key_decoder_movement.sv
     ../rtl/cheese_taken.sv
     ../rtl/randomx_plat.sv
-    ../rtl/host_move_ctrl.sv
-    ../rtl/player_move_ctrl.sv
+    ../rtl/is_gameover.sv
+    ../rtl/movement/host_move_ctrl.sv
+    ../rtl/movement/player_move_ctrl.sv
     ../rtl/draw/draw_tom.sv
     ../rtl/draw/draw_jerry.sv
     ../rtl/draw/draw_cheese.sv
+    ../rtl/draw/draw_gameover.sv
     ../rtl/rom/read_rom.sv
     ../rtl/rom/tom/tom_get_sprite.sv
     ../rtl/rom/jerry/jerry_get_sprite.sv
