@@ -64,8 +64,6 @@ set verilog_files {
      ../rtl/Keyboard/bin2ascii.v
      ../rtl/Keyboard/debouncer.v
      ../rtl/Keyboard/PS2Receiver.v
-     ../rtl/Keyboard/uart_buf_con.v
-     ../rtl/Keyboard/uart_tx.v
 }
 
 
