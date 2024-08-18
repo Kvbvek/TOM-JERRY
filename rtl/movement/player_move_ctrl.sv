@@ -33,8 +33,8 @@ import functions_tasks_pkg::*;
 // local parameters
 //------------------------------------------------------------------------------
 // coords as two lower values, meaning upper y cord and left x cord 
-localparam JERRY_X_SPAWN = 800;
-localparam JERRY_Y_SPAWN = 768 - 2 - JERRY_HEIGHT;
+localparam JERRY_X_SPAWN = P6_X_START + 100;
+localparam JERRY_Y_SPAWN = P6_Y_COLLISION - JERRY_HEIGHT - 2;
 localparam JUMP_HEIGHT = 200;
 
 localparam COUNTERX_STOP = 400_000;
