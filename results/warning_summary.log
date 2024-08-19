@@ -1,13 +1,9 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2024-08-18 12:14:39
+Created: 2024-08-19 12:51:20
 
 ----SYNTHESIS----
-WARNING: [Synth 8-7129] Port gameover[1] in module draw_gameover is either unconnected or has no load
-WARNING: [Synth 8-7129] Port gameover[0] in module draw_gameover is either unconnected or has no load
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
-WARNING: [Synth 8-7129] Port gameover[1] in module draw_gameover is either unconnected or has no load
-WARNING: [Synth 8-7129] Port gameover[0] in module draw_gameover is either unconnected or has no load
 WARNING: [Synth 8-7129] Port addrA[19] in module jerry_get_sprite is either unconnected or has no load
 WARNING: [Synth 8-7129] Port addrA[18] in module jerry_get_sprite is either unconnected or has no load
 WARNING: [Synth 8-7129] Port addrA[17] in module jerry_get_sprite is either unconnected or has no load

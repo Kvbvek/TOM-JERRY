@@ -25,6 +25,7 @@
  import functions_tasks_pkg::*;
  
 localparam OBJ_HEIGHT = 18;
+localparam MAX_CHEESE = 10;
 
  /**
   * Local variables and signals
@@ -49,7 +50,7 @@ localparam OBJ_HEIGHT = 18;
  always_comb begin
     if(checkCollisionWithObject(jerrypos.x, jerrypos.y, cheesepos.x + 10, cheesepos.y, JERRY_WIDTH, JERRY_HEIGHT, 5) != 2'b00) begin
         is_cheese_taken_nxt = 1;
-        if(cheese_ctr >= 20) begin
+        if(cheese_ctr >= MAX_CHEESE) begin
             cheese_ctr_nxt = 1;
         end
         else begin

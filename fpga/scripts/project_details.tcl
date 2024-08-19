@@ -47,6 +47,7 @@ set sv_files {
     ../rtl/draw/draw_jerry.sv
     ../rtl/draw/draw_cheese.sv
     ../rtl/draw/draw_gameover.sv
+    ../rtl/get_over.sv
     ../rtl/rom/read_rom.sv
     ../rtl/rom/tom/tom_get_sprite.sv
     ../rtl/rom/jerry/jerry_get_sprite.sv

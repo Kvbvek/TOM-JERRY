@@ -14,7 +14,6 @@
      input  logic clk,
      input  logic rst,
      input logic [7:0] cheese_ctr,
-     input logic rst_button,
     pos_if.in jerrypos,
     pos_if.in tompos,
 
@@ -43,10 +42,13 @@
 // logic
 
  always_comb begin
-    if(checkCollisionWithObject(tompos.x, tompos.y, jerrypos.x, jerrypos.y, TOM_WIDTH, TOM_HEIGHT, 25) != 2'b00) begin
+    // if(checkCollisionWithObject(tompos.x, tompos.y, jerrypos.x, jerrypos.y, TOM_WIDTH, TOM_HEIGHT, 5) != 2'b00) begin
+    //     gameover_nxt = 2'b10;
+    // end
+    if(((tompos.x + 15) == (jerrypos.x + 12)) && ((tompos.y + 25) == (jerrypos.y + 9))) begin 
         gameover_nxt = 2'b10;
     end
-    else if(cheese_ctr == 20) begin
+    else if(cheese_ctr >= 20) begin
         gameover_nxt = 2'b01;
     end
     else begin

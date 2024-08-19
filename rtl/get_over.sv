@@ -24,7 +24,8 @@ module get_over (
  * Local variables and signals
  */
 
-logic over_nxt;
+logic over_nxt = 0;
+// logic o;
 
 /**
  * Internal logic
@@ -42,8 +43,15 @@ end
 
 
 always_comb begin
-    if(over) over_nxt = 1;
-    else over_nxt = (gameover[1] | gameover[0]);
+    // o_nxt = (gameover[1] | gameover[0]);
+    if(over == 1'b1) begin
+        over_nxt = 1'b1;
+    end
+    else begin
+        if(gameover[1:0] != 2'b00) over_nxt = 1'b1;
+        else over_nxt = 1'b0; 
+    end
 end
+
 
 endmodule

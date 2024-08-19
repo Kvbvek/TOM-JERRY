@@ -20,7 +20,6 @@ module draw_gameover (
 
 );
 
-import vga_pkg::*;
 import game_pkg::*;
 
 
@@ -29,21 +28,20 @@ import game_pkg::*;
  */
 
 logic [11:0] rgb_nxt;
-logic over, over_nxt = 0;
 vga_if intr();
 
 /**
  * Internal logic
  */
 
-always_ff @(posedge clk) begin
-    if (rst) begin
-        over <= '0;
-    end
-     else begin
-        over <= over_nxt;
-    end
-end
+
+get_over u_get_over(
+    .clk,
+    .rst,
+    .gameover(gameover),
+    .over(over_wire)
+
+);
 
 always_ff @(posedge clk) begin
     if (rst) begin
@@ -67,33 +65,10 @@ always_ff @(posedge clk) begin
     end
 end
 
-always_comb begin
-    // if(over) over_nxt = 1;
-    // else over_nxt = (gameover[1] | gameover[0]);
-    over_nxt = 0;
-    if(gameover[1] == 1'b1 || gameover[0] == 1'b1) over_nxt = 1;
-    else over_nxt = over;
-    // if(over) begin
-    //     if((in.vcount > P1_Y_START) && (in.vcount < P1_Y_END) && ((in.hcount > P1_X_START) && (in.hcount < P1_X_END) || (in.hcount > P2_X_START) && (in.hcount < P2_X_END)) || 
-    //         (in.vcount > P3_Y_START) && (in.vcount < P3_Y_END) && ((in.hcount > P3_X_START) && (in.hcount < P3_X_END) || (in.hcount > P4_X_START) && (in.hcount < P4_X_END)) || 
-    //         (in.vcount > P5_Y_START) && (in.vcount < P5_Y_END) && ((in.hcount > P5_X_START) && (in.hcount < P5_X_END)) || 
-    //         (in.vcount > P6_Y_START) && (in.vcount < P6_Y_END) && ((in.hcount > P6_X_START) && (in.hcount < P6_X_END)))
-    //         begin
-    //             rgb_nxt = 12'h8_2_0;
-    //         end
-    //         else rgb_nxt = in.rgb;
-    // end
-    // else begin
-    //     rgb_nxt = in.rgb;
-    // end                            
-
-   
-
-end
 
 delay #(
         .WIDTH (38),
-        .CLK_DEL(2)
+        .CLK_DEL(1)
 ) u_delay_ch (
         .clk (clk),
         .rst (rst),
@@ -102,7 +77,7 @@ delay #(
     );
 
 always_comb begin
-    if(over) begin
+    if(over_wire) begin
             if((intr.vcount > P1_Y_START) && (intr.vcount < P1_Y_END) && ((intr.hcount > P1_X_START) && (intr.hcount < P1_X_END) || (intr.hcount > P2_X_START) && (intr.hcount < P2_X_END)) || 
             (intr.vcount > P3_Y_START) && (intr.vcount < P3_Y_END) && ((intr.hcount > P3_X_START) && (intr.hcount < P3_X_END) || (intr.hcount > P4_X_START) && (intr.hcount < P4_X_END)) || 
             (intr.vcount > P5_Y_START) && (intr.vcount < P5_Y_END) && ((intr.hcount > P5_X_START) && (intr.hcount < P5_X_END)) || 
