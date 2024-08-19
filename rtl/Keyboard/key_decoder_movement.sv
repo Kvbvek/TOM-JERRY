@@ -15,20 +15,20 @@
     input  logic [15:0] keycode,
     output  logic right,
     output  logic left,
-    output  logic jump,
-    output  logic rst_button
+    output  logic jump
+    
  );
 
-    logic r_nxt, l_nxt, j_nxt, rst_button_nxt;
+    logic r_nxt, l_nxt, j_nxt;
     logic [7:0] ctr, ctr_nxt;
-    // 23 D prawo | 1D W skok | 1C A lewo | 29 Space Reset
+    // 23 D prawo | 1D W skok | 1C A lewo 
 
     always_ff @(posedge clk) begin
         if(rst)begin
             right <= '0;
             left <= '0;
             jump <= '0;
-            rst_button <= '0;
+            
 
             ctr <= '0;
         end
@@ -36,7 +36,6 @@
             right <= r_nxt;
             left <= l_nxt;
             jump <= j_nxt;
-            rst_button <= rst_button_nxt;
 
              ctr <= ctr_nxt;
         end
@@ -88,12 +87,8 @@
             j_nxt = 0;
             ctr_nxt = 0;
         end
-
-         if(keycode[7:0] == 8'h29) begin
-            rst_button_nxt = rst_button;
-         end else begin
-            rst_button_nxt = 0;
-         end
     end
+        
+    
 
  endmodule 

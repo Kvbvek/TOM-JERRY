@@ -14,6 +14,7 @@
  module host_move_ctrl (
     input  logic clk,
     input  logic rst,
+    input  logic reset,
 
     input logic  left,
     input logic  right,
@@ -65,8 +66,8 @@ logic [6:0] sprite_control_nxt;
 
 always_ff @(posedge clk) begin
     if (rst) begin
-        x <= '0;
-        y <= '0;
+        x <= TOM_X_SPAWN;
+        y <= TOM_Y_SPAWN;
         y_jump_start <= '0;
 
         counterx <= '0;
@@ -101,10 +102,10 @@ end
 always_comb begin
     case(state_c)
         IDLE: begin
-            if(!spawned) begin
+            if(reset) begin
                 x_tmp = TOM_X_SPAWN;
                 y_tmp = TOM_Y_SPAWN;
-                spawned_nxt = 1;
+                // spawned_nxt = 1;
                 state_nxt = IDLE;
                 
                 sprite_control_nxt = 7'b1010000;
@@ -122,7 +123,7 @@ always_comb begin
                 end
                 x_tmp = x;
                 y_tmp = y;
-                spawned_nxt = 1;
+                // spawned_nxt = 1;
 
                 sprite_control_nxt = {sprite_control[6],6'b010000};
             end

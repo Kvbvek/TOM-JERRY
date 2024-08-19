@@ -38,6 +38,7 @@ set sv_files {
     ../rtl/interface/vga_if.sv
     ../rtl/interface/pos_if.sv
     ../rtl/Keyboard/key_decoder_movement.sv
+    ../rtl/Keyboard/key_decoder_reset.sv
     ../rtl/cheese_taken.sv
     ../rtl/randomx_plat.sv
     ../rtl/is_gameover.sv

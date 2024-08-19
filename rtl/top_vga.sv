@@ -99,9 +99,17 @@ key_decoder_movement u_key_decoder_movement(
 
 .left(left_wire),
 .right(right_wire),
-.jump(jump_wire),
-.rst_button(rst_button_wire)
+.jump(jump_wire)
+
 );  
+
+key_decoder_reset u_key_decoder_reset(
+    .clk(clk),
+    .rst(rst),
+    .keycode(keycode),
+
+    .reset(reset_wire)
+);
 
 vga_timing u_vga_timing (
     .clk,
@@ -123,6 +131,7 @@ host_move_ctrl u_host_move_ctrl(
     .left(left_wire),
     .right(right_wire),
     .jump(jump_wire),
+    .reset(reset_wire),
 
     .sprite_control(sprite_control_wire_t),
     .x(tom_x_wire),
@@ -156,6 +165,7 @@ player_move_ctrl u_player_move_ctrl(
     .left(left_wire),
     .right(right_wire),
     .jump(jump_wire),
+    .reset(reset_wire),
 
     .sprite_control(sprite_control_wire_j),
     .x(jerry_x_wire),
