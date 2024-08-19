@@ -17,7 +17,7 @@
 module top_vga (
     input  logic clk,
     input  logic rst,
-    input  logic clk100,
+    input  logic clk87,
     inout  logic kclk,
     inout  logic kdata,
     output logic vs,
@@ -85,7 +85,7 @@ assign {r,g,b} = drawgameover.rgb;
  */
 
 top u_keyboardTop(
-  .clk(clk100),
+  .clk(clk87),
   .PS2Clk(kclk),
   .PS2Data(kdata),
   .keyc(keycode)
@@ -99,7 +99,8 @@ key_decoder_movement u_key_decoder_movement(
 
 .left(left_wire),
 .right(right_wire),
-.jump(jump_wire)
+.jump(jump_wire),
+.rst_button(rst_button_wire)
 );  
 
 vga_timing u_vga_timing (

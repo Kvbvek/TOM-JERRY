@@ -57,8 +57,8 @@ assign JA1 = pclk_mirror;
  */
 clk_wiz_0_clk_wiz u_clk_wiz_0(
     .clk(clk),
-    .clk87(pclk),
-    .clk100(clk100),
+    .clk65(pclk),
+    .clk87(clk87),
     .locked(locked)
     );
 
@@ -84,7 +84,7 @@ ODDR pclk_oddr (
 top_vga u_top_vga (
     .clk(pclk),
     .rst(btnC),
-    .clk100(clk100),
+    .clk87(clk87),
     .r(vgaRed),
     .g(vgaGreen),
     .b(vgaBlue),

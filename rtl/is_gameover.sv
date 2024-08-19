@@ -14,6 +14,7 @@
      input  logic clk,
      input  logic rst,
      input logic [7:0] cheese_ctr,
+     input logic rst_button,
     pos_if.in jerrypos,
     pos_if.in tompos,
 
