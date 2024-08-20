@@ -25,7 +25,15 @@ module top_vga_basys3 (
     output wire [3:0] vgaRed,
     output wire [3:0] vgaGreen,
     output wire [3:0] vgaBlue,
-    output wire JA1
+    output wire JA1,
+
+    input wire JB1,
+    input wire JB2,
+    input wire JB3,
+
+    output wire JB7,
+    output wire JB8,
+    output wire JB9
 );
 
 
@@ -91,7 +99,15 @@ top_vga u_top_vga (
     .hs(Hsync),
     .vs(Vsync),
     .kclk(PS2Clk),
-    .kdata(PS2Data)
+    .kdata(PS2Data),
+
+    .j_in(JB1),
+    .l_in(JB2),
+    .r_in(JB3),
+
+    .j_out(JB7),
+    .l_out(JB8),
+    .r_out(JB9)
     // .oflag(RsTx)
     
 );

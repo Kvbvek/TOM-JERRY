@@ -20,6 +20,15 @@ module top_vga (
     input  logic clk87,
     inout  logic kclk,
     inout  logic kdata,
+  
+    input  logic l_in,
+    input  logic r_in,
+    input  logic j_in,
+
+    output logic l_out,
+    output logic r_out,
+    output logic j_out,
+
     output logic vs,
     output logic hs,
     output logic [3:0] r,
@@ -79,6 +88,9 @@ assign vs = drawgameover.vsync;
 assign hs = drawgameover.hsync;
 assign {r,g,b} = drawgameover.rgb;
 
+assign l_out = left_wire;
+assign r_out = right_wire;
+assign j_out = jump_wire;
 
 /**
  * Submodules instances
@@ -162,9 +174,9 @@ draw_tom u_draw_tom (
 player_move_ctrl u_player_move_ctrl(
     .clk,
     .rst,
-    .left(left_wire),
-    .right(right_wire),
-    .jump(jump_wire),
+    .left(l_in),
+    .right(r_in),
+    .jump(j_in),
     .reset(reset_wire),
 
     .sprite_control(sprite_control_wire_j),
