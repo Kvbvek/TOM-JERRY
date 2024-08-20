@@ -13,6 +13,7 @@
 module draw_gameover (
     input  logic clk,
     input  logic rst,
+    input logic reset,
     input logic [1:0] gameover,
 
     vga_if.in in,
@@ -38,6 +39,7 @@ vga_if intr();
 get_over u_get_over(
     .clk,
     .rst,
+    .reset,
     .gameover(gameover),
     .over(over_wire)
 

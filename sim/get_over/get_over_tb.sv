@@ -62,15 +62,17 @@ initial begin
     rst = 1'b0;
     # 30 rst = 1'b1;
     # 30 rst = 1'b0;
+    gameover_s = 2'b00;
 
     $display("Starting simulation...");
     $display("Over value - %d at %t", ov, $time);
     # 50 gameover_s = 2'b10;
+    # 25;
     $display("Over value - %d at %t", ov, $time);
-    # 1;
+    # 50;
     gameover_s = 2'b00;
     $display("Over value - %d at %t", ov, $time);
-    # 1;
+    # 50;
     $display("Over value - %d at %t", ov, $time);
 
     // End the simulation.

@@ -83,14 +83,15 @@ initial begin
     j.y = 650;
     t.x = 156;
     t.y = 120;
-    cheese_ctr_w = 15;
+    cheese_ctr_w = 9;
     #125
     $display("Output - gameover[1:0]: %b at %t  - exp 00", gameover_w, $time);
     # 25;
     #125
     $display("Output - gameover[1:0]: %b at %t  - exp 00", gameover_w, $time);
     cheese_ctr_w = 20;
-    #125
+    #125;
+    # 50;
     $display("Output - gameover[1:0]: %b at %t  - exp 01", gameover_w, $time);
     cheese_ctr_w = 1;
     #4;

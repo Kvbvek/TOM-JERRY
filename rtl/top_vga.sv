@@ -76,7 +76,7 @@ logic [19:0] address_wire_c;
 
 logic [11:0] chrgb;
 
-logic [7:0] cheese_ctr_wire;
+logic cheese_gm_wire;
 
 logic [1:0] gameover_wire;
 
@@ -208,10 +208,11 @@ draw_jerry u_draw_jerry (
 cheese_taken u_cheese_taken(
     .clk,
     .rst,
+    .reset(reset_wire),
     .jerrypos(jerryp),
     .cheesepos(cheesep),
     .is_cheese_taken(is_cheese_taken_wire),
-    .cheese_ctr(cheese_ctr_wire)
+    .cheese_gm(cheese_gm_wire)
 );
 
 randomx_plat u_randomx_plat(
@@ -254,7 +255,7 @@ draw_cheese u_draw_cheese(
 is_gameover u_is_gameover(
     .clk,
     .rst,
-    .cheese_ctr(cheese_ctr_wire),
+    .cheese_gm(cheese_gm_wire),
     .tompos(hostp),
     .jerrypos(jerryp),
     .gameover(gameover_wire)
@@ -264,6 +265,7 @@ is_gameover u_is_gameover(
 draw_gameover u_draw_gameover(
     .clk,
     .rst,
+    .reset(reset_wire),
     .gameover(gameover_wire),
     .in(drawcheeseo),
     .out(drawgameover)

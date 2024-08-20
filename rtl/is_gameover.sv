@@ -13,7 +13,7 @@
  module is_gameover (
      input  logic clk,
      input  logic rst,
-     input logic [7:0] cheese_ctr,
+     input logic cheese_gm,
     pos_if.in jerrypos,
     pos_if.in tompos,
 
@@ -28,6 +28,7 @@
   * Local variables and signals
   */
  logic [1:0] gameover_nxt;
+localparam MAX_CHEESE = 10;
 
 
  always_ff @(posedge clk) begin
@@ -48,7 +49,7 @@
     if(((tompos.x + 15) == (jerrypos.x + 12)) && ((tompos.y + 25) == (jerrypos.y + 9))) begin 
         gameover_nxt = 2'b10;
     end
-    else if(cheese_ctr >= 20) begin
+    else if(cheese_gm) begin
         gameover_nxt = 2'b01;
     end
     else begin
