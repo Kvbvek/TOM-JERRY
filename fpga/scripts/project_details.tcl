@@ -34,27 +34,27 @@ set sv_files {
     ../rtl/package/vga_pkg.sv
     ../rtl/package/game_pkg.sv
     ../rtl/package/functions_tasks_pkg.sv
-    ../rtl/delay.sv
+    ../rtl/timing/delay.sv
     ../rtl/interface/vga_if.sv
     ../rtl/interface/pos_if.sv
     ../rtl/Keyboard/key_decoder_movement.sv
     ../rtl/Keyboard/key_decoder_reset.sv
-    ../rtl/cheese_taken.sv
-    ../rtl/randomx_plat.sv
-    ../rtl/is_gameover.sv
+    ../rtl/timing/cheese_taken.sv
+    ../rtl/timing/randomx_plat.sv
     ../rtl/movement/host_move_ctrl.sv
     ../rtl/movement/player_move_ctrl.sv
     ../rtl/draw/draw_tom.sv
     ../rtl/draw/draw_jerry.sv
     ../rtl/draw/draw_cheese.sv
     ../rtl/draw/draw_gameover.sv
-    ../rtl/get_over.sv
+    ../rtl/gameover/get_over.sv
+    ../rtl/gameover/is_gameover.sv
     ../rtl/rom/read_rom.sv
     ../rtl/rom/tom/tom_get_sprite.sv
     ../rtl/rom/jerry/jerry_get_sprite.sv
-    ../rtl/vga_timing.sv
+    ../rtl/timing/vga_timing.sv
     ../rtl/draw/draw_bg.sv
-    ../rtl/top_vga.sv
+    ../rtl/top/top_vga.sv
     rtl/top_vga_basys3.sv
 }
 

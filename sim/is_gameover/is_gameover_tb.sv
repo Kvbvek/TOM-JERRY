@@ -52,7 +52,7 @@ end
 is_gameover dut (
     .clk(clk),
     .rst(rst),
-    .cheese_ctr(cheese_ctr_w),
+    .cheese_gm(cheese_ctr_w),
     .jerrypos(j),
     .tompos(t),
     .gameover(gameover_w)
