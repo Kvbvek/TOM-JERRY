@@ -18,7 +18,7 @@
     pos_if.in jerrypos,
     pos_if.in cheesepos,
     output logic is_cheese_taken,
-    // output logic [7:0] cheese_ctr
+    output logic [7:0] cheese_ctr,
     output logic cheese_gm
      
  );
@@ -33,7 +33,7 @@ localparam MAX_CHEESE = 10;
   * Local variables and signals
   */
  logic is_cheese_taken_nxt;
- logic [7:0] cheese_ctr_nxt, cheese_ctr;
+ logic [7:0] cheese_ctr_nxt;
  logic [10:0] ctrd, ctrd_nxt;
 logic cheese_gm_nxt;
 

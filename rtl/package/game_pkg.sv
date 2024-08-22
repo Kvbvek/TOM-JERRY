@@ -11,6 +11,11 @@
 
    localparam COLOR_PINK = 12'hf_6_f;
 
+    localparam NUMBER_WIDTH = 22;
+    localparam NUMBER_HEIGHT = 36;
+    localparam NUMBER_BG_COLOR = 12'hf_f_f;
+
+
     localparam TOM_WIDTH = 32;
     localparam TOM_HEIGHT = 50;
     localparam TOM_BG_COLOR = COLOR_PINK;

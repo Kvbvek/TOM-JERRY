@@ -49,6 +49,7 @@ vga_if drawjerry();
 vga_if drawcheese();
 vga_if drawcheeseo();
 vga_if drawgameover();
+vga_if drawcounter();
 
 
 logic [15:0] keycode;
@@ -205,6 +206,10 @@ draw_jerry u_draw_jerry (
     .player_pos(jerryp)
 );
 
+wire [7:0] cheese_ctr_wire;
+wire [19:0] address_wire_counter;
+wire [11:0] data_wire_c;
+
 cheese_taken u_cheese_taken(
     .clk,
     .rst,
@@ -212,6 +217,7 @@ cheese_taken u_cheese_taken(
     .jerrypos(jerryp),
     .cheesepos(cheesep),
     .is_cheese_taken(is_cheese_taken_wire),
+    .cheese_ctr(cheese_ctr_wire),
     .cheese_gm(cheese_gm_wire)
 );
 
@@ -250,6 +256,26 @@ draw_cheese u_draw_cheese(
     .out(drawcheeseo),
     .address(address_wire_c)
 
+);
+
+
+counter  u_counter(
+    .clk,
+    .rst,
+    .cheese_ctr(cheese_ctr_wire),
+    .addrA(address_wire_counter),
+    .rgb(data_wire_c)
+    
+);
+
+
+draw_counter u_draw_counter(
+    .clk,
+    .rst,
+    .data(data_wire_c),
+    .in(drawcheeseo),
+    .out(drawcounter),
+    .address(address_wire_counter)
 );
 
 is_gameover u_is_gameover(

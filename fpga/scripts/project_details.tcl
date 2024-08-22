@@ -43,6 +43,7 @@ set sv_files {
     ../rtl/timing/randomx_plat.sv
     ../rtl/movement/host_move_ctrl.sv
     ../rtl/movement/player_move_ctrl.sv
+    ../rtl/draw/draw_counter.sv
     ../rtl/draw/draw_tom.sv
     ../rtl/draw/draw_jerry.sv
     ../rtl/draw/draw_cheese.sv
@@ -50,6 +51,7 @@ set sv_files {
     ../rtl/gameover/get_over.sv
     ../rtl/gameover/is_gameover.sv
     ../rtl/rom/read_rom.sv
+    ../rtl/rom/numbers/counter.sv
     ../rtl/rom/tom/tom_get_sprite.sv
     ../rtl/rom/jerry/jerry_get_sprite.sv
     ../rtl/timing/vga_timing.sv
