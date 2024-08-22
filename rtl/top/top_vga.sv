@@ -259,7 +259,7 @@ draw_cheese u_draw_cheese(
 );
 
 
-counter  u_counter(
+counter u_counter(
     .clk,
     .rst,
     .cheese_ctr(cheese_ctr_wire),
@@ -293,7 +293,7 @@ draw_gameover u_draw_gameover(
     .rst,
     .reset(reset_wire),
     .gameover(gameover_wire),
-    .in(drawcheeseo),
+    .in(drawcounter),
     .out(drawgameover)
     
 );

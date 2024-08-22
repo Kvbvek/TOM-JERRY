@@ -26,7 +26,7 @@
  import game_pkg::*;
  import functions_tasks_pkg::*;
  
-localparam OBJ_HEIGHT = 18;
+// localparam OBJ_HEIGHT = 18;
 localparam MAX_CHEESE = 10;
 
  /**
@@ -34,7 +34,7 @@ localparam MAX_CHEESE = 10;
   */
  logic is_cheese_taken_nxt;
  logic [7:0] cheese_ctr_nxt;
- logic [10:0] ctrd, ctrd_nxt;
+ logic [15:0] ctrd, ctrd_nxt;
 logic cheese_gm_nxt;
 
  always_ff @(posedge clk) begin
@@ -61,7 +61,7 @@ logic cheese_gm_nxt;
  always_comb begin
     if(!reset) begin
         if(checkCollisionWithObject(jerrypos.x, jerrypos.y, cheesepos.x + 10, cheesepos.y, JERRY_WIDTH, JERRY_HEIGHT, 5) != 2'b00) begin
-            if(ctrd >= 500) begin  
+            if(ctrd >= 10_000) begin  
                 is_cheese_taken_nxt = 1;
                 if(cheese_ctr >= MAX_CHEESE - 1) begin
                     cheese_ctr_nxt = 1;

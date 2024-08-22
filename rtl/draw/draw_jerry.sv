@@ -103,18 +103,19 @@ logic [11:0] rgb_d;
  always_comb begin
     imag_x_nxt = in.hcount - jerry_x;
     imag_y_nxt = (in.vcount - jerry_y)*5;
+    
     address_nxt = (imag_y * 5) + imag_x;
-     if((in.vcount >= jerry_y) && (in.vcount < (jerry_y + JERRY_HEIGHT))  && (in.hcount > jerry_x + 4) && (in.hcount <= jerry_x + 4 + JERRY_WIDTH)) begin
-        if(data == JERRY_BG_COLOR) begin
+        if((in.vcount >= jerry_y) && (in.vcount < (jerry_y + JERRY_HEIGHT))  && (in.hcount > jerry_x + 4) && (in.hcount <= jerry_x + 4 + JERRY_WIDTH)) begin
+            if(data == JERRY_BG_COLOR) begin
+                rgb_nxt = rgb_d;
+            end
+            else begin 
+                rgb_nxt = data;
+            end
+        end
+        else begin
             rgb_nxt = rgb_d;
         end
-        else begin 
-            rgb_nxt = data;
-        end
-     end
-     else begin
-        rgb_nxt = rgb_d;
-     end
  end
  
  endmodule

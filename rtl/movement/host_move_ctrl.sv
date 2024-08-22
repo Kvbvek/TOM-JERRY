@@ -61,7 +61,6 @@ logic [19:0] countery_jump_stop, countery_jump_stop_nxt;
 logic [19:0] countery_fall_stop, countery_fall_stop_nxt;
 logic [9:0] x_tmp, x_nxt;
 logic [9:0] y_tmp, y_jump_start, y_jump_start_nxt, y_nxt;
-logic spawned, spawned_nxt;
 logic [6:0] sprite_control_nxt;
 
 always_ff @(posedge clk) begin
@@ -74,7 +73,6 @@ always_ff @(posedge clk) begin
         countery <= '0;
         countery_fall_stop <= '0;
         countery_jump_stop <= '0;
-        spawned <= '0;
 
         sprite_control <= '0;
 
@@ -89,7 +87,6 @@ always_ff @(posedge clk) begin
         countery <= countery_nxt;
         countery_fall_stop <= countery_fall_stop_nxt;
         countery_jump_stop <= countery_jump_stop_nxt;
-        spawned <= spawned_nxt;
 
         sprite_control <= sprite_control_nxt;
 
@@ -105,7 +102,6 @@ always_comb begin
             if(reset) begin
                 x_tmp = TOM_X_SPAWN;
                 y_tmp = TOM_Y_SPAWN;
-                // spawned_nxt = 1;
                 state_nxt = IDLE;
                 
                 sprite_control_nxt = 7'b1010000;
@@ -123,7 +119,6 @@ always_comb begin
                 end
                 x_tmp = x;
                 y_tmp = y;
-                // spawned_nxt = 1;
 
                 sprite_control_nxt = {sprite_control[6],6'b010000};
             end
@@ -204,7 +199,6 @@ always_comb begin
             y_jump_start_nxt = y;
 
             y_tmp = y;
-            spawned_nxt = 1;
             countery_nxt = 0;
             countery_jump_stop_nxt = 200_000;
             countery_fall_stop_nxt = 800_000;
@@ -281,7 +275,6 @@ always_comb begin
                 state_nxt = JUMPING;
                 countery_fall_stop_nxt = 800_000;
             end
-            spawned_nxt = 1;
             y_jump_start_nxt = y_jump_start;
 
             x_nxt = correctCoordinateX(x_tmp, TOM_WIDTH);
@@ -314,7 +307,7 @@ always_comb begin
                     counterx_nxt = counterx + 1;
                     sprite_control_nxt[3:0] = sprite_control[3:0];
                 end
-                sprite_control_nxt[6:4] = 2'b010;
+                sprite_control_nxt[6:4] = 3'b010;
             end
 
             else begin
@@ -354,7 +347,6 @@ always_comb begin
             else begin
                 state_nxt = IDLE;
             end
-            spawned_nxt = 1;
             
             y_jump_start_nxt = y;
 
@@ -365,7 +357,6 @@ always_comb begin
         end
 
         default: begin
-            spawned_nxt = 1;
             state_nxt = IDLE;
             x_tmp = x;
             y_tmp = y;  
