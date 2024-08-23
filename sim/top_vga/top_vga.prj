@@ -16,8 +16,8 @@ sv work ../../rtl/package/vga_pkg.sv \
         ../../rtl/Keyboard/key_decoder_reset.sv \
         ../../rtl/movement/host_move_ctrl.sv \
         ../../rtl/movement/player_move_ctrl.sv \
-        ../../rtl/timing/cheese_taken.sv \
-        ../../rtl/timing/randomx_plat.sv \
+        ../../rtl/cheese/cheese_taken.sv \
+        ../../rtl/cheese/randomx_plat.sv \
         ../../rtl/gameover/is_gameover.sv \
         ../../rtl/gameover/get_over.sv \
         ../../rtl/interface/vga_if.sv \

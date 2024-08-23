@@ -18,7 +18,7 @@
      input logic [9:0] tom_y,
     vga_if.in in,
 
-    output logic [19:0] address,
+    output logic [10:0] address,
     vga_if.out out,
     pos_if.out host_pos
      
@@ -33,12 +33,12 @@
   */
  
 logic [11:0] rgb_nxt;
-logic [19:0] address_nxt;
+logic [10:0] address_nxt;
 
 logic [10:0] vcount_d, hcount_d, imag_x, imag_y, imag_x_nxt, imag_y_nxt;
 logic [11:0] rgb_d;
 
-// pos_if host_nxt();
+logic vblnk_d, vsync_d, hblnk_d, hsync_d;
 
  delay #(
         .WIDTH (38),

@@ -64,7 +64,7 @@ logic cheese_gm_nxt;
             if(ctrd >= 10_000) begin  
                 is_cheese_taken_nxt = 1;
                 if(cheese_ctr >= MAX_CHEESE - 1) begin
-                    cheese_ctr_nxt = 1;
+                    cheese_ctr_nxt = 0;
                     cheese_gm_nxt = 1;
                 end
                 else begin

@@ -35,6 +35,7 @@ vga_if intr();
  * Internal logic
  */
 
+logic over_wire;
 
 get_over u_get_over(
     .clk,

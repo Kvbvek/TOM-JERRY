@@ -36,6 +36,7 @@ logic [19:0] address_nxt;
 logic [10:0] vcount_d, hcount_d, imag_x, imag_y, imag_x_nxt, imag_y_nxt;
 logic [11:0] rgb_d;
 
+logic vblnk_d, vsync_d, hblnk_d, hsync_d;
 
  delay #(
         .WIDTH (38),
@@ -59,8 +60,8 @@ logic [11:0] rgb_d;
 
          address    <= '0;
 
-        //  imag_x <= '0;
-        //  imag_y <= '0;
+         imag_x <= '0;
+         imag_y <= '0;
 
     end else begin
         out.vcount <= vcount_d;
@@ -73,21 +74,9 @@ logic [11:0] rgb_d;
 
          address    <= address_nxt;
 
-        //  imag_x <= imag_x_nxt;
-        //  imag_y <= imag_y_nxt;
-
-    end
- end
-
- always_ff @(posedge clk) begin
-    if (rst) begin
-         imag_x <= '0;
-         imag_y <= '0;
-
-    end else begin
-
          imag_x <= imag_x_nxt;
          imag_y <= imag_y_nxt;
+
     end
  end
  

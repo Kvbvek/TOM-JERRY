@@ -28,7 +28,6 @@
   * Local variables and signals
   */
  logic [1:0] gameover_nxt;
-localparam MAX_CHEESE = 10;
 
 
  always_ff @(posedge clk) begin
