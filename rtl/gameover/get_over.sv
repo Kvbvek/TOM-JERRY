@@ -14,6 +14,7 @@ module get_over (
     input  logic clk,
     input  logic rst,
     input logic [1:0] gameover,
+    input logic reset,
 
     output logic over
 
@@ -44,11 +45,11 @@ end
 
 always_comb begin
     // o_nxt = (gameover[1] | gameover[0]);
-    if(over == 1'b1) begin
+    if(over == 1'b1 && !reset) begin
         over_nxt = 1'b1;
     end
     else begin
-        if(gameover[1:0] != 2'b00) over_nxt = 1'b1;
+        if((gameover[1:0] != 2'b00) && !reset) over_nxt = 1'b1;
         else over_nxt = 1'b0; 
     end
 end

@@ -49,11 +49,12 @@ vga_if drawjerry();
 vga_if drawcheese();
 vga_if drawcheeseo();
 vga_if drawgameover();
+vga_if drawcounter();
 
 
 logic [15:0] keycode;
 
-logic [19:0] address_wire;
+logic [10:0] address_wire;
 logic [9:0] tom_x_wire;
 logic [9:0] tom_y_wire;
 logic [6:0] sprite_control_wire_t;
@@ -62,7 +63,7 @@ logic [11:0] data_wire;
 
 pos_if hostp();
 
-logic [19:0] address_wire_j;
+logic [9:0] address_wire_j;
 logic [9:0] jerry_x_wire;
 logic [9:0] jerry_y_wire;
 logic [6:0] sprite_control_wire_j;
@@ -71,14 +72,17 @@ logic [11:0] data_wire_j;
 
 pos_if jerryp();
 pos_if cheesep();
+logic is_cheese_taken_wire;
 
 logic [19:0] address_wire_c;
 
 logic [11:0] chrgb;
 
-logic [7:0] cheese_ctr_wire;
+logic cheese_gm_wire;
 
 logic [1:0] gameover_wire;
+
+logic left_wire, right_wire, jump_wire, reset_wire;
 
 /**
  * Signals assignments
@@ -98,6 +102,7 @@ assign j_out = jump_wire;
 
 top u_keyboardTop(
   .clk(clk87),
+  .rst(rst),
   .PS2Clk(kclk),
   .PS2Data(kdata),
   .keyc(keycode)
@@ -205,13 +210,19 @@ draw_jerry u_draw_jerry (
     .player_pos(jerryp)
 );
 
+wire [7:0] cheese_ctr_wire;
+// wire [19:0] address_wire_counter;
+// wire [11:0] data_wire_c;
+
 cheese_taken u_cheese_taken(
     .clk,
     .rst,
+    .reset(reset_wire),
     .jerrypos(jerryp),
     .cheesepos(cheesep),
     .is_cheese_taken(is_cheese_taken_wire),
-    .cheese_ctr(cheese_ctr_wire)
+    .cheese_ctr(cheese_ctr_wire),
+    .cheese_gm(cheese_gm_wire)
 );
 
 randomx_plat u_randomx_plat(
@@ -251,10 +262,31 @@ draw_cheese u_draw_cheese(
 
 );
 
+
+// counter u_counter(
+//     .clk,
+//     .rst,
+//     .cheese_ctr(cheese_ctr_wire),
+//     .addrA(address_wire_counter),
+//     .rgb(data_wire_c)
+    
+// );
+
+
+draw_counter u_draw_counter(
+    .clk,
+    .rst,
+    // .data(data_wire_c),
+    .cheese_ctr(cheese_ctr_wire),
+    .in(drawcheeseo),
+    .out(drawcounter)
+    // .address(address_wire_counter)
+);
+
 is_gameover u_is_gameover(
     .clk,
     .rst,
-    .cheese_ctr(cheese_ctr_wire),
+    .cheese_gm(cheese_gm_wire),
     .tompos(hostp),
     .jerrypos(jerryp),
     .gameover(gameover_wire)
@@ -264,8 +296,9 @@ is_gameover u_is_gameover(
 draw_gameover u_draw_gameover(
     .clk,
     .rst,
+    .reset(reset_wire),
     .gameover(gameover_wire),
-    .in(drawcheeseo),
+    .in(drawcounter),
     .out(drawgameover)
     
 );

@@ -11,7 +11,7 @@
 		input logic clk, // posedge active clock
         input logic rst,
 		input logic [6:0] sprite_control,
-        input logic [19:0] addrA,
+        input logic [9:0] addrA,
 		output logic [11:0] rgb
 	);
 
@@ -27,7 +27,8 @@
     logic [11:0] rgb_nxt;
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/right/jerry_idle_r.dat")
+        .DATA_PATH ("../../rtl/data/jerry/right/jerry_idle_r.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_idle_r (
         .clk (clk),
         .addrA(addrA),
@@ -35,7 +36,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_1.dat")
+        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_1.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_r_1 (
         .clk (clk),
         .addrA(addrA),
@@ -43,7 +45,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_2.dat")
+        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_2.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_r_2 (
         .clk (clk),
         .addrA(addrA),
@@ -51,7 +54,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_3.dat")
+        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_3.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_r_3 (
         .clk (clk),
         .addrA(addrA),
@@ -59,7 +63,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_4.dat")
+        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_4.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_r_4 (
         .clk (clk),
         .addrA(addrA),
@@ -67,7 +72,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_5.dat")
+        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_5.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_r_5 (
         .clk (clk),
         .addrA(addrA),
@@ -75,7 +81,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_6.dat")
+        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_6.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_r_6 (
         .clk (clk),
         .addrA(addrA),
@@ -83,7 +90,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_7.dat")
+        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_7.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_r_7 (
         .clk (clk),
         .addrA(addrA),
@@ -91,7 +99,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_8.dat")
+        .DATA_PATH ("../../rtl/data/jerry/right/jerry_run_r_8.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_r_8 (
         .clk (clk),
         .addrA(addrA),
@@ -99,7 +108,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/left/jerry_idle_l.dat")
+        .DATA_PATH ("../../rtl/data/jerry/left/jerry_idle_l.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_idle_l (
         .clk (clk),
         .addrA(addrA),
@@ -107,7 +117,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_1.dat")
+        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_1.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_l_1 (
         .clk (clk),
         .addrA(addrA),
@@ -115,7 +126,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_2.dat")
+        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_2.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_l_2 (
         .clk (clk),
         .addrA(addrA),
@@ -123,7 +135,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_3.dat")
+        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_3.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_l_3 (
         .clk (clk),
         .addrA(addrA),
@@ -131,7 +144,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_4.dat")
+        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_4.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_l_4 (
         .clk (clk),
         .addrA(addrA),
@@ -139,7 +153,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_5.dat")
+        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_5.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_l_5 (
         .clk (clk),
         .addrA(addrA),
@@ -147,7 +162,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_6.dat")
+        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_6.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_l_6 (
         .clk (clk),
         .addrA(addrA),
@@ -155,7 +171,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_7.dat")
+        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_7.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_l_7 (
         .clk (clk),
         .addrA(addrA),
@@ -163,7 +180,8 @@
     );
 
     read_rom #(
-        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_8.dat")
+        .DATA_PATH ("../../rtl/data/jerry/left/jerry_run_l_8.dat"),
+        .ADDR_WIDTH(10)
     ) read_rom_jerry_run_l_8 (
         .clk (clk),
         .addrA(addrA),

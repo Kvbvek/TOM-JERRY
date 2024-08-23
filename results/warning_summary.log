@@ -1,28 +1,9 @@
 Warnings, critical warnings and errors from synthesis and implementation
 
-Created: 2024-08-19 12:51:20
+Created: 2024-08-23 11:25:56
 
 ----SYNTHESIS----
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
-WARNING: [Synth 8-7129] Port addrA[19] in module jerry_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[18] in module jerry_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[17] in module jerry_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[16] in module jerry_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[15] in module jerry_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[14] in module jerry_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[13] in module jerry_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[12] in module jerry_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[11] in module jerry_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[10] in module jerry_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[19] in module tom_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[18] in module tom_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[17] in module tom_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[16] in module tom_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[15] in module tom_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[14] in module tom_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[13] in module tom_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[12] in module tom_get_sprite is either unconnected or has no load
-WARNING: [Synth 8-7129] Port addrA[11] in module tom_get_sprite is either unconnected or has no load
 
 ----IMPLEMENTATION----
 CLEAR :)

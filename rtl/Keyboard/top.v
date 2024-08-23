@@ -22,33 +22,35 @@
 
 module top(
     input         clk,
+    input         rst,
     inout         PS2Data,
     inout         PS2Clk,
-    // output        tx
-    output  [15:0]     keyc
+    output  reg [15:0]     keyc
 );
-    // wire        tready;
-    // wire        ready;
-    // wire        tstart;
-    // reg         start=0;
+   
     reg         CLK50MHZ=0;
-    // wire [31:0] tbuf;
-    // reg  [15:0] keycodev=0;
-    // wire [15:0] keycode;
-    // wire [ 7:0] tbus;
-    // reg  [ 2:0] bcount=0;
     wire        flag;
-    // reg         cn=0;
+   
+    wire [15:0] keyc_wire;
     
     always @(posedge(clk))begin
         CLK50MHZ<=~CLK50MHZ;
     end
     
+    always @(posedge CLK50MHZ) begin
+        if (rst) begin
+            keyc <= 0;
+        end
+        else begin
+            keyc <= keyc_wire;
+        end
+    end
+
     PS2Receiver uut (
         .clk(CLK50MHZ),
         .kclk(PS2Clk),
         .kdata(PS2Data),
-        .keycode(keyc),
+        .keycode(keyc_wire),
         .oflag(flag)
     );
     
