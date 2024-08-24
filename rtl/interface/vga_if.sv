@@ -4,7 +4,7 @@
  * Author:Tomasz Maslanka, Jakub Brzazgacz
  *
  * Description:
- * Interfaces.
+ * Vga interfaces.
  */
 
  import vga_pkg::*;

@@ -29,7 +29,7 @@ localparam CLK_PERIOD = 25;     // 40 MHz
  */
 
 logic clk, rst;
-logic [7:0] cheese_ctr_w;
+logic cheese_gm_w;
 pos_if j();
 pos_if t();
 
@@ -52,7 +52,7 @@ end
 is_gameover dut (
     .clk(clk),
     .rst(rst),
-    .cheese_gm(cheese_ctr_w),
+    .cheese_gm(cheese_gm_w),
     .jerrypos(j),
     .tompos(t),
     .gameover(gameover_w)
@@ -70,7 +70,6 @@ initial begin
     j.y = 0;
     t.x = 0;
     t.y = 0;
-    cheese_ctr_w = 0;
     # 30 rst = 1'b1;
     # 30 rst = 1'b0;
 
@@ -83,19 +82,18 @@ initial begin
     j.y = 650;
     t.x = 156;
     t.y = 120;
-    cheese_ctr_w = 9;
+    cheese_gm_w = 0;
     #125
     $display("Output - gameover[1:0]: %b at %t  - exp 00", gameover_w, $time);
     # 25;
     #125
     $display("Output - gameover[1:0]: %b at %t  - exp 00", gameover_w, $time);
-    cheese_ctr_w = 20;
     #125;
+    cheese_gm_w = 1;
     # 50;
     $display("Output - gameover[1:0]: %b at %t  - exp 01", gameover_w, $time);
-    cheese_ctr_w = 1;
     #4;
-    $display("Output - gameover[1:0]: %b at %t  - exp 00", gameover_w, $time);
+    cheese_gm_w = 0;
     #25;
     $display("Output - gameover[1:0]: %b at %t  - exp 00", gameover_w, $time);
 

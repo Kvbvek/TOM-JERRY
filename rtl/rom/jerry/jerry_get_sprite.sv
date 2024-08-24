@@ -4,7 +4,7 @@
  * Author: Tomasz Maslanka, Jakub Brzazgacz
  *
  * Description:
- * Module 
+ * Module to get the current model of Jerry depending on which movement state he is in
  */
 
  module jerry_get_sprite(
@@ -201,8 +201,7 @@
         .dout ({jerry_idle_r, jerry_run_r_1, jerry_run_r_2, jerry_run_r_3, jerry_run_r_4, jerry_run_r_5,
         jerry_run_r_6, jerry_run_r_7, jerry_run_r_8, jerry_idle_l, jerry_run_l_1, jerry_run_l_2, jerry_run_l_3, jerry_run_l_4, jerry_run_l_5,
         jerry_run_l_6, jerry_run_l_7, jerry_run_l_8})
-        /* .din({jerry_idle_r_i,jerry_idle_l_i}),
-        .dout({jerry_idle_r, jerry_idle_l}) */
+    
     );
 
     always_comb begin

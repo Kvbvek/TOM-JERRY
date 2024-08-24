@@ -10,7 +10,7 @@
 
  `timescale 1 ns / 1 ps
 
- module cheese_taken (
+module cheese_taken (
      input  logic clk,
      input  logic rst,
      input  logic reset,
@@ -21,23 +21,24 @@
     output logic [7:0] cheese_ctr,
     output logic cheese_gm
      
- );
+);
  
- import game_pkg::*;
- import functions_tasks_pkg::*;
- 
-// localparam OBJ_HEIGHT = 18;
+import game_pkg::*;
+import functions_tasks_pkg::*;
+
+ // local parameters
 localparam MAX_CHEESE = 10;
+localparam TIMER_20S = 1_300_000_000;
 
- /**
-  * Local variables and signals
-  */
- logic is_cheese_taken_nxt;
- logic [7:0] cheese_ctr_nxt;
- logic [15:0] ctrd, ctrd_nxt;
+// local variables
+logic is_cheese_taken_nxt;
+logic [7:0] cheese_ctr_nxt;
+logic [15:0] ctrd, ctrd_nxt;
 logic cheese_gm_nxt;
+logic [31:0] waiting_ctr, waiting_ctr_nxt;
 
- always_ff @(posedge clk) begin
+// output register with sync reset
+always_ff @(posedge clk) begin 
     if (rst) begin
         is_cheese_taken <= '0;
         cheese_ctr <= '0;
@@ -45,6 +46,8 @@ logic cheese_gm_nxt;
         ctrd <= '0;
 
         cheese_gm <= '0;
+
+        waiting_ctr <= '0;
     end 
     else begin
         is_cheese_taken <= is_cheese_taken_nxt;
@@ -53,12 +56,13 @@ logic cheese_gm_nxt;
         ctrd <= ctrd_nxt;
 
         cheese_gm <= cheese_gm_nxt;
+
+        waiting_ctr <= waiting_ctr_nxt;
     end
- end
+end
  
 // logic
-
- always_comb begin
+always_comb begin
     if(!reset) begin
         if(checkCollisionWithObject(jerrypos.x, jerrypos.y, cheesepos.x + 10, cheesepos.y, JERRY_WIDTH, JERRY_HEIGHT, 5) != 2'b00) begin
             if(ctrd >= 10_000) begin  
@@ -72,6 +76,7 @@ logic cheese_gm_nxt;
                     cheese_gm_nxt = 0;
                 end
                 ctrd_nxt = 0;
+                waiting_ctr_nxt = 0;
             end
             
             else begin
@@ -79,13 +84,24 @@ logic cheese_gm_nxt;
                 cheese_ctr_nxt = cheese_ctr;
                 ctrd_nxt = ctrd + 1;
                 cheese_gm_nxt = 0;
+                waiting_ctr_nxt = 0;
             end
         end
+
+        else if(waiting_ctr >= TIMER_20S) begin
+            is_cheese_taken_nxt = 1;
+            cheese_ctr_nxt = cheese_ctr;
+            ctrd_nxt = 0;
+            cheese_gm_nxt = 0;
+            waiting_ctr_nxt = 0;
+        end
+
         else begin
             is_cheese_taken_nxt = 0;
             cheese_ctr_nxt = cheese_ctr;
             ctrd_nxt = ctrd;
             cheese_gm_nxt = 0;
+            waiting_ctr_nxt = waiting_ctr + 1;
         end
     end
     else begin
@@ -93,8 +109,9 @@ logic cheese_gm_nxt;
         cheese_ctr_nxt = 0;
         ctrd_nxt = 0;
         cheese_gm_nxt = 0;
+        waiting_ctr_nxt = 0;
     end
- end
+end
  
- endmodule
+endmodule
  

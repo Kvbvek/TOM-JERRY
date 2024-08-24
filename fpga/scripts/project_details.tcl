@@ -45,10 +45,10 @@ set sv_files {
     ../rtl/movement/host_move_ctrl.sv
     ../rtl/movement/player_move_ctrl.sv
     ../rtl/draw/draw_bg.sv
-    ../rtl/draw/draw_counter.sv
     ../rtl/draw/draw_tom.sv
     ../rtl/draw/draw_jerry.sv
     ../rtl/draw/draw_cheese.sv
+    ../rtl/draw/draw_cheese_counter.sv
     ../rtl/draw/draw_gameover.sv
     ../rtl/gameover/get_over.sv
     ../rtl/gameover/is_gameover.sv

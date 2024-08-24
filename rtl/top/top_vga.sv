@@ -79,6 +79,7 @@ logic [19:0] address_wire_c;
 logic [11:0] chrgb;
 
 logic cheese_gm_wire;
+logic [7:0] cheese_ctr_wire;
 
 logic [1:0] gameover_wire;
 
@@ -210,9 +211,6 @@ draw_jerry u_draw_jerry (
     .player_pos(jerryp)
 );
 
-wire [7:0] cheese_ctr_wire;
-// wire [19:0] address_wire_counter;
-// wire [11:0] data_wire_c;
 
 cheese_taken u_cheese_taken(
     .clk,
@@ -235,7 +233,7 @@ randomx_plat u_randomx_plat(
 
 delay #(
         .WIDTH (38),
-        .CLK_DEL(2)
+        .CLK_DEL(3)
 ) u_delay_ch (
         .clk (clk),
         .rst (rst),
@@ -251,36 +249,35 @@ read_rom #(
         .dout (chrgb)
     );
 
+logic [11:0] chrgbo;
+
+delay #(
+    .WIDTH (12),
+    .CLK_DEL(1)
+) u_delay_rom_ch (
+    .clk (clk),
+    .rst (rst),
+    .din (chrgb),
+    .dout (chrgbo)
+);
+
 draw_cheese u_draw_cheese(
     .clk,
     .rst,
     .pin(cheesep),
-    .data(chrgb),
+    .data(chrgbo),
     .in(drawcheese),
     .out(drawcheeseo),
     .address(address_wire_c)
 
 );
 
-
-// counter u_counter(
-//     .clk,
-//     .rst,
-//     .cheese_ctr(cheese_ctr_wire),
-//     .addrA(address_wire_counter),
-//     .rgb(data_wire_c)
-    
-// );
-
-
-draw_counter u_draw_counter(
+draw_cheese_counter u_draw_cheese_counter(
     .clk,
     .rst,
-    // .data(data_wire_c),
     .cheese_ctr(cheese_ctr_wire),
     .in(drawcheeseo),
     .out(drawcounter)
-    // .address(address_wire_counter)
 );
 
 is_gameover u_is_gameover(
