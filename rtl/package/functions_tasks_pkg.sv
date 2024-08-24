@@ -115,7 +115,11 @@ function logic [1:0] checkCollisionWithAllPlatforms(
                   checkCollisionWithObject(x, y, P13_X_START, P13_Y_COLLISION, width, height, P13_LENGTH) |
                   checkCollisionWithObject(x, y, P14_X_START, P14_Y_COLLISION, width, height, P14_LENGTH) |
                   checkCollisionWithObject(x, y, P15_X_START, P15_Y_COLLISION, width, height, P15_LENGTH) |
-                  checkCollisionWithObject(x, y, P16_X_START, P16_Y_COLLISION, width, height, P16_LENGTH));
+                  checkCollisionWithObject(x, y, P16_X_START, P16_Y_COLLISION, width, height, P16_LENGTH) |
+                  checkCollisionWithObject(x, y, P17_X_START, P17_Y_COLLISION, width, height, P17_LENGTH) |
+                  checkCollisionWithObject(x, y, P18_X_START, P18_Y_COLLISION, width, height, P18_LENGTH) |
+                  checkCollisionWithObject(x, y, P19_X_START, P19_Y_COLLISION, width, height, P19_LENGTH)
+                   );
         return result;
     end
 

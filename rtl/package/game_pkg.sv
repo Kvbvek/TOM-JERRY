@@ -96,13 +96,13 @@
     localparam P9_Y_COLLISION = 285;
     localparam P9_LENGTH = 30;
 
-  // vertical platform
-    // localparam P10_Y_START = 280;
-    // localparam P10_Y_END = 425;
-    // localparam P10_X_START = 60;
-    // localparam P10_X_END = 65;
-    // localparam P10_Y_COLLISION = 285;
-    // localparam P10_LENGTH = 5;
+  
+    localparam P10_X_START = 990 ;
+    localparam P10_X_END = 1030;
+    localparam P10_Y_START = 535;
+    localparam P10_Y_END = 540;
+    localparam P10_Y_COLLISION = 540;
+    localparam P10_LENGTH = 40;
 
     
     localparam P11_X_START = 0;
@@ -148,13 +148,26 @@
     localparam P16_Y_COLLISION = 355;
     localparam P16_LENGTH = 50;
 
-    // vertical platform
-    localparam P10_Y_START = 280;
-    localparam P10_Y_END = 425;
-    localparam P10_X_START = 60;
-    localparam P10_X_END = 65;
-    localparam P10_Y_COLLISION = 285;
-    localparam P10_LENGTH = 5;
+    localparam P17_X_START = 920 ;
+    localparam P17_X_END = 960;
+    localparam P17_Y_START = 455;
+    localparam P17_Y_END = 460;
+    localparam P17_Y_COLLISION = 460;
+    localparam P17_LENGTH = 40;
+
+    localparam P18_X_START = 990 ;
+    localparam P18_X_END = 1030;
+    localparam P18_Y_START = 375;
+    localparam P18_Y_END = 380;
+    localparam P18_Y_COLLISION = 380;
+    localparam P18_LENGTH = 40;
+
+    localparam P19_X_START = 0;
+    localparam P19_X_END = 1000;
+    localparam P19_Y_START = 795;
+    localparam P19_Y_END = 800;
+    localparam P19_Y_COLLISION = 800;
+    localparam P19_LENGTH = 1000;
     
     endpackage
     
