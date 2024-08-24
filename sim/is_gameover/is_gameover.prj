@@ -12,5 +12,5 @@
 sv work ../../rtl/package/game_pkg.sv \
         ../../rtl/package/functions_tasks_pkg.sv \
         ../../rtl/interface/pos_if.sv \
-        ../../rtl/is_gameover.sv \
+        ../../rtl/gameover/is_gameover.sv \
         is_gameover_tb.sv

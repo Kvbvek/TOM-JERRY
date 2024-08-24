@@ -4,7 +4,7 @@
  * Author: Tomasz Maslanka, Jakub Brzazgacz
  *
  * Description:
- * get over .
+ * Module informing if game ended
  */
 
 
@@ -25,8 +25,7 @@ module get_over (
  * Local variables and signals
  */
 
-logic over_nxt = 0;
-// logic o;
+logic over_nxt;
 
 /**
  * Internal logic
@@ -44,7 +43,6 @@ end
 
 
 always_comb begin
-    // o_nxt = (gameover[1] | gameover[0]);
     if(over == 1'b1 && !reset) begin
         over_nxt = 1'b1;
     end

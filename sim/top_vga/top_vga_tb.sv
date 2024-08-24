@@ -62,7 +62,16 @@ top_vga dut (
     .hs(hs),
     .r(r),
     .g(g),
-    .b(b)
+    .b(b),
+    .l_in(1'b0),
+    .r_in(1'b0),
+    .j_in(1'b0),
+    .l_out(),
+    .r_out(),
+    .j_out(),
+    .kdata(),
+    .clk87(1'b0),
+    .kclk()
 );
 
 tiff_writer #(

@@ -30,7 +30,7 @@ localparam CLK_PERIOD = 25;     // 40 MHz
 
 logic clk, rst;
 logic [1:0] gameover_s;
-logic ov;
+logic ov, reset_w;
 
 /**
  * Clock generation
@@ -48,6 +48,7 @@ end
 
 get_over dut (
     .clk(clk),
+    .reset(reset_w),
     .rst(rst),
     .gameover(gameover_s),
     .over(ov)
@@ -63,6 +64,7 @@ initial begin
     # 30 rst = 1'b1;
     # 30 rst = 1'b0;
     gameover_s = 2'b00;
+    reset_w = 0;
 
     $display("Starting simulation...");
     $display("Over value - %d at %t", ov, $time);

@@ -4,7 +4,7 @@
  * Author: Tomasz Maslanka, Jakub Brzazgacz
  *
  * Description:
- * Module 
+ * Module to get the current model of Tom depending on which movement state he is in 
  */
 
  module tom_get_sprite(
@@ -205,7 +205,6 @@
         .addrA(addrA),
         .dout (tom_run_l_8_i)
     );
-    // logic [47:0] dout_s;
 
     delay #(
         .WIDTH (240),

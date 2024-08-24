@@ -9,7 +9,8 @@
 
 package vga_pkg;
 
-// Parameters for VGA Display 800 x 600 @ 60fps using a 40 MHz clock;
+// 1024 x 768 display resolution
+    
 localparam HOR_PIXELS = 1024;
 localparam VER_PIXELS = 768;
 
@@ -25,7 +26,6 @@ localparam VER_SYNC_END = 777;
 localparam VER_BLANK_START = 768;
 localparam VER_BLANK_END = 806;
 
-// Add VGA timing parameters here and refer to them in other modules.
 
 endpackage
 

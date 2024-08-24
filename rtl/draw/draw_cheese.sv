@@ -86,7 +86,7 @@ logic vblnk_d, vsync_d, hblnk_d, hsync_d;
     imag_x_nxt = in.hcount - pin.x;
     imag_y_nxt = (in.vcount - pin.y)*5;
     address_nxt = (imag_y * 5) + imag_x;
-     if((in.vcount >= pin.y) && (in.vcount < (pin.y + CHEESE_HEIGHT))  && (in.hcount > pin.x + 2) && (in.hcount <= pin.x + 2 + CHEESE_WIDTH)) begin
+     if((in.vcount >= pin.y) && (in.vcount < (pin.y + CHEESE_HEIGHT))  && (in.hcount > pin.x + 3) && (in.hcount <= pin.x + 3 + CHEESE_WIDTH)) begin
         if(data == 12'hf_f_f) begin
             rgb_nxt = rgb_d;
         end

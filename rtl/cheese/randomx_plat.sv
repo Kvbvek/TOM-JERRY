@@ -4,8 +4,8 @@
  * Author: Tomasz Maslanka, Jakub Brzazgacz
  *
  * Description:
- * Module for generating pseudo random coords placed on platforms. It is made for spawning cheese model.
- * Made pseudo random cause function $urandom_range() is not supported :(
+ * Module for generating pseudo random coords to spawn cheese on platforms.
+ * Made pseudo random because function $urandom_range() is not supported :(
  */
 
 
@@ -22,17 +22,16 @@
  
  import game_pkg::*;
  
+// local parameters
 localparam OBJ_HEIGHT = 20;
+localparam PLATFORM_NUMBER = 6;
 
+// local variables
 logic [9:0] ctr, ctr_nxt;
 logic [2:0] ctr1, ctr1_nxt;
-
- /**
-  * Local variables and signals
-  */
- 
 pos_if pnxt();
 logic start, start_nxt;
+
 
  always_ff @(posedge clk) begin
     if (rst) begin
@@ -57,12 +56,11 @@ logic start, start_nxt;
  end
  
 // logic
-
- always_comb begin
-    if(ctr >= 1024) ctr_nxt = 0;
+always_comb begin
+    if(ctr >= 1000) ctr_nxt = 0;
     else ctr_nxt = ctr + 1;
 
-    if(ctr1 >= 6) ctr1_nxt = 0;
+    if(ctr1 >= PLATFORM_NUMBER) ctr1_nxt = 0;
     else ctr1_nxt = ctr1 + 1;
 
     if(!start) begin
@@ -133,7 +131,7 @@ logic start, start_nxt;
         end
     end
     start_nxt = 1;
- end
+end
  
- endmodule
+endmodule
  

@@ -26,12 +26,11 @@ sv work ../../rtl/package/vga_pkg.sv \
         ../../rtl/draw/draw_tom.sv \
         ../../rtl/draw/draw_cheese.sv \
         ../../rtl/draw/draw_gameover.sv \
-        ../../rtl/draw/draw_counter.sv \
+        ../../rtl/draw/draw_cheese_counter.sv \
         ../../rtl/timing/delay.sv \
         ../../rtl/rom/read_rom.sv \
         ../../rtl/rom/tom/tom_get_sprite.sv \
         ../../rtl/rom/jerry/jerry_get_sprite.sv \
-        ../../rtl/rom/numbers/counter.sv \
         ../../rtl/timing/vga_timing.sv \
         ../../rtl/draw/draw_bg.sv \
         ../../rtl/top/top_vga.sv \
