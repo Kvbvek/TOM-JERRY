@@ -75,6 +75,15 @@ always_comb begin : bg_comb_blk
             (in.vcount > P3_Y_START) && (in.vcount < P3_Y_END) && ((in.hcount > P3_X_START) && (in.hcount < P3_X_END) || (in.hcount > P4_X_START) && (in.hcount < P4_X_END)) || 
             (in.vcount > P5_Y_START) && (in.vcount < P5_Y_END) && ((in.hcount > P5_X_START) && (in.hcount < P5_X_END)) || 
             (in.vcount > P6_Y_START) && (in.vcount < P6_Y_END) && ((in.hcount > P6_X_START) && (in.hcount < P6_X_END))
+            || (in.vcount > P7_Y_START) && (in.vcount < P7_Y_END) && ((in.hcount > P7_X_START) && (in.hcount < P7_X_END))
+            || (in.vcount > P8_Y_START) && (in.vcount < P8_Y_END) && ((in.hcount > P8_X_START) && (in.hcount < P8_X_END)) || (in.vcount > P9_Y_START) && (in.vcount < P9_Y_END) && ((in.hcount > P9_X_START) && (in.hcount < P9_X_END))
+            || (in.hcount > P10_X_START) && (in.hcount < P10_X_END) && ((in.vcount > P10_Y_START) && (in.vcount < P10_Y_END)) 
+            || (in.hcount > P11_X_START) && (in.hcount < P11_X_END) && ((in.vcount > P11_Y_START) && (in.vcount < P11_Y_END))
+            || (in.hcount > P12_X_START) && (in.hcount < P12_X_END) && ((in.vcount > P12_Y_START) && (in.vcount < P12_Y_END))
+            || (in.hcount > P13_X_START) && (in.hcount < P13_X_END) && ((in.vcount > P13_Y_START) && (in.vcount < P13_Y_END))
+            || (in.hcount > P14_X_START) && (in.hcount < P14_X_END) && ((in.vcount > P14_Y_START) && (in.vcount < P14_Y_END))
+            || (in.hcount > P15_X_START) && (in.hcount < P15_X_END) && ((in.vcount > P15_Y_START) && (in.vcount < P15_Y_END))
+            || (in.hcount > P16_X_START) && (in.hcount < P16_X_END) && ((in.vcount > P16_Y_START) && (in.vcount < P16_Y_END))
             )
             begin
                 rgb_nxt = 12'h1_1_1;
@@ -105,6 +114,42 @@ always_comb begin : bg_comb_blk
             || ((in.vcount == P6_Y_START    ) && ((in.hcount > P6_X_START + 1) && (in.hcount < P6_X_END + 1)))
             || ((in.vcount == P6_Y_START - 1) && ((in.hcount > P6_X_START + 2) && (in.hcount < P6_X_END + 2)))
             || ((in.vcount == P6_Y_START - 2) && ((in.hcount > P6_X_START + 3) && (in.hcount < P6_X_END + 3)))
+            
+            || ((in.vcount == P7_Y_START    ) && ((in.hcount > P7_X_START + 1) && (in.hcount < P7_X_END + 1)))
+            || ((in.vcount == P7_Y_START - 1) && ((in.hcount > P7_X_START + 2) && (in.hcount < P7_X_END + 2)))
+            || ((in.vcount == P7_Y_START - 2) && ((in.hcount > P7_X_START + 3) && (in.hcount < P7_X_END + 3)))
+
+            || ((in.vcount == P8_Y_START    ) && ((in.hcount > P8_X_START + 1) && (in.hcount < P8_X_END + 1)))
+            || ((in.vcount == P8_Y_START - 1) && ((in.hcount > P8_X_START + 2) && (in.hcount < P8_X_END + 2)))
+            || ((in.vcount == P8_Y_START - 2) && ((in.hcount > P8_X_START + 3) && (in.hcount < P8_X_END + 3)))
+
+            || ((in.vcount == P9_Y_START    ) && ((in.hcount > P9_X_START + 1) && (in.hcount < P9_X_END + 1)))
+            || ((in.vcount == P9_Y_START - 1) && ((in.hcount > P9_X_START + 2) && (in.hcount < P9_X_END + 2)))
+            || ((in.vcount == P9_Y_START - 2) && ((in.hcount > P9_X_START + 3) && (in.hcount < P9_X_END + 3)))
+
+            || ((in.vcount == P11_Y_START    ) && ((in.hcount > P11_X_START + 1) && (in.hcount < P11_X_END + 1)))
+            || ((in.vcount == P11_Y_START - 1) && ((in.hcount > P11_X_START + 2) && (in.hcount < P11_X_END + 2)))
+            || ((in.vcount == P11_Y_START - 2) && ((in.hcount > P11_X_START + 3) && (in.hcount < P11_X_END + 3)))
+
+            || ((in.vcount == P12_Y_START    ) && ((in.hcount > P12_X_START + 1) && (in.hcount < P12_X_END + 1)))
+            || ((in.vcount == P12_Y_START - 1) && ((in.hcount > P12_X_START + 2) && (in.hcount < P12_X_END + 2)))
+            || ((in.vcount == P12_Y_START - 2) && ((in.hcount > P12_X_START + 3) && (in.hcount < P12_X_END + 3)))
+
+            || ((in.vcount == P13_Y_START    ) && ((in.hcount > P13_X_START + 1) && (in.hcount < P13_X_END + 1)))
+            || ((in.vcount == P13_Y_START - 1) && ((in.hcount > P13_X_START + 2) && (in.hcount < P13_X_END + 2)))
+            || ((in.vcount == P13_Y_START - 2) && ((in.hcount > P13_X_START + 3) && (in.hcount < P13_X_END + 3)))
+
+            || ((in.vcount == P14_Y_START    ) && ((in.hcount > P14_X_START + 1) && (in.hcount < P14_X_END + 1)))
+            || ((in.vcount == P14_Y_START - 1) && ((in.hcount > P14_X_START + 2) && (in.hcount < P14_X_END + 2)))
+            || ((in.vcount == P14_Y_START - 2) && ((in.hcount > P14_X_START + 3) && (in.hcount < P14_X_END + 3)))
+
+            || ((in.vcount == P15_Y_START    ) && ((in.hcount > P15_X_START + 1) && (in.hcount < P15_X_END + 1)))
+            || ((in.vcount == P15_Y_START - 1) && ((in.hcount > P15_X_START + 2) && (in.hcount < P15_X_END + 2)))
+            || ((in.vcount == P15_Y_START - 2) && ((in.hcount > P15_X_START + 3) && (in.hcount < P15_X_END + 3)))
+
+            || ((in.vcount == P16_Y_START    ) && ((in.hcount > P16_X_START + 1) && (in.hcount < P16_X_END + 1)))
+            || ((in.vcount == P16_Y_START - 1) && ((in.hcount > P16_X_START + 2) && (in.hcount < P16_X_END + 2)))
+            || ((in.vcount == P16_Y_START - 2) && ((in.hcount > P16_X_START + 3) && (in.hcount < P16_X_END + 3)))
             )
             begin
                 rgb_nxt = COLOR_BLACK;

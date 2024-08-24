@@ -10,6 +10,7 @@
  package game_pkg;
 
    localparam COLOR_PINK = 12'hf_6_f;
+   localparam BLACK = 12'h0_0_0;
 
     localparam NUMBER_WIDTH = 22;
     localparam NUMBER_HEIGHT = 36;
@@ -71,6 +72,89 @@
     localparam P6_Y_END = 270;
     localparam P6_Y_COLLISION = 270;
     localparam P6_LENGTH = 325;
+
+
+    localparam P7_X_START = 60;
+    localparam P7_X_END = 210;
+    localparam P7_Y_START = 420;
+    localparam P7_Y_END = 425;
+    localparam P7_Y_COLLISION = 425;
+    localparam P7_LENGTH = 150;
+
+
+    localparam P8_X_START = 0;
+    localparam P8_X_END = 25;
+    localparam P8_Y_START = 350;
+    localparam P8_Y_END = 355;
+    localparam P8_Y_COLLISION = 355;
+    localparam P8_LENGTH = 25;
+
+    localparam P9_X_START = 35;
+    localparam P9_X_END = 65;
+    localparam P9_Y_START = 280;
+    localparam P9_Y_END = 285;
+    localparam P9_Y_COLLISION = 285;
+    localparam P9_LENGTH = 30;
+
+  // vertical platform
+    // localparam P10_Y_START = 280;
+    // localparam P10_Y_END = 425;
+    // localparam P10_X_START = 60;
+    // localparam P10_X_END = 65;
+    // localparam P10_Y_COLLISION = 285;
+    // localparam P10_LENGTH = 5;
+
+    
+    localparam P11_X_START = 0;
+    localparam P11_X_END = 70;
+    localparam P11_Y_START = 675;
+    localparam P11_Y_END = 680;
+    localparam P11_Y_COLLISION = 680;
+    localparam P11_LENGTH = 70;
+
+    localparam P12_X_START = 35;
+    localparam P12_X_END = 65;
+    localparam P12_Y_START = 420;
+    localparam P12_Y_END = 425;
+    localparam P12_Y_COLLISION = 425;
+    localparam P12_LENGTH = 30;
+
+
+    localparam P13_X_START = 680;
+    localparam P13_X_END = 750;
+    localparam P13_Y_START = 675;
+    localparam P13_Y_END = 680;
+    localparam P13_Y_COLLISION = 680;
+    localparam P13_LENGTH = 70;
+
+    localparam P14_X_START = 300;
+    localparam P14_X_END = 400;
+    localparam P14_Y_START = 515;
+    localparam P14_Y_END = 520;
+    localparam P14_Y_COLLISION = 520;
+    localparam P14_LENGTH = 100;
+
+    localparam P15_X_START = 620;
+    localparam P15_X_END = 680;
+    localparam P15_Y_START = 515;
+    localparam P15_Y_END = 520;
+    localparam P15_Y_COLLISION = 520;
+    localparam P15_LENGTH = 60;
+
+    localparam P16_X_START = 440;
+    localparam P16_X_END = 490;
+    localparam P16_Y_START = 350;
+    localparam P16_Y_END = 355;
+    localparam P16_Y_COLLISION = 355;
+    localparam P16_LENGTH = 50;
+
+    // vertical platform
+    localparam P10_Y_START = 280;
+    localparam P10_Y_END = 425;
+    localparam P10_X_START = 60;
+    localparam P10_X_END = 65;
+    localparam P10_Y_COLLISION = 285;
+    localparam P10_LENGTH = 5;
     
     endpackage
     

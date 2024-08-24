@@ -30,10 +30,46 @@ import game_pkg::*;
 
 logic [11:0] rgb_nxt;
 vga_if intr();
+vga_if out_over();
 
 /**
  * Internal logic
+ * 
  */
+wire [11:0] char_xy_end;
+wire [6:0] char_code_end;
+wire [3:0] char_line_end;
+wire [7:0] char_pixel_end;
+
+
+write #(
+    .BEGIN_TXT_X(900),
+    .BEGIN_TXT_Y(100),
+    .TXT_COLOUR(BLACK)
+)
+u_write_gameover(
+    .clk,
+    .rst,
+    .char_pixels(char_pixel_end),
+    .char_xy(char_xy_end),
+    .char_line(char_line_end),
+    .in(in),
+    .out(out_over)
+);
+
+font_rom u_font_rom(
+    .clk,
+    .char_code(char_code_end),
+    .char_line_pixels(char_pixel_end),
+    .char_line(char_line_end)
+    
+);
+
+char_rom_gameover u_char_rom_gameover(
+    .clk,
+    .char_xy(char_xy_end),
+    .char_code(char_code_end)
+);
 
 logic over_wire;
 

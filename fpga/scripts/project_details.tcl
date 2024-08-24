@@ -44,6 +44,10 @@ set sv_files {
     ../rtl/cheese/randomx_plat.sv
     ../rtl/movement/host_move_ctrl.sv
     ../rtl/movement/player_move_ctrl.sv
+    ../rtl/text/write.sv
+    ../rtl/text/font_rom.sv
+    ../rtl/text/char_rom_gameover.sv
+    ../rtl/text/char_rom_score.sv
     ../rtl/draw/draw_bg.sv
     ../rtl/draw/draw_tom.sv
     ../rtl/draw/draw_jerry.sv
