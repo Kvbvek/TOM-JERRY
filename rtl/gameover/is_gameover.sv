@@ -4,7 +4,7 @@
  * Author: Tomasz Maslanka, Jakub Brzazgacz
  *
  * Description:
- * Module to check the game has ended
+ * Module to check if the game has ended
  */
 
 
@@ -24,9 +24,7 @@
  import functions_tasks_pkg::*;
  
 
- /**
-  * Local variables and signals
-  */
+// local variables
  logic [1:0] gameover_nxt;
 
 
@@ -40,13 +38,20 @@
  end
  
 // logic
-
  always_comb begin
     // if(checkCollisionWithObject(tompos.x, tompos.y, jerrypos.x, jerrypos.y, TOM_WIDTH, TOM_HEIGHT, 5) != 2'b00) begin
     //     gameover_nxt = 2'b10;
     // end
-    if(((tompos.x + 15) == (jerrypos.x + 12)) && ((tompos.y + 25) == (jerrypos.y + 9))) begin 
-        gameover_nxt = 2'b10;
+    // if(((tompos.x + 15) == (jerrypos.x + 12)) && ((tompos.y + 25) == (jerrypos.y + 9))) begin 
+    //     gameover_nxt = 2'b10;
+    // end
+    if(((tompos.y + TOM_HEIGHT) == (jerrypos.y + JERRY_HEIGHT)) || ((tompos.y + TOM_HEIGHT) == jerrypos.y)) begin // dorobic dodatkowy warunek do zlapania jerrego
+        if(((tompos.x >= jerrypos.x) && (tompos.x <= jerrypos.x + JERRY_WIDTH)) || ((tompos.x + TOM_WIDTH >= jerrypos.x) && (tompos.x + TOM_WIDTH <= jerrypos.x + JERRY_WIDTH))) begin 
+            gameover_nxt = 2'b10;
+        end
+        else begin
+            gameover_nxt = 2'b00;
+        end
     end
     else if(cheese_gm) begin
         gameover_nxt = 2'b01;

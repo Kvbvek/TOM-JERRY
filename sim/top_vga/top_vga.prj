@@ -43,6 +43,5 @@ sv work ../../rtl/package/vga_pkg.sv \
 
 verilog work ../common/glbl.v \
              ../../rtl/Keyboard/top.v \
-             ../../rtl/Keyboard/bin2ascii.v \
              ../../rtl/Keyboard/debouncer.v \
              ../../rtl/Keyboard/PS2Receiver.v \

@@ -312,6 +312,48 @@ always_comb begin : bg_comb_blk
                 rgb_nxt = 12'hd_d_d;
             end
 
+            // cloud 3
+            else if(
+                (in.vcount == 110) && (in.hcount >= 367  ) && (in.hcount <= 513    ) ||
+                (in.vcount == 111) && (in.hcount >= 361  ) && (in.hcount <= 525    ) ||
+                (in.vcount == 112) && (in.hcount >= 359  ) && (in.hcount <= 537    ) ||
+                (in.vcount == 113) && (in.hcount >= 356  ) && (in.hcount <= 540 + 4) ||
+                (in.vcount == 114) && (in.hcount >= 330+1) && (in.hcount <= 540 + 1) ||
+                (in.vcount == 115) && (in.hcount >= 330-3) && (in.hcount <= 540 + 3) ||
+                (in.vcount == 116) && (in.hcount >= 330-2) && (in.hcount <= 540 + 2) ||
+                (in.vcount == 117) && (in.hcount >= 330-1) && (in.hcount <= 540 + 2) ||
+                (in.vcount == 118) && (in.hcount >= 330-2) && (in.hcount <= 540 + 0) ||
+                (in.vcount == 119) && (in.hcount >= 330-2) && (in.hcount <= 540 + 1) ||
+                (in.vcount == 120) && (in.hcount >= 330-3) && (in.hcount <= 540 + 3) ||
+                (in.vcount == 121) && (in.hcount >= 330-1) && (in.hcount <= 540 + 3) ||
+                (in.vcount == 122) && (in.hcount >= 330-3) && (in.hcount <= 540 + 2) ||
+                (in.vcount == 123) && (in.hcount >= 330-2) && (in.hcount <= 540 + 1) ||
+                (in.vcount == 124) && (in.hcount >= 330-1) && (in.hcount <= 535    ) ||
+                (in.vcount == 125) && (in.hcount >= 354-4) && (in.hcount <= 529    ) ||
+                (in.vcount == 126) && (in.hcount >= 366-4) && (in.hcount <= 522    ) ||
+                (in.vcount == 127) && (in.hcount >= 369-5) && (in.hcount <= 516    ) ||
+                (in.vcount == 128) && (in.hcount >= 382  ) && (in.hcount <= 503    )
+                ) begin
+                rgb_nxt = 12'hd_d_d;
+            end
+
+            // cloud 4
+            else if(
+                (in.vcount == 65) && (in.hcount >= 67  ) && (in.hcount <= 153    ) ||
+                (in.vcount == 66) && (in.hcount >= 61  ) && (in.hcount <= 165    ) ||
+                (in.vcount == 67) && (in.hcount >= 59  ) && (in.hcount <= 177    ) ||
+                (in.vcount == 68) && (in.hcount >= 56  ) && (in.hcount <= 180 + 4) ||
+                (in.vcount == 69) && (in.hcount >= 30+1) && (in.hcount <= 180 + 1) ||
+                (in.vcount == 70) && (in.hcount >= 30-3) && (in.hcount <= 180 + 3) ||
+                (in.vcount == 71) && (in.hcount >= 30-2) && (in.hcount <= 180 + 2) ||
+                (in.vcount == 72) && (in.hcount >= 30-1) && (in.hcount <= 175    ) ||
+                (in.vcount == 73) && (in.hcount >= 54-4) && (in.hcount <= 169    ) ||
+                (in.vcount == 74) && (in.hcount >= 66-4) && (in.hcount <= 162    ) ||
+                (in.vcount == 75) && (in.hcount >= 79-5) && (in.hcount <= 156    )
+                ) begin
+                rgb_nxt = 12'hd_d_d;
+            end
+
             else begin    // The rest of active display pixels:
                 rgb_nxt = 12'h0_a_f; 
             end

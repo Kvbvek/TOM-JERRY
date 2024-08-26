@@ -4,7 +4,7 @@
  * Author: Tomasz Maslanka, Jakub Brzazgacz
  *
  * Description:
- * Module informing if game ended
+ * Module to catch the information if game ended
  */
 
 
@@ -21,16 +21,10 @@ module get_over (
 );
 
 
-/**
- * Local variables and signals
- */
-
+// local variables
 logic over_nxt;
 
-/**
- * Internal logic
- */
-
+// output register with sync reset
 always_ff @(posedge clk) begin
     if (rst) begin
         over <= '0;
@@ -40,8 +34,7 @@ always_ff @(posedge clk) begin
     end
 end
 
-
-
+// logic
 always_comb begin
     if(over == 1'b1 && !reset) begin
         over_nxt = 1'b1;
