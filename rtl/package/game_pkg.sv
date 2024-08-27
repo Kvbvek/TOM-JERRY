@@ -10,7 +10,6 @@
  package game_pkg;
 
    localparam COLOR_PINK = 12'hf_6_f;
-   localparam BLACK = 12'h0_0_0;
 
     localparam NUMBER_WIDTH = 22;
     localparam NUMBER_HEIGHT = 36;

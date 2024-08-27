@@ -27,11 +27,11 @@ always_comb begin
             12'h00c: data = "S";
             12'h00d: data = "S";
             12'h00e: data = " ";
-            12'h00f: data = "S";
-            12'h010: data = "P";
-            12'h011: data = "A";
-            12'h012: data = "C";
-            12'h013: data = "E";
+            12'h00f: data = "E";
+            12'h010: data = "N";
+            12'h011: data = "T";
+            12'h012: data = "E";
+            12'h013: data = "R";
             12'h014: data = " ";
             12'h015: data = "T";
             12'h016: data = "O";

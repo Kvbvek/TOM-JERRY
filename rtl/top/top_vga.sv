@@ -91,13 +91,15 @@ logic [1:0] gameover_wire;
 
 logic left_wire, right_wire, jump_wire, reset_wire;
 
+logic over_wire;
+
 /**
  * Signals assignments
  */
 
-assign vs = drawgameover.vsync;
-assign hs = drawgameover.hsync;
-assign {r,g,b} = drawgameover.rgb;
+assign vs = choosescreen.vsync;
+assign hs = choosescreen.hsync;
+assign {r,g,b} = choosescreen.rgb;
 
 assign l_out = left_wire;
 assign r_out = right_wire;
@@ -152,6 +154,7 @@ draw_bg u_draw_bg (
 host_move_ctrl u_host_move_ctrl(
     .clk,
     .rst,
+    .over(over_wire),
     .left(left_wire),
     .right(right_wire),
     .jump(jump_wire),
@@ -186,6 +189,7 @@ draw_tom u_draw_tom (
 player_move_ctrl u_player_move_ctrl(
     .clk,
     .rst,
+    .over(over_wire),
     .left(l_in),
     .right(r_in),
     .jump(j_in),
@@ -296,18 +300,17 @@ is_gameover u_is_gameover(
 
 );
 
-draw_gameover u_draw_gameover(
+get_over u_get_over(
     .clk,
     .rst,
     .reset(reset_wire),
     .gameover(gameover_wire),
-    .in(drawcounter),
-    .out(in_over)
-    
+    .over(over_wire)
+
 );
 
 write #(
-    .BEGIN_TXT_X(500),
+    .BEGIN_TXT_X(350),
     .BEGIN_TXT_Y(200),
     .TXT_COLOUR(12'h0_0_0)
 )
@@ -317,7 +320,7 @@ u_write_gameover(
     .char_pixels(char_pixel_end),
     .char_xy(char_xy_end),
     .char_line(char_line_end),
-    .in(in_over),
+    .in(drawcounter),
     .out(drawgameover)
 );
 
@@ -332,6 +335,30 @@ char_rom_gameover u_char_rom_gameover(
     .clk,
     .char_xy(char_xy_end),
     .char_code(char_code_end)
+);
+
+vga_if del_if();
+vga_if choosescreen();
+
+
+delay #(
+        .WIDTH (38),
+        .CLK_DEL(6)
+) u_delay_text (
+        .clk (clk),
+        .rst (rst),
+        .din ({drawcounter.vcount, drawcounter.vblnk, drawcounter.vsync, drawcounter.hcount, drawcounter.hblnk, drawcounter.hsync,drawcounter.rgb}),
+        .dout ({del_if.vcount, del_if.vblnk, del_if.vsync, del_if.hcount, del_if.hblnk, del_if.hsync,del_if.rgb})
+    );
+
+draw_gameover u_draw_gameover(
+    .clk,
+    .rst,
+    .over(over_wire),
+    .in_text(drawgameover),
+    .in_notext(del_if),
+    .out(choosescreen)
+    
 );
 
 endmodule

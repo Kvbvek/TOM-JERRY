@@ -15,6 +15,7 @@
     input  logic clk,
     input  logic rst,
     input  logic reset,
+    input logic over,
 
     input logic  left,
     input logic  right,
@@ -99,7 +100,7 @@ end
 always_comb begin
     case(state_c)
         IDLE: begin
-            if(reset) begin
+            if(reset || over) begin
                 x_tmp = TOM_X_SPAWN;
                 y_tmp = TOM_Y_SPAWN;
                 state_nxt = IDLE;

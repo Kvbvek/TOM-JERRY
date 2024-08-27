@@ -13,10 +13,10 @@
 module draw_gameover (
     input  logic clk,
     input  logic rst,
-    input logic reset,
-    input logic [1:0] gameover,
+    input logic over,
 
-    vga_if.in in,
+    vga_if.in in_notext,
+    vga_if.in in_text,
     vga_if.out out
 
 );
@@ -28,7 +28,7 @@ import game_pkg::*;
  * Local variables and signals
  */
 
-logic [11:0] rgb_nxt;
+// logic [11:0] rgb_nxt;
 vga_if intr();
 // vga_if out_over();
 
@@ -36,51 +36,6 @@ vga_if intr();
  * Internal logic
  * 
  */
-// wire [11:0] char_xy_end;
-// wire [6:0] char_code_end;
-// wire [3:0] char_line_end;
-// wire [7:0] char_pixel_end;
-
-
-// write #(
-//     .BEGIN_TXT_X(900),
-//     .BEGIN_TXT_Y(100),
-//     .TXT_COLOUR(BLACK)
-// )
-// u_write_gameover(
-//     .clk,
-//     .rst,
-//     .char_pixels(char_pixel_end),
-//     .char_xy(char_xy_end),
-//     .char_line(char_line_end),
-//     .in(in),
-//     .out(out_over)
-// );
-
-// font_rom u_font_rom(
-//     .clk,
-//     .char_code(char_code_end),
-//     .char_line_pixels(char_pixel_end),
-//     .char_line(char_line_end)
-    
-// );
-
-// char_rom_gameover u_char_rom_gameover(
-//     .clk,
-//     .char_xy(char_xy_end),
-//     .char_code(char_code_end)
-// );
-
-logic over_wire;
-
-get_over u_get_over(
-    .clk,
-    .rst,
-    .reset,
-    .gameover(gameover),
-    .over(over_wire)
-
-);
 
 always_ff @(posedge clk) begin
     if (rst) begin
@@ -99,35 +54,37 @@ always_ff @(posedge clk) begin
         out.hcount <= intr.hcount;
         out.hsync  <= intr.hsync;
         out.hblnk  <= intr.hblnk;
-        out.rgb    <= rgb_nxt;
+        out.rgb    <= intr.rgb;
 
     end
 end
 
 
-delay #(
-        .WIDTH (38),
-        .CLK_DEL(1)
-) u_delay_ch (
-        .clk (clk),
-        .rst (rst),
-        .din ({in.vcount, in.vblnk, in.vsync, in.hcount, in.hblnk, in.hsync,in.rgb}),
-        .dout ({intr.vcount, intr.vblnk, intr.vsync, intr.hcount, intr.hblnk, intr.hsync,intr.rgb})
-    );
-
 always_comb begin
-    if(over_wire) begin
-            if((intr.vcount > P1_Y_START) && (intr.vcount < P1_Y_END) && ((intr.hcount > P1_X_START) && (intr.hcount < P1_X_END) || (intr.hcount > P2_X_START) && (intr.hcount < P2_X_END)) || 
-            (intr.vcount > P3_Y_START) && (intr.vcount < P3_Y_END) && ((intr.hcount > P3_X_START) && (intr.hcount < P3_X_END) || (intr.hcount > P4_X_START) && (intr.hcount < P4_X_END)) || 
-            (intr.vcount > P5_Y_START) && (intr.vcount < P5_Y_END) && ((intr.hcount > P5_X_START) && (intr.hcount < P5_X_END)) || 
-            (intr.vcount > P6_Y_START) && (intr.vcount < P6_Y_END) && ((intr.hcount > P6_X_START) && (intr.hcount < P6_X_END)))
-            begin
-                rgb_nxt = 12'h8_2_0;
-            end
-            else rgb_nxt = intr.rgb;
+
+    if(over) begin
+        intr.vcount = in_text.vcount;
+        intr.vsync  = in_text.vsync;
+        intr.vblnk  = in_text.vblnk;
+        intr.hcount = in_text.hcount;
+        intr.hsync  = in_text.hsync;
+        intr.hblnk  = in_text.hblnk;
+        // if(in_text.rgb != 12'h5_6_7) begin
+        //     intr.rgb = 12'h2_2_2;
+        // end
+        // else begin
+        //     intr.rgb = in_text.rgb;
+        // end
+        intr.rgb = in_text.rgb;
     end
     else begin
-        rgb_nxt = intr.rgb;
+        intr.vcount = in_notext.vcount;
+        intr.vsync  = in_notext.vsync;
+        intr.vblnk  = in_notext.vblnk;
+        intr.hcount = in_notext.hcount;
+        intr.hsync  = in_notext.hsync;
+        intr.hblnk  = in_notext.hblnk;
+        intr.rgb    = in_notext.rgb;
     end
 end
 
