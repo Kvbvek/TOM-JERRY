@@ -86,6 +86,7 @@ always_comb begin : bg_comb_blk
             || (in.hcount > P16_X_START) && (in.hcount < P16_X_END) && ((in.vcount > P16_Y_START) && (in.vcount < P16_Y_END))
             || (in.hcount > P17_X_START) && (in.hcount < P17_X_END) && ((in.vcount > P17_Y_START) && (in.vcount < P17_Y_END))
             || (in.hcount > P18_X_START) && (in.hcount < P18_X_END) && ((in.vcount > P18_Y_START) && (in.vcount < P18_Y_END))
+            || (in.hcount > P19_X_START) && (in.hcount < P19_X_END) && ((in.vcount > P19_Y_START) && (in.vcount < P19_Y_END))
             )
             begin
                 rgb_nxt = 12'h1_1_1;
@@ -163,7 +164,12 @@ always_comb begin : bg_comb_blk
             
             || ((in.vcount == P18_Y_START    ) && ((in.hcount > P18_X_START + 1) && (in.hcount < P18_X_END + 1)))
             || ((in.vcount == P18_Y_START - 1) && ((in.hcount > P18_X_START + 2) && (in.hcount < P18_X_END + 2)))
-            || ((in.vcount == P18_Y_START - 2) && ((in.hcount > P18_X_START + 3) && (in.hcount < P18_X_END + 3))))
+            || ((in.vcount == P18_Y_START - 2) && ((in.hcount > P18_X_START + 3) && (in.hcount < P18_X_END + 3)))
+            
+            || ((in.vcount == P19_Y_START    ) && ((in.hcount > P19_X_START + 1) && (in.hcount < P19_X_END + 1)))
+            || ((in.vcount == P19_Y_START - 1) && ((in.hcount > P19_X_START + 2) && (in.hcount < P19_X_END + 2)))
+            || ((in.vcount == P19_Y_START - 2) && ((in.hcount > P19_X_START + 3) && (in.hcount < P19_X_END + 3)))
+            )
             begin
                 rgb_nxt = COLOR_BLACK;
             end
@@ -352,6 +358,57 @@ always_comb begin : bg_comb_blk
                 (in.vcount == 75) && (in.hcount >= 79-5) && (in.hcount <= 156    )
                 ) begin
                 rgb_nxt = 12'hd_d_d;
+            end
+
+
+
+            else if (
+                // S
+                (in.vcount == 5) && (in.hcount >= 5) && (in.hcount <= 10)                ||
+                (in.vcount == in.hcount - 5) && (in.hcount >= 11) && (in.hcount <= 13)   ||
+                (in.vcount == -in.hcount + 10) && (in.hcount >= 2) && (in.hcount <= 5)   ||
+                (in.vcount == in.hcount + 6) && (in.hcount >= 2) && (in.hcount <= 13)    ||
+                (in.vcount == in.hcount + 17) && (in.hcount >= 2) && (in.hcount <= 4)    ||
+                (in.vcount == -in.hcount + 33) && (in.hcount >= 11) && (in.hcount <= 13) ||
+                (in.vcount == 22) && (in.hcount >= 5) && (in.hcount <= 10)               ||
+
+                // C
+                (in.vcount == 5) && (in.hcount >= 20) && (in.hcount <= 25)               ||
+                (in.vcount == in.hcount - 20) && (in.hcount >= 25) && (in.hcount <= 28)  ||
+                (in.vcount == -in.hcount + 25) && (in.hcount >= 17) && (in.hcount <= 20) ||
+                (in.vcount == in.hcount + 2) && (in.hcount >= 17) && (in.hcount <= 20)   ||
+                (in.vcount == -in.hcount + 47) && (in.hcount >= 25) && (in.hcount <= 28) ||
+                (in.vcount == 22) && (in.hcount >= 20) && (in.hcount <= 25)              ||             
+                (in.vcount >= 8) && (in.vcount <= 18) && (in.hcount == 17)               || 
+
+                // O
+                (in.vcount == 5) && (in.hcount >= 35) && (in.hcount <= 40)               ||
+                (in.vcount == in.hcount - 35) && (in.hcount >= 40) && (in.hcount <= 43)  ||
+                (in.vcount == -in.hcount + 40) && (in.hcount >= 32) && (in.hcount <= 35) ||
+                (in.vcount == in.hcount - 13) && (in.hcount >= 32) && (in.hcount <= 35)  ||
+                (in.vcount == -in.hcount + 62) && (in.hcount >= 40) && (in.hcount <= 43) ||
+                (in.vcount == 22) && (in.hcount >= 20) && (in.hcount <= 25)              || 
+                (in.vcount >= 8) && (in.vcount <= 18) && (in.hcount == 32)               ||
+                (in.vcount == 22) && (in.hcount >= 35) && (in.hcount <= 40)              ||
+                (in.vcount >= 8) && (in.vcount <= 18) && (in.hcount == 43)               ||
+
+                // R
+                (in.vcount == 5) && (in.hcount >= 46) && (in.hcount <= 51)               ||
+                (in.vcount >= 5) && (in.vcount <= 22) && (in.hcount == 46)               ||
+                (in.vcount == in.hcount - 46) && (in.hcount >= 51) && (in.hcount <= 54)  ||
+                (in.vcount >= 8) && (in.vcount <= 9) && (in.hcount == 54)                ||
+                (in.vcount == -in.hcount + 63) && (in.hcount >= 51) && (in.hcount <= 54) ||
+                (in.vcount == 12) && (in.hcount >= 46) && (in.hcount <= 51)              ||
+                (in.vcount == in.hcount - 39) && (in.hcount >= 51) && (in.hcount <= 54)  ||
+                (in.vcount >= 15 ) && (in.vcount <= 22) && (in.hcount == 54)             ||
+               
+                //E 
+                (in.vcount == 5) && (in.hcount >= 57) && (in.hcount <= 65)               ||
+                (in.vcount == 22) && (in.hcount >= 57) && (in.hcount <= 65)              ||
+                (in.vcount == 13) && (in.hcount >= 57) && (in.hcount <= 64)              ||
+                (in.vcount >= 5) && (in.vcount <= 22) && (in.hcount == 57) 
+            ) begin
+                rgb_nxt = 12'h0_0_0;
             end
 
             else begin    // The rest of active display pixels:

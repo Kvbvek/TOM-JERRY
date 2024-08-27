@@ -163,11 +163,11 @@
     localparam P18_LENGTH = 40;
 
     localparam P19_X_START = 0;
-    localparam P19_X_END = 1000;
-    localparam P19_Y_START = 795;
-    localparam P19_Y_END = 800;
-    localparam P19_Y_COLLISION = 800;
-    localparam P19_LENGTH = 1000;
+    localparam P19_X_END = 1020;
+    localparam P19_Y_START = 760;
+    localparam P19_Y_END = 765;
+    localparam P19_Y_COLLISION = 765;
+    localparam P19_LENGTH = 1020;
     
     endpackage
     

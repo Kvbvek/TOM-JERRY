@@ -64,7 +64,7 @@ end
 // logic
 always_comb begin
     if(!reset) begin
-        if(checkCollisionWithObject(jerrypos.x, jerrypos.y, cheesepos.x + 10, cheesepos.y, JERRY_WIDTH, JERRY_HEIGHT, 5) != 2'b00) begin
+        if(checkCollisionWithObject(jerrypos.x, jerrypos.y, cheesepos.x + 10, cheesepos.y, JERRY_WIDTH, JERRY_HEIGHT, CHEESE_WIDTH) != 2'b00) begin
             if(ctrd >= 10_000) begin  
                 is_cheese_taken_nxt = 1;
                 if(cheese_ctr >= MAX_CHEESE - 1) begin

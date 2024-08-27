@@ -28,13 +28,13 @@ end
 
 always_comb begin
     if(keycode[15:8] == 8'hf0) begin
-        if(keycode[7:0] == 8'h29) begin
+        if(keycode[7:0] == 8'h5a) begin
             reset_nxt = 0;
         end else begin
             reset_nxt = reset;
         end
     end else begin
-        if(keycode[7:0] == 8'h29) begin
+        if(keycode[7:0] == 8'h5a) begin
             reset_nxt = 1;
         end else begin
             reset_nxt = reset;

@@ -267,7 +267,7 @@ always_comb begin
 
             if((y < (y_jump_start - JUMP_HEIGHT)) || (checkCollisionWithAllPlatforms(x_tmp, y_tmp, JERRY_WIDTH, JERRY_HEIGHT) == 2'b01)) begin
                 state_nxt = FALLING;
-                countery_fall_stop_nxt = countery_jump_stop;
+                countery_fall_stop_nxt = countery_fall_stop;
             end
             else begin
                 state_nxt = JUMPING;

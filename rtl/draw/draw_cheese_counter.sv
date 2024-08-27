@@ -21,10 +21,10 @@ module draw_cheese_counter (
 import game_pkg::*;
 
 // local parameters
-localparam CH_MIDDLE_START = 5;
-localparam CH_MIDDLE_END = 15;
-localparam CH_SIDE_START = 6;
-localparam CH_SIDE_END = 14;
+localparam CH_MIDDLE_START = 30;
+localparam CH_MIDDLE_END = 40;
+localparam CH_SIDE_START = 31;
+localparam CH_SIDE_END = 39;
 
 localparam CH1_X = 5;
 localparam CH2_X = 10;
@@ -66,7 +66,7 @@ end
 always_comb begin
     case(cheese_ctr)
         8'd0: begin
-            if((in.vcount >= 5) && (in.vcount <= 10) && (in.hcount >= 5) && (in.hcount <= 10)) rgb_nxt = 12'hf_c_0;
+            if((in.vcount >= 30) && (in.vcount <= 35) && (in.hcount >= 5) && (in.hcount <= 10)) rgb_nxt = 12'hf_c_0;
             else rgb_nxt = in.rgb;
         end
         8'd1: begin
