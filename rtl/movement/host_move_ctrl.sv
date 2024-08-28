@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////
 /*
  Module name:   host_move_ctrl
  Author:        Tomasz Maslanka, Jakub Brzazgacz
@@ -7,9 +6,8 @@
  Coding style: safe with FPGA sync reset
  Description:  Module for controlling movement of host
  */
-//////////////////////////////////////////////////////////////////////////////
 
-//`timescale 1 ns / 1 ps
+`timescale 1 ns / 1 ps
 
  module host_move_ctrl (
     input  logic clk,
@@ -31,24 +29,20 @@ import game_pkg::*;
 import functions_tasks_pkg::*;
 
 
-//------------------------------------------------------------------------------
 // local parameters
-//------------------------------------------------------------------------------
 // coords as two lower values, meaning upper y cord and left x cord 
 localparam TOM_X_SPAWN = 500;
 localparam TOM_Y_SPAWN = 768 - 2 - TOM_HEIGHT;
 localparam JUMP_HEIGHT = 200;
 
-localparam COUNTERX_STOP = 350_000;
-localparam COUNTERX_AIR_STOP = 650_000;
+localparam COUNTERX_STOP = 425_000;
+localparam COUNTERX_AIR_STOP = 600_000;
 // localparam COUNTERY_FALL_STOP = 200_000;
 // localparam COUNTERY_JUMP_STOP = 200_000;
 
 localparam STATE_BITS = 2; // number of bits used for state register
 
-//------------------------------------------------------------------------------
 // local variables
-//------------------------------------------------------------------------------
 typedef enum logic [STATE_BITS-1 :0] {
     IDLE = 2'b00, // idle state
     MOVING = 2'b01,

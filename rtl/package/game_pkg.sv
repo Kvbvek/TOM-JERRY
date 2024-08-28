@@ -15,7 +15,6 @@
     localparam NUMBER_HEIGHT = 36;
     localparam NUMBER_BG_COLOR = 12'hf_f_f;
 
-
     localparam TOM_WIDTH = 32;
     localparam TOM_HEIGHT = 50;
     localparam TOM_BG_COLOR = COLOR_PINK;
@@ -44,12 +43,12 @@
     localparam P2_Y_COLLISION = 600;
     localparam P2_LENGTH = 140;
 
-    localparam P3_X_START = 0;
+    localparam P3_X_START = 3;
     localparam P3_X_END = 250;
     localparam P3_Y_START = 455;
     localparam P3_Y_END = 460;
     localparam P3_Y_COLLISION = 460;
-    localparam P3_LENGTH = 250;
+    localparam P3_LENGTH = 247;
 
     localparam P4_X_START = 500;
     localparam P4_X_END = 600;
@@ -72,21 +71,19 @@
     localparam P6_Y_COLLISION = 270;
     localparam P6_LENGTH = 325;
 
+    localparam P7_X_START = 650;
+    localparam P7_X_END = 750;
+    localparam P7_Y_START = 70;
+    localparam P7_Y_END = 75;
+    localparam P7_Y_COLLISION = 75;
+    localparam P7_LENGTH = 100;
 
-    localparam P7_X_START = 60;
-    localparam P7_X_END = 210;
-    localparam P7_Y_START = 420;
-    localparam P7_Y_END = 425;
-    localparam P7_Y_COLLISION = 425;
-    localparam P7_LENGTH = 150;
-
-
-    localparam P8_X_START = 0;
+    localparam P8_X_START = 3;
     localparam P8_X_END = 25;
     localparam P8_Y_START = 350;
     localparam P8_Y_END = 355;
     localparam P8_Y_COLLISION = 355;
-    localparam P8_LENGTH = 25;
+    localparam P8_LENGTH = 22;
 
     localparam P9_X_START = 35;
     localparam P9_X_END = 65;
@@ -94,16 +91,14 @@
     localparam P9_Y_END = 285;
     localparam P9_Y_COLLISION = 285;
     localparam P9_LENGTH = 30;
-
   
     localparam P10_X_START = 990 ;
-    localparam P10_X_END = 1030;
+    localparam P10_X_END = 1020;
     localparam P10_Y_START = 535;
     localparam P10_Y_END = 540;
     localparam P10_Y_COLLISION = 540;
-    localparam P10_LENGTH = 40;
+    localparam P10_LENGTH = 30;
 
-    
     localparam P11_X_START = 0;
     localparam P11_X_END = 70;
     localparam P11_Y_START = 675;
@@ -117,7 +112,6 @@
     localparam P12_Y_END = 425;
     localparam P12_Y_COLLISION = 425;
     localparam P12_LENGTH = 30;
-
 
     localparam P13_X_START = 680;
     localparam P13_X_END = 750;
@@ -155,11 +149,11 @@
     localparam P17_LENGTH = 40;
 
     localparam P18_X_START = 990 ;
-    localparam P18_X_END = 1030;
+    localparam P18_X_END = 1020;
     localparam P18_Y_START = 375;
     localparam P18_Y_END = 380;
     localparam P18_Y_COLLISION = 380;
-    localparam P18_LENGTH = 40;
+    localparam P18_LENGTH = 30;
 
     localparam P19_X_START = 0;
     localparam P19_X_END = 1020;

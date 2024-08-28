@@ -51,7 +51,8 @@ vga_if drawcheeseo();
 vga_if drawgameover();
 vga_if drawcounter();
 vga_if in_over();
-
+vga_if del_if();
+vga_if choosescreen();
 
 logic [15:0] keycode;
 
@@ -92,6 +93,9 @@ logic [1:0] gameover_wire;
 logic left_wire, right_wire, jump_wire, reset_wire;
 
 logic over_wire;
+
+logic [11:0] chrgbo;
+
 
 /**
  * Signals assignments
@@ -259,8 +263,6 @@ read_rom #(
         .dout (chrgb)
     );
 
-logic [11:0] chrgbo;
-
 delay #(
     .WIDTH (12),
     .CLK_DEL(1)
@@ -310,7 +312,7 @@ get_over u_get_over(
 );
 
 write #(
-    .BEGIN_TXT_X(350),
+    .BEGIN_TXT_X(375),
     .BEGIN_TXT_Y(200),
     .TXT_COLOUR(12'h0_0_0)
 )
@@ -336,10 +338,6 @@ char_rom_gameover u_char_rom_gameover(
     .char_xy(char_xy_end),
     .char_code(char_code_end)
 );
-
-vga_if del_if();
-vga_if choosescreen();
-
 
 delay #(
         .WIDTH (38),

@@ -61,7 +61,6 @@ end
 
 
 always_comb begin
-
     if(over) begin
         intr.vcount = in_text.vcount;
         intr.vsync  = in_text.vsync;
@@ -69,12 +68,6 @@ always_comb begin
         intr.hcount = in_text.hcount;
         intr.hsync  = in_text.hsync;
         intr.hblnk  = in_text.hblnk;
-        // if(in_text.rgb != 12'h5_6_7) begin
-        //     intr.rgb = 12'h2_2_2;
-        // end
-        // else begin
-        //     intr.rgb = in_text.rgb;
-        // end
         intr.rgb = in_text.rgb;
     end
     else begin

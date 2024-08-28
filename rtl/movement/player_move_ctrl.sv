@@ -37,11 +37,12 @@ import functions_tasks_pkg::*;
 // coords as two lower values, meaning upper y cord and left x cord 
 localparam JERRY_X_SPAWN = P6_X_START + 100;
 localparam JERRY_Y_SPAWN = P6_Y_COLLISION - JERRY_HEIGHT - 2;
-localparam JUMP_HEIGHT = 200;
+localparam JUMP_HEIGHT = 125;
 
-localparam COUNTERX_STOP = 400_000;
-localparam COUNTERX_AIR_STOP = 700_000;
-// localparam COUNTERY_FALL_STOP = 200_000;
+localparam COUNTERX_STOP = 300_000;
+localparam COUNTERX_AIR_STOP = 450_000;
+// localparam COUNTERY_FALL_STOP_MAX = 320_000;
+// localparam COUNTERY_FALL_STOP_MAX = 320_000;
 
 localparam STATE_BITS = 2; // number of bits used for state register
 
@@ -126,7 +127,7 @@ always_comb begin
 
             counterx_nxt = 0;
             countery_nxt = 0;
-            countery_jump_stop_nxt = 200_000;
+            countery_jump_stop_nxt = 250_000;
             countery_fall_stop_nxt = 800_000;
 
             x_nxt = correctCoordinateX(x_tmp, JERRY_WIDTH);
@@ -199,7 +200,7 @@ always_comb begin
 
             y_tmp = y;
             countery_nxt = 0;
-            countery_jump_stop_nxt = 200_000;
+            countery_jump_stop_nxt = 250_000;
             countery_fall_stop_nxt = 800_000;
 
             x_nxt = correctCoordinateX(x_tmp, JERRY_WIDTH);
@@ -246,7 +247,7 @@ always_comb begin
             if(countery >= countery_jump_stop) begin
                 y_tmp = y - 1;
                 countery_nxt = 0;
-                if(y <= y_jump_start - 175) begin
+                if(y <= y_jump_start - JUMP_HEIGHT - 25) begin
                     if(countery_jump_stop >= 800_000) begin
                         countery_jump_stop_nxt = 800_000;
                     end
@@ -255,7 +256,7 @@ always_comb begin
                     end
                 end
                 else begin
-                    countery_jump_stop_nxt = 200_000;
+                    countery_jump_stop_nxt = 250_000;
                 end
             end
             else begin
@@ -360,7 +361,7 @@ always_comb begin
             x_tmp = x;
             y_tmp = y;  
             counterx_nxt = 0;
-            countery_jump_stop_nxt = 200_000;
+            countery_jump_stop_nxt = 250_000;
             countery_fall_stop_nxt = 800_000;
             countery_nxt = 0;
             y_jump_start_nxt = y;

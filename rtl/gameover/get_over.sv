@@ -7,7 +7,6 @@
  * Module to catch the information if game ended
  */
 
-
 `timescale 1 ns / 1 ps
 
 module get_over (
@@ -19,7 +18,6 @@ module get_over (
     output logic over
 
 );
-
 
 // local variables
 logic over_nxt;

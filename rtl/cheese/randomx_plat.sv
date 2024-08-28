@@ -25,6 +25,7 @@
 // local parameters
 localparam OBJ_HEIGHT = 20;
 localparam PLATFORM_NUMBER = 19;
+localparam MAX_X_CTR = 1000;
 
 // local variables
 logic [9:0] ctr, ctr_nxt;
@@ -32,7 +33,7 @@ logic [6:0] ctr1, ctr1_nxt;
 pos_if pnxt();
 logic start, start_nxt;
 
-
+// output register with sync reset
  always_ff @(posedge clk) begin
     if (rst) begin
         pout.x <= '0;
@@ -57,7 +58,7 @@ logic start, start_nxt;
  
 // logic
 always_comb begin
-    if(ctr >= 1000) ctr_nxt = 0;
+    if(ctr >= MAX_X_CTR) ctr_nxt = 0;
     else ctr_nxt = ctr + 1;
 
     if(ctr1 >= PLATFORM_NUMBER) ctr1_nxt = 0;
@@ -89,8 +90,8 @@ always_comb begin
             pnxt.x = (ctr % P6_LENGTH) + P6_X_START;
         end
         else if(ctr1 == 7'd6) begin
-            pnxt.y = P7_Y_COLLISION - OBJ_HEIGHT;
-            pnxt.x = (ctr % P7_LENGTH) + P7_X_START;
+            pnxt.y = P6_Y_COLLISION - OBJ_HEIGHT;
+            pnxt.x = (ctr % P6_LENGTH) + P6_X_START;
         end
         else if(ctr1 == 7'd7) begin
             pnxt.y = P8_Y_COLLISION - OBJ_HEIGHT;

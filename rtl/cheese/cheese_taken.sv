@@ -29,6 +29,7 @@ import functions_tasks_pkg::*;
  // local parameters
 localparam MAX_CHEESE = 10;
 localparam TIMER_20S = 1_300_000_000;
+localparam DELAY_TICKS = 10_000;
 
 // local variables
 logic is_cheese_taken_nxt;
@@ -65,7 +66,7 @@ end
 always_comb begin
     if(!reset) begin
         if(checkCollisionWithObject(jerrypos.x, jerrypos.y, cheesepos.x + 10, cheesepos.y, JERRY_WIDTH, JERRY_HEIGHT, CHEESE_WIDTH) != 2'b00) begin
-            if(ctrd >= 10_000) begin  
+            if(ctrd >= DELAY_TICKS) begin  
                 is_cheese_taken_nxt = 1;
                 if(cheese_ctr >= MAX_CHEESE - 1) begin
                     cheese_ctr_nxt = 0;

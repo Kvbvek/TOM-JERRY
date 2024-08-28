@@ -7,7 +7,6 @@
  * Module for drawing Tom model on display
  */
 
-
  `timescale 1 ns / 1 ps
 
  module draw_tom (

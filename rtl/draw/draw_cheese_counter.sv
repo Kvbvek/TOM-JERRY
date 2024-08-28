@@ -73,7 +73,10 @@ always_comb begin
             if(
                 (in.hcount == CH1_X    ) && (in.vcount >= CH_MIDDLE_START) && (in.vcount < CH_MIDDLE_END) ||
                 (in.hcount == CH1_X - 1) && (in.vcount >= CH_SIDE_START  ) && (in.vcount < CH_SIDE_END  ) ||
-                (in.hcount == CH1_X + 1) && (in.vcount >= CH_SIDE_START  ) && (in.vcount < CH_SIDE_END  )
+                (in.hcount == CH1_X + 1) && (in.vcount >= CH_SIDE_START  ) && (in.vcount < CH_SIDE_END  ) ||
+
+                (((in.vcount == 28) || (in.vcount == 27) || (in.vcount == 41) || (in.vcount == 42)) && (in.hcount >= 1) && (in.hcount <= 53)) ||
+                (((in.hcount == 1) || (in.hcount == 2) || (in.hcount == 52) || (in.hcount == 53)) && (in.vcount >= 27) && (in.vcount <= 42))
             ) 
             begin
             rgb_nxt = 12'hf_c_0;
@@ -91,7 +94,10 @@ always_comb begin
 
                 (in.hcount == CH2_X    ) && (in.vcount >= CH_MIDDLE_START) && (in.vcount < CH_MIDDLE_END) ||
                 (in.hcount == CH2_X - 1) && (in.vcount >= CH_SIDE_START  ) && (in.vcount < CH_SIDE_END  ) ||
-                (in.hcount == CH2_X + 1) && (in.vcount >= CH_SIDE_START  ) && (in.vcount < CH_SIDE_END  )
+                (in.hcount == CH2_X + 1) && (in.vcount >= CH_SIDE_START  ) && (in.vcount < CH_SIDE_END  ) ||
+
+                (((in.vcount == 28) || (in.vcount == 27) || (in.vcount == 41) || (in.vcount == 42)) && (in.hcount >= 1) && (in.hcount <= 53)) ||
+                (((in.hcount == 1) || (in.hcount == 2) || (in.hcount == 52) || (in.hcount == 53)) && (in.vcount >= 27) && (in.vcount <= 42))
             ) 
             begin
             rgb_nxt = 12'hf_c_0;
@@ -113,7 +119,10 @@ always_comb begin
 
                 (in.hcount == CH3_X) && (in.vcount >= CH_MIDDLE_START) && (in.vcount < CH_MIDDLE_END) ||
                 (in.hcount == CH3_X - 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) ||
-                (in.hcount == CH3_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END)
+                (in.hcount == CH3_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) || 
+
+                (((in.vcount == 28) || (in.vcount == 27) || (in.vcount == 41) || (in.vcount == 42)) && (in.hcount >= 1) && (in.hcount <= 53)) ||
+                (((in.hcount == 1) || (in.hcount == 2) || (in.hcount == 52) || (in.hcount == 53)) && (in.vcount >= 27) && (in.vcount <= 42))
             ) 
             begin
             rgb_nxt = 12'hf_c_0;
@@ -139,7 +148,10 @@ always_comb begin
 
                 (in.hcount == CH4_X) && (in.vcount >= CH_MIDDLE_START) && (in.vcount < CH_MIDDLE_END) ||
                 (in.hcount == CH4_X - 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) ||
-                (in.hcount == CH4_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END)
+                (in.hcount == CH4_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) ||
+
+                (((in.vcount == 28) || (in.vcount == 27) || (in.vcount == 41) || (in.vcount == 42)) && (in.hcount >= 1) && (in.hcount <= 53)) ||
+                (((in.hcount == 1) || (in.hcount == 2) || (in.hcount == 52) || (in.hcount == 53)) && (in.vcount >= 27) && (in.vcount <= 42))
             ) 
             begin
             rgb_nxt = 12'hf_c_0;
@@ -169,7 +181,10 @@ always_comb begin
 
                 (in.hcount == CH5_X) && (in.vcount >= CH_MIDDLE_START) && (in.vcount < CH_MIDDLE_END) ||
                 (in.hcount == CH5_X - 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) ||
-                (in.hcount == CH5_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END)
+                (in.hcount == CH5_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) ||
+
+                (((in.vcount == 28) || (in.vcount == 27) || (in.vcount == 41) || (in.vcount == 42)) && (in.hcount >= 1) && (in.hcount <= 53)) ||
+                (((in.hcount == 1) || (in.hcount == 2) || (in.hcount == 52) || (in.hcount == 53)) && (in.vcount >= 27) && (in.vcount <= 42))
             ) 
             begin
             rgb_nxt = 12'hf_c_0;
@@ -203,7 +218,10 @@ always_comb begin
 
                 (in.hcount == CH6_X) && (in.vcount >= CH_MIDDLE_START) && (in.vcount < CH_MIDDLE_END) ||
                 (in.hcount == CH6_X - 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) ||
-                (in.hcount == CH6_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END)
+                (in.hcount == CH6_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) ||
+
+                (((in.vcount == 28) || (in.vcount == 27) || (in.vcount == 41) || (in.vcount == 42)) && (in.hcount >= 1) && (in.hcount <= 53)) ||
+                (((in.hcount == 1) || (in.hcount == 2) || (in.hcount == 52) || (in.hcount == 53)) && (in.vcount >= 27) && (in.vcount <= 42))
             ) 
             begin
             rgb_nxt = 12'hf_c_0;
@@ -241,7 +259,10 @@ always_comb begin
 
                 (in.hcount == CH7_X) && (in.vcount >= CH_MIDDLE_START) && (in.vcount < CH_MIDDLE_END) ||
                 (in.hcount == CH7_X - 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) ||
-                (in.hcount == CH7_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END)
+                (in.hcount == CH7_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) ||
+
+                (((in.vcount == 28) || (in.vcount == 27) || (in.vcount == 41) || (in.vcount == 42)) && (in.hcount >= 1) && (in.hcount <= 53)) ||
+                (((in.hcount == 1) || (in.hcount == 2) || (in.hcount == 52) || (in.hcount == 53)) && (in.vcount >= 27) && (in.vcount <= 42))
             ) 
             begin
             rgb_nxt = 12'hf_c_0;
@@ -283,7 +304,10 @@ always_comb begin
 
                 (in.hcount == CH8_X) && (in.vcount >= CH_MIDDLE_START) && (in.vcount < CH_MIDDLE_END) ||
                 (in.hcount == CH8_X - 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) ||
-                (in.hcount == CH8_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) 
+                (in.hcount == CH8_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) ||
+
+                (((in.vcount == 28) || (in.vcount == 27) || (in.vcount == 41) || (in.vcount == 42)) && (in.hcount >= 1) && (in.hcount <= 53)) ||
+                (((in.hcount == 1) || (in.hcount == 2) || (in.hcount == 52) || (in.hcount == 53)) && (in.vcount >= 27) && (in.vcount <= 42))
             ) 
             begin
             rgb_nxt = 12'hf_c_0;
@@ -329,7 +353,10 @@ always_comb begin
 
                 (in.hcount == CH9_X) && (in.vcount >= CH_MIDDLE_START) && (in.vcount < CH_MIDDLE_END) ||
                 (in.hcount == CH9_X - 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) ||
-                (in.hcount == CH9_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) 
+                (in.hcount == CH9_X + 1) && (in.vcount >= CH_SIDE_START) && (in.vcount < CH_SIDE_END) ||
+
+                (((in.vcount == 28) || (in.vcount == 27) || (in.vcount == 41) || (in.vcount == 42)) && (in.hcount >= 1) && (in.hcount <= 53)) ||
+                (((in.hcount == 1) || (in.hcount == 2) || (in.hcount == 52) || (in.hcount == 53)) && (in.vcount >= 27) && (in.vcount <= 42))
             ) 
             begin
             rgb_nxt = 12'hf_c_0;
