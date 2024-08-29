@@ -4,7 +4,7 @@
  * Author: Tomasz Maslanka, Jakub Brzazgacz
  *
  * Description:
- * Draw background.
+ * Write text on screen.
  */
 
 
@@ -29,14 +29,11 @@
 import vga_pkg::*;
 import game_pkg::*;
  
- /**
-  * Local variables and signals
-  */
+// local variables
 logic [11:0] rgb_nxt;
 logic [11:0] char_xy_nxt, char_line_calc,char_xy_calc; //org 7:0
 logic [3:0] char_line_nxt;
 logic [11:0] rgb_d;
-
 
 logic [10:0] hcount_d, vcount_d;
 logic hblnk_d, vblnk_d, hsync_d, vsync_d;
@@ -68,8 +65,8 @@ logic hblnk_d, vblnk_d, hsync_d, vsync_d;
          out.hblnk  <= '0;
          out.rgb    <= '0;
 
-         char_xy        <= '0;
-         char_line      <= '0 ;
+         char_xy    <= '0;
+         char_line  <= '0 ;
 
      end else begin
          out.vcount <= vcount_d;
@@ -80,8 +77,8 @@ logic hblnk_d, vblnk_d, hsync_d, vsync_d;
          out.hblnk  <= hblnk_d;
          
          out.rgb    <= rgb_nxt;
-         char_xy        <= char_xy_nxt ;
-         char_line      <= char_line_nxt ;
+         char_xy    <= char_xy_nxt ;
+         char_line  <= char_line_nxt ;
      end
  end
  

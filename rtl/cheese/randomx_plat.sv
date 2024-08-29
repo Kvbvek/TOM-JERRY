@@ -157,7 +157,7 @@ always_comb begin
             pnxt1.y = P1_Y_COLLISION - OBJ_HEIGHT;
             pnxt1.x = (ctr % P1_LENGTH) + P1_X_START;
         end
-        pnxt2.x = (ctr2 % P19_LENGTH) + P19_X_START;
+        pnxt2.x = (ctr2 % P19_LENGTH) + P19_X_START + 350;
         pnxt2.y = P19_Y_COLLISION - OBJ_HEIGHT;
     end
 
@@ -248,36 +248,36 @@ always_comb begin
 
     else if((rnd_generate == 2'b10)) begin
         if(ctr2 == 7'd0) begin
-            pnxt2.y = P1_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P1_LENGTH) + P1_X_START;
+            pnxt2.y = P19_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P19_LENGTH) + P19_X_START;
         end
         else if(ctr2 == 7'd1) begin
-            pnxt2.y = P2_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P2_LENGTH) + P2_X_START;
+            pnxt2.y = P18_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P18_LENGTH) + P18_X_START;
         end
         else if(ctr2 == 7'd2) begin
-            pnxt2.y = P3_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P3_LENGTH) + P3_X_START;
+            pnxt2.y = P17_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P17_LENGTH) + P17_X_START;
         end
         else if(ctr2 == 7'd3) begin
-            pnxt2.y = P4_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P4_LENGTH) + P4_X_START;
+            pnxt2.y = P16_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P16_LENGTH) + P16_X_START;
         end
         else if(ctr2 == 7'd4) begin
-            pnxt2.y = P5_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P5_LENGTH) + P5_X_START;
+            pnxt2.y = P15_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P15_LENGTH) + P15_X_START;
         end
         else if(ctr2 == 7'd5) begin
-            pnxt2.y = P6_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P6_LENGTH) + P6_X_START;
+            pnxt2.y = P14_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P14_LENGTH) + P14_X_START;
         end
         else if(ctr2 == 7'd6) begin
-            pnxt2.y = P6_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P6_LENGTH) + P6_X_START;
+            pnxt2.y = P13_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P13_LENGTH) + P13_X_START;
         end
         else if(ctr2 == 7'd7) begin
-            pnxt2.y = P8_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P8_LENGTH) + P8_X_START;
+            pnxt2.y = P12_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P11_LENGTH) + P12_X_START;
         end
         else if(ctr2 == 7'd8) begin
             pnxt2.y = P9_Y_COLLISION - OBJ_HEIGHT;
@@ -288,40 +288,40 @@ always_comb begin
             pnxt2.x = (ctr % P10_LENGTH) + P10_X_START;
         end
         else if(ctr2 == 7'd10) begin
-            pnxt2.y = P11_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P11_LENGTH) + P11_X_START;
+            pnxt2.y = P9_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P9_LENGTH) + P9_X_START;
         end
         else if(ctr2 == 7'd11) begin
-            pnxt2.y = P12_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P12_LENGTH) + P12_X_START;
+            pnxt2.y = P8_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P8_LENGTH) + P8_X_START;
         end
         else if(ctr2 == 7'd12) begin
-            pnxt2.y = P13_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P13_LENGTH) + P13_X_START;
+            pnxt2.y = P6_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P6_LENGTH) + P6_X_START;
         end
         else if(ctr2 == 7'd13) begin
-            pnxt2.y = P14_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P14_LENGTH) + P14_X_START;
+            pnxt2.y = P6_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P6_LENGTH) + P6_X_START;
         end
         else if(ctr2 == 7'd14) begin
-            pnxt2.y = P15_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P15_LENGTH) + P15_X_START;
+            pnxt2.y = P5_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P5_LENGTH) + P5_X_START;
         end
         else if(ctr2 == 7'd15) begin
-            pnxt2.y = P16_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P16_LENGTH) + P16_X_START;
+            pnxt2.y = P4_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P4_LENGTH) + P4_X_START;
         end
         else if(ctr2 == 7'd16) begin
-            pnxt2.y = P17_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P17_LENGTH) + P17_X_START;
+            pnxt2.y = P3_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P3_LENGTH) + P3_X_START;
         end
         else if(ctr2 == 7'd17) begin
-            pnxt2.y = P18_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P18_LENGTH) + P18_X_START;
+            pnxt2.y = P2_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P2_LENGTH) + P2_X_START;
         end
         else if(ctr2 == 7'd18) begin
-            pnxt2.y = P19_Y_COLLISION - OBJ_HEIGHT;
-            pnxt2.x = (ctr % P19_LENGTH) + P19_X_START;
+            pnxt2.y = P1_Y_COLLISION - OBJ_HEIGHT;
+            pnxt2.x = (ctr % P19_LENGTH) + P1_X_START;
         end
         else begin
             pnxt2.y = P1_Y_COLLISION - OBJ_HEIGHT;

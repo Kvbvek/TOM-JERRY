@@ -30,7 +30,8 @@ localparam CLK_PERIOD = 25;     // 40 MHz
 
 logic clk, rst;
 logic [1:0] gameover_s;
-logic ov, reset_w;
+logic reset_w;
+logic [1:0] ov;
 
 /**
  * Clock generation
@@ -67,18 +68,35 @@ initial begin
     reset_w = 0;
 
     $display("Starting simulation...");
-    $display("Over value - %d at %t", ov, $time);
+    $display("Over value - %b at %t", ov, $time);
     # 50 gameover_s = 2'b10;
     # 25;
-    $display("Over value - %d at %t", ov, $time);
+    $display("Over value - %b at %t", ov, $time);
+    # 50;
+    reset_w = 1;
+    gameover_s = 2'b00;
+    $display("Over value - %b at %t", ov, $time);
+    # 50;
+    reset_w = 0;
+    $display("Over value - %b at %t", ov, $time);
+    # 50;
+    # 50;
+    gameover_s = 2'b01;
+    $display("Over value - %b at %t", ov, $time);
     # 50;
     gameover_s = 2'b00;
-    $display("Over value - %d at %t", ov, $time);
+    $display("Over value - %b at %t", ov, $time);
     # 50;
-    $display("Over value - %d at %t", ov, $time);
-
+    # 50;
+    $display("Over value - %b at %t", ov, $time);
+    # 50;
+    $display("Over value - %b at %t", ov, $time);
+    # 50;
+    $display("Over value - %b at %t", ov, $time);
+    # 50;
+    $display("Over value - %b at %t", ov, $time);
     // End the simulation.
-    $display("Simulation is over, check the waveforms.");
+    $display("Simulation is over.");
     $finish;
 end
 

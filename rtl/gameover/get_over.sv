@@ -15,12 +15,12 @@ module get_over (
     input logic [1:0] gameover,
     input logic reset,
 
-    output logic over
+    output logic [1:0] over
 
 );
 
 // local variables
-logic over_nxt;
+logic [1:0] over_nxt;
 
 // output register with sync reset
 always_ff @(posedge clk) begin
@@ -34,12 +34,16 @@ end
 
 // logic
 always_comb begin
-    if(over == 1'b1 && !reset) begin
-        over_nxt = 1'b1;
+    if(over == 2'b10 && !reset) begin
+        over_nxt = 2'b10;
+    end
+    else if(over == 2'b01 && !reset) begin
+        over_nxt = 2'b01;
     end
     else begin
-        if((gameover[1:0] != 2'b00) && !reset) over_nxt = 1'b1;
-        else over_nxt = 1'b0; 
+        if((gameover[1:0] != 2'b00) && (gameover[1:0] == 2'b10) && !reset) over_nxt = 2'b10;
+        else if((gameover[1:0] != 2'b00) && (gameover[1:0] == 2'b01) && !reset) over_nxt = 2'b01;
+        else over_nxt = 2'b00; 
     end
 end
 

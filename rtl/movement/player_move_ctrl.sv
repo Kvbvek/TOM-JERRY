@@ -15,7 +15,7 @@
     input  logic clk,
     input  logic rst,
     input  logic reset,
-    input logic over,
+    input logic [1:0] over,
 
     input logic  left,
     input logic  right,
@@ -99,7 +99,7 @@ end
 always_comb begin
     case(state_c)
         IDLE: begin
-            if(reset || over) begin
+            if(reset || over != 2'b00) begin
                 x_tmp = JERRY_X_SPAWN;
                 y_tmp = JERRY_Y_SPAWN;
                 state_nxt = IDLE;

@@ -9,5 +9,5 @@
 # https://docs.xilinx.com/r/en-US/ug900-vivado-logic-simulation/Project-File-.prj-Syntax
 
 
-sv work ../../rtl/get_over.sv \
+sv work ../../rtl/gameover/get_over.sv \
         get_over_tb.sv

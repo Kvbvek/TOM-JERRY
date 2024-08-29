@@ -13,10 +13,11 @@
 module draw_gameover (
     input  logic clk,
     input  logic rst,
-    input logic over,
+    input logic [1:0] over,
 
     vga_if.in in_notext,
-    vga_if.in in_text,
+    vga_if.in in_texttom,
+    vga_if.in in_textjerry,
     vga_if.out out
 
 );
@@ -61,14 +62,23 @@ end
 
 
 always_comb begin
-    if(over) begin
-        intr.vcount = in_text.vcount;
-        intr.vsync  = in_text.vsync;
-        intr.vblnk  = in_text.vblnk;
-        intr.hcount = in_text.hcount;
-        intr.hsync  = in_text.hsync;
-        intr.hblnk  = in_text.hblnk;
-        intr.rgb = in_text.rgb;
+    if(over == 2'b10) begin
+        intr.vcount = in_texttom.vcount;
+        intr.vsync  = in_texttom.vsync;
+        intr.vblnk  = in_texttom.vblnk;
+        intr.hcount = in_texttom.hcount;
+        intr.hsync  = in_texttom.hsync;
+        intr.hblnk  = in_texttom.hblnk;
+        intr.rgb = in_texttom.rgb;
+    end
+    else if(over == 2'b01) begin
+        intr.vcount = in_textjerry.vcount;
+        intr.vsync  = in_textjerry.vsync;
+        intr.vblnk  = in_textjerry.vblnk;
+        intr.hcount = in_textjerry.hcount;
+        intr.hsync  = in_textjerry.hsync;
+        intr.hblnk  = in_textjerry.hblnk;
+        intr.rgb = in_textjerry.rgb;
     end
     else begin
         intr.vcount = in_notext.vcount;

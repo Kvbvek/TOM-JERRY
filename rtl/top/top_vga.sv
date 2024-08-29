@@ -48,7 +48,9 @@ vga_if drawtom();
 vga_if drawjerry();
 vga_if drawcheese();
 vga_if drawcheeseo();
-vga_if drawgameover();
+vga_if drawgameovertom();
+vga_if drawgameoverjerry();
+
 vga_if drawcounter();
 vga_if in_over();
 vga_if del_if();
@@ -61,10 +63,18 @@ logic [9:0] tom_x_wire;
 logic [9:0] tom_y_wire;
 logic [6:0] sprite_control_wire_t;
 
-wire [11:0] char_xy_end;
-wire [6:0] char_code_end;
-wire [3:0] char_line_end;
-wire [7:0] char_pixel_end;
+wire [11:0] char_xy_end_tom;
+wire [11:0] char_xy_end_jerry;
+
+wire [6:0] char_code_end_tom;
+wire [6:0] char_code_end_jerry;
+
+wire [3:0] char_line_end_tom;
+wire [3:0] char_line_end_jerry;
+
+
+wire [7:0] char_pixel_end_tom;
+wire [7:0] char_pixel_end_jerry;
 
 logic [11:0] data_wire;
 
@@ -93,7 +103,7 @@ logic [1:0] gameover_wire;
 
 logic left_wire, right_wire, jump_wire, reset_wire;
 
-logic over_wire;
+logic [1:0] over_wire;
 
 logic [11:0] chrgbo1, chrgbo2;
 
@@ -340,27 +350,65 @@ write #(
     .BEGIN_TXT_Y(200),
     .TXT_COLOUR(12'h0_0_0)
 )
-u_write_gameover(
+u_write_gameovertom(
     .clk,
     .rst,
-    .char_pixels(char_pixel_end),
-    .char_xy(char_xy_end),
-    .char_line(char_line_end),
+    .char_pixels(char_pixel_end_tom),
+    .char_xy(char_xy_end_tom),
+    .char_line(char_line_end_tom),
     .in(drawcounter),
-    .out(drawgameover)
+    .out(drawgameovertom)
 );
 
-font_rom u_font_rom(
+write #(
+    .BEGIN_TXT_X(375),
+    .BEGIN_TXT_Y(200),
+    .TXT_COLOUR(12'h0_0_0)
+)
+u_write_gameoverjerry(
     .clk,
-    .char_code(char_code_end),
-    .char_line_pixels(char_pixel_end),
-    .char_line(char_line_end)
+    .rst,
+    .char_pixels(char_pixel_end_jerry),
+    .char_xy(char_xy_end_jerry),
+    .char_line(char_line_end_jerry),
+    .in(drawcounter),
+    .out(drawgameoverjerry)
+);
+
+font_rom u_font_rom_tom(
+    .clk,
+    .char_code(char_code_end_tom),
+    .char_line_pixels(char_pixel_end_tom),
+    .char_line(char_line_end_tom)
     
 );
-char_rom_gameover u_char_rom_gameover(
+
+font_rom u_font_rom_jerry(
     .clk,
-    .char_xy(char_xy_end),
-    .char_code(char_code_end)
+    .char_code(char_code_end_jerry),
+    .char_line_pixels(char_pixel_end_jerry),
+    .char_line(char_line_end_jerry)
+    
+);
+
+
+
+char_rom_gameover #(
+    .TOM(1)
+)
+u_char_rom_gameovertom(
+    .clk,
+    .char_xy(char_xy_end_tom),
+    .char_code(char_code_end_tom)
+);
+
+char_rom_gameover #(
+    .TOM(0)
+)
+u_char_rom_gameoverjerry(
+    .clk,
+    .char_xy(char_xy_end_jerry),
+    .char_code(char_code_end_jerry)
 );
 
 delay #(
@@ -377,7 +425,8 @@ draw_gameover u_draw_gameover(
     .clk,
     .rst,
     .over(over_wire),
-    .in_text(drawgameover),
+    .in_texttom(drawgameovertom),
+    .in_textjerry(drawgameoverjerry),
     .in_notext(del_if),
     .out(choosescreen)
     
