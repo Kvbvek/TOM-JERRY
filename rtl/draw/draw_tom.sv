@@ -13,8 +13,7 @@
      input  logic clk,
      input  logic rst,
      input logic [11:0] data,
-     input logic [9:0] tom_x,
-     input logic [9:0] tom_y,
+     pos_if.in tom_pos,
     vga_if.in in,
 
     output logic [10:0] address,
@@ -81,18 +80,18 @@ logic vblnk_d, vsync_d, hblnk_d, hsync_d;
          imag_x <= imag_x_nxt;
          imag_y <= imag_y_nxt;
 
-         host_pos.x <= tom_x;
-         host_pos.y <= tom_y;
+         host_pos.x <= tom_pos.x;
+         host_pos.y <= tom_pos.y;
     end
  end
  
 // logic
 
  always_comb begin
-    imag_x_nxt = in.hcount - tom_x;
-    imag_y_nxt = in.vcount - tom_y;
+    imag_x_nxt = in.hcount - tom_pos.x;
+    imag_y_nxt = in.vcount - tom_pos.y;
     address_nxt = imag_y * TOM_WIDTH + imag_x;
-     if((in.vcount >= tom_y) && (in.vcount < (tom_y + TOM_HEIGHT))  && (in.hcount > tom_x + 4) && (in.hcount <= tom_x + 4 + TOM_WIDTH)) begin
+     if((in.vcount >= tom_pos.y) && (in.vcount < (tom_pos.y + TOM_HEIGHT))  && (in.hcount > tom_pos.x + 4) && (in.hcount <= tom_pos.x + 4 + TOM_WIDTH)) begin
         if(data == TOM_BG_COLOR) begin
             rgb_nxt = rgb_d;
         end

@@ -55,12 +55,18 @@ vga_if drawcounter();
 vga_if in_over();
 vga_if del_if();
 vga_if choosescreen();
+pos_if tom_pos();
+pos_if jerry_pos();
+
+
+pos_if jerryp();
+pos_if cheesep1();
+pos_if cheesep2();
+pos_if hostp();
 
 logic [15:0] keycode;
 
 logic [10:0] address_wire;
-logic [9:0] tom_x_wire;
-logic [9:0] tom_y_wire;
 logic [6:0] sprite_control_wire_t;
 
 wire [11:0] char_xy_end_tom;
@@ -78,18 +84,14 @@ wire [7:0] char_pixel_end_jerry;
 
 logic [11:0] data_wire;
 
-pos_if hostp();
+
 
 logic [9:0] address_wire_j;
-logic [9:0] jerry_x_wire;
-logic [9:0] jerry_y_wire;
 logic [6:0] sprite_control_wire_j;
 
 logic [11:0] data_wire_j;
 
-pos_if jerryp();
-pos_if cheesep1();
-pos_if cheesep2();
+
 logic [1:0] is_cheese_taken_wire;
 
 logic [19:0] address_wire_c1, address_wire_c2;
@@ -175,8 +177,7 @@ host_move_ctrl u_host_move_ctrl(
     .reset(reset_wire),
 
     .sprite_control(sprite_control_wire_t),
-    .x(tom_x_wire),
-    .y(tom_y_wire)
+    .tom_pos(tom_pos)
 );
 
 tom_get_sprite u_tom_get_sprite(
@@ -191,8 +192,7 @@ tom_get_sprite u_tom_get_sprite(
 draw_tom u_draw_tom (
     .clk,
     .rst,
-    .tom_x(tom_x_wire),
-    .tom_y(tom_y_wire),
+    .tom_pos(tom_pos),
     .data(data_wire),
     .in(bg),
     .out(drawtom),
@@ -210,8 +210,7 @@ player_move_ctrl u_player_move_ctrl(
     .reset(reset_wire),
 
     .sprite_control(sprite_control_wire_j),
-    .x(jerry_x_wire),
-    .y(jerry_y_wire)
+    .jerry_pos(jerry_pos)
 );
 
 jerry_get_sprite u_jerry_get_sprite(
@@ -226,8 +225,7 @@ jerry_get_sprite u_jerry_get_sprite(
 draw_jerry u_draw_jerry (
     .clk,
     .rst,
-    .jerry_x(jerry_x_wire),
-    .jerry_y(jerry_y_wire),
+    .jerry_pos(jerry_pos),
     .data(data_wire_j),
     .in(drawtom),
     .out(drawjerry),

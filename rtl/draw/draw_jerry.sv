@@ -14,8 +14,7 @@
      input  logic clk,
      input  logic rst,
      input logic [11:0] data,
-     input logic [9:0] jerry_x,
-     input logic [9:0] jerry_y,
+    pos_if.in jerry_pos, 
     vga_if.in in,
 
     output logic [9:0] address,
@@ -83,8 +82,8 @@ logic vblnk_d, vsync_d, hblnk_d, hsync_d;
          imag_x <= imag_x_nxt;
          imag_y <= imag_y_nxt;
 
-        player_pos.x <= jerry_x;
-        player_pos.y <= jerry_y;
+        player_pos.x <= jerry_pos.x;
+        player_pos.y <= jerry_pos.y;
     end
  end
 
@@ -92,11 +91,11 @@ logic vblnk_d, vsync_d, hblnk_d, hsync_d;
 // logic
 
  always_comb begin
-    imag_x_nxt = in.hcount - jerry_x;
-    imag_y_nxt = (in.vcount - jerry_y)*5;
+    imag_x_nxt = in.hcount - jerry_pos.x;
+    imag_y_nxt = (in.vcount - jerry_pos.y)*5;
     
     address_nxt = (imag_y * 5) + imag_x;
-        if((in.vcount >= jerry_y) && (in.vcount < (jerry_y + JERRY_HEIGHT))  && (in.hcount > jerry_x + 4) && (in.hcount <= jerry_x + 4 + JERRY_WIDTH)) begin
+        if((in.vcount >= jerry_pos.y) && (in.vcount < (jerry_pos.y + JERRY_HEIGHT))  && (in.hcount > jerry_pos.x + 4) && (in.hcount <= jerry_pos.x + 4 + JERRY_WIDTH)) begin
             if(data == JERRY_BG_COLOR) begin
                 rgb_nxt = rgb_d;
             end

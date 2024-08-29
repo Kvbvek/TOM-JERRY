@@ -22,8 +22,7 @@
     input logic  jump,
 
     output logic [6:0] sprite_control, // {prawo,skok,idle,licznik}
-    output logic [9:0] x,
-    output logic [9:0] y
+    pos_if.out jerry_pos
     
 );
 
@@ -65,8 +64,8 @@ logic [6:0] sprite_control_nxt;
 
 always_ff @(posedge clk) begin
     if (rst) begin
-        x <= JERRY_X_SPAWN;
-        y <= JERRY_Y_SPAWN;
+        jerry_pos.x <= JERRY_X_SPAWN;
+        jerry_pos.y <= JERRY_Y_SPAWN;
         y_jump_start <= '0;
 
         counterx <= '0;
@@ -79,8 +78,8 @@ always_ff @(posedge clk) begin
         state_c <= IDLE;
     end 
     else begin
-        x <= x_nxt;
-        y <= y_nxt;
+        jerry_pos.x <= x_nxt;
+        jerry_pos.y <= y_nxt;
         y_jump_start <= y_jump_start_nxt;
 
         counterx <= counterx_nxt;
@@ -117,13 +116,13 @@ always_comb begin
                 else begin
                     state_nxt = IDLE;
                 end
-                x_tmp = x;
-                y_tmp = y;
+                x_tmp = jerry_pos.x;
+                y_tmp = jerry_pos.y;
 
                 sprite_control_nxt = {sprite_control[6],6'b010000};
             end
 
-            y_jump_start_nxt = y;
+            y_jump_start_nxt = jerry_pos.y;
 
             counterx_nxt = 0;
             countery_nxt = 0;
@@ -137,9 +136,9 @@ always_comb begin
         MOVING: begin
             if(right && !left) begin
                 if(counterx >= COUNTERX_STOP) begin
-                    x_tmp = correctCoordinateX(x + 1, JERRY_WIDTH);
+                    x_tmp = correctCoordinateX(jerry_pos.x + 1, JERRY_WIDTH);
                     counterx_nxt = 0;
-                    if((x % 8) == 0) begin
+                    if((jerry_pos.x % 8) == 0) begin
                         sprite_control_nxt[3:0] = (sprite_control[3:0] + 1) % 8;
                     end
                     else begin
@@ -147,7 +146,7 @@ always_comb begin
                     end
                 end
                 else begin
-                    x_tmp = x;
+                    x_tmp = jerry_pos.x;
                     counterx_nxt = counterx + 1;
                     sprite_control_nxt[3:0] = sprite_control[3:0];
                 end
@@ -156,9 +155,9 @@ always_comb begin
 
             else if(!right && left) begin
                 if(counterx >= COUNTERX_STOP) begin
-                    x_tmp = correctCoordinateX(x - 1, JERRY_WIDTH);
+                    x_tmp = correctCoordinateX(jerry_pos.x - 1, JERRY_WIDTH);
                     counterx_nxt = 0;
-                    if((x % 8) == 0) begin
+                    if((jerry_pos.x % 8) == 0) begin
                         sprite_control_nxt[3:0] = (sprite_control[3:0] + 1) % 8;
                     end
                     else begin
@@ -166,7 +165,7 @@ always_comb begin
                     end
                 end
                 else begin
-                    x_tmp = x;
+                    x_tmp = jerry_pos.x;
                     counterx_nxt = counterx + 1;
                     sprite_control_nxt[3:0] = sprite_control[3:0];
                 end
@@ -175,7 +174,7 @@ always_comb begin
 
             else begin
                 counterx_nxt = 0;
-                x_tmp = x;
+                x_tmp = jerry_pos.x;
                 sprite_control_nxt = sprite_control;
             end
             
@@ -185,7 +184,7 @@ always_comb begin
                 state_nxt = JUMPING;
             end
             else if((right && !left) || (!right && left)) begin
-                if(checkCollisionWithAllPlatforms(x_tmp, y_tmp, JERRY_WIDTH, JERRY_HEIGHT) == 2'b10 || ((y + JERRY_HEIGHT) == 767)) begin
+                if(checkCollisionWithAllPlatforms(x_tmp, y_tmp, JERRY_WIDTH, JERRY_HEIGHT) == 2'b10 || ((jerry_pos.y + JERRY_HEIGHT) == 767)) begin
                     state_nxt = MOVING;
                 end
                 else begin
@@ -196,9 +195,9 @@ always_comb begin
                 state_nxt = IDLE;
             end
 
-            y_jump_start_nxt = y;
+            y_jump_start_nxt = jerry_pos.y;
 
-            y_tmp = y;
+            y_tmp = jerry_pos.y;
             countery_nxt = 0;
             countery_jump_stop_nxt = 250_000;
             countery_fall_stop_nxt = 800_000;
@@ -210,12 +209,12 @@ always_comb begin
         JUMPING: begin
             if(right && !left) begin
                 if(counterx >= COUNTERX_AIR_STOP) begin
-                    x_tmp = correctCoordinateX(x + 1, JERRY_WIDTH);
+                    x_tmp = correctCoordinateX(jerry_pos.x + 1, JERRY_WIDTH);
                     counterx_nxt = 0;
                     sprite_control_nxt[3:0] = (sprite_control[3:0] + 1) % 8;
                 end
                 else begin
-                    x_tmp = x;
+                    x_tmp = jerry_pos.x;
                     counterx_nxt = counterx + 1;
                      sprite_control_nxt[3:0] = sprite_control[3:0];
                 end
@@ -224,12 +223,12 @@ always_comb begin
 
             else if(!right && left) begin
                 if(counterx >= COUNTERX_AIR_STOP) begin
-                    x_tmp = correctCoordinateX(x - 1, JERRY_WIDTH);
+                    x_tmp = correctCoordinateX(jerry_pos.x - 1, JERRY_WIDTH);
                     counterx_nxt = 0;
                      sprite_control_nxt[3:0] = (sprite_control[3:0] + 1) % 8;
                 end
                 else begin
-                    x_tmp = x;
+                    x_tmp = jerry_pos.x;
                     counterx_nxt = counterx + 1;
                     sprite_control_nxt[3:0] = sprite_control[3:0];
                 end
@@ -237,7 +236,7 @@ always_comb begin
             end
 
             else begin
-                x_tmp = x;
+                x_tmp = jerry_pos.x;
                 counterx_nxt = 0;
                 sprite_control_nxt = {sprite_control[6],1'b1,sprite_control[4:0]};
             end
@@ -245,9 +244,9 @@ always_comb begin
             // ------------------------ //
 
             if(countery >= countery_jump_stop) begin
-                y_tmp = y - 1;
+                y_tmp = jerry_pos.y - 1;
                 countery_nxt = 0;
-                if(y <= y_jump_start - JUMP_HEIGHT - 25) begin
+                if(jerry_pos.y <= y_jump_start - JUMP_HEIGHT - 25) begin
                     if(countery_jump_stop >= 800_000) begin
                         countery_jump_stop_nxt = 800_000;
                     end
@@ -260,14 +259,14 @@ always_comb begin
                 end
             end
             else begin
-                y_tmp = y;
+                y_tmp = jerry_pos.y;
                 countery_nxt = countery + 1;
                 countery_jump_stop_nxt = countery_jump_stop;
             end
 
             // ------------------------ //
 
-            if((y < (y_jump_start - JUMP_HEIGHT)) || (checkCollisionWithAllPlatforms(x_tmp, y_tmp, JERRY_WIDTH, JERRY_HEIGHT) == 2'b01)) begin
+            if((jerry_pos.y < (y_jump_start - JUMP_HEIGHT)) || (checkCollisionWithAllPlatforms(x_tmp, y_tmp, JERRY_WIDTH, JERRY_HEIGHT) == 2'b01)) begin
                 state_nxt = FALLING;
                 countery_fall_stop_nxt = countery_fall_stop;
             end
@@ -284,12 +283,12 @@ always_comb begin
         FALLING: begin
             if(right && !left) begin
                 if(counterx >= COUNTERX_AIR_STOP) begin
-                    x_tmp = correctCoordinateX(x + 1, JERRY_WIDTH);
+                    x_tmp = correctCoordinateX(jerry_pos.x + 1, JERRY_WIDTH);
                     counterx_nxt = 0;
                     sprite_control_nxt[3:0] = (sprite_control[3:0] + 1) % 8;
                 end
                 else begin
-                    x_tmp = x;
+                    x_tmp = jerry_pos.x;
                     counterx_nxt = counterx + 1;
                     sprite_control_nxt[3:0] = sprite_control[3:0];
                 end
@@ -298,12 +297,12 @@ always_comb begin
 
             else if(!right && left) begin
                 if(counterx >= COUNTERX_STOP) begin
-                    x_tmp = correctCoordinateX(x - 1, JERRY_WIDTH);
+                    x_tmp = correctCoordinateX(jerry_pos.x - 1, JERRY_WIDTH);
                     counterx_nxt = 0;
                     sprite_control_nxt[3:0] = (sprite_control[3:0] + 1) % 8;
                 end
                 else begin
-                    x_tmp = x;
+                    x_tmp = jerry_pos.x;
                     counterx_nxt = counterx + 1;
                     sprite_control_nxt[3:0] = sprite_control[3:0];
                 end
@@ -311,7 +310,7 @@ always_comb begin
             end
 
             else begin
-                x_tmp = x;
+                x_tmp = jerry_pos.x;
                 counterx_nxt = 0;
                 sprite_control_nxt = sprite_control;
             end
@@ -319,7 +318,7 @@ always_comb begin
             // ------------------------ //
 
             if(countery >= countery_fall_stop) begin
-                y_tmp = y + 1;
+                y_tmp = jerry_pos.y + 1;
                 countery_nxt = 0;
                 if(countery_fall_stop <= 150_000) begin
                     countery_fall_stop_nxt = 150_000;
@@ -329,14 +328,14 @@ always_comb begin
                 end
             end
             else begin
-                y_tmp = y;
+                y_tmp = jerry_pos.y;
                 countery_nxt = countery + 1;
                 countery_fall_stop_nxt = countery_fall_stop;
             end
 
             // ------------------------ //
 
-            if(y < (767 - JERRY_HEIGHT)) begin 
+            if(jerry_pos.y < (767 - JERRY_HEIGHT)) begin 
                 if(checkCollisionWithAllPlatforms(x_tmp, y_tmp, JERRY_WIDTH, JERRY_HEIGHT) == 2'b10) begin
                     state_nxt = IDLE;
                 end
@@ -348,7 +347,7 @@ always_comb begin
                 state_nxt = IDLE;
             end
             
-            y_jump_start_nxt = y;
+            y_jump_start_nxt = jerry_pos.y;
 
             countery_jump_stop_nxt = countery_jump_stop;
 
@@ -358,13 +357,13 @@ always_comb begin
 
         default: begin
             state_nxt = IDLE;
-            x_tmp = x;
-            y_tmp = y;  
+            x_tmp = jerry_pos.x;
+            y_tmp = jerry_pos.y;  
             counterx_nxt = 0;
             countery_jump_stop_nxt = 250_000;
             countery_fall_stop_nxt = 800_000;
             countery_nxt = 0;
-            y_jump_start_nxt = y;
+            y_jump_start_nxt = jerry_pos.y;
             sprite_control_nxt = 7'b1010000;
             x_nxt = correctCoordinateX(x_tmp, JERRY_WIDTH);
             y_nxt = correctCoordinateY(y_tmp, JERRY_HEIGHT);
