@@ -78,12 +78,13 @@ logic [6:0] sprite_control_wire_j;
 logic [11:0] data_wire_j;
 
 pos_if jerryp();
-pos_if cheesep();
-logic is_cheese_taken_wire;
+pos_if cheesep1();
+pos_if cheesep2();
+logic [1:0] is_cheese_taken_wire;
 
-logic [19:0] address_wire_c;
+logic [19:0] address_wire_c1, address_wire_c2;
 
-logic [11:0] chrgb;
+logic [11:0] chrgb1, chrgb2;
 
 logic cheese_gm_wire;
 logic [7:0] cheese_ctr_wire;
@@ -94,7 +95,7 @@ logic left_wire, right_wire, jump_wire, reset_wire;
 
 logic over_wire;
 
-logic [11:0] chrgbo;
+logic [11:0] chrgbo1, chrgbo2;
 
 
 /**
@@ -231,7 +232,8 @@ cheese_taken u_cheese_taken(
     .rst,
     .reset(reset_wire),
     .jerrypos(jerryp),
-    .cheesepos(cheesep),
+    .cheesepos1(cheesep1),
+    .cheesepos2(cheesep2),
     .is_cheese_taken(is_cheese_taken_wire),
     .cheese_ctr(cheese_ctr_wire),
     .cheese_gm(cheese_gm_wire)
@@ -241,7 +243,8 @@ randomx_plat u_randomx_plat(
     .clk,
     .rst,
     .rnd_generate(is_cheese_taken_wire),
-    .pout(cheesep)
+    .pout1(cheesep1),
+    .pout2(cheesep2)
 
 );
 
@@ -257,30 +260,51 @@ delay #(
 
 read_rom #(
         .DATA_PATH ("../../rtl/data/cheese.dat")
-) read_rom_cheese (
+) read_rom_cheese1 (
         .clk (clk),
-        .addrA(address_wire_c),
-        .dout (chrgb)
+        .addrA(address_wire_c1),
+        .dout (chrgb1)
+    );
+
+    read_rom #(
+        .DATA_PATH ("../../rtl/data/cheese.dat")
+) read_rom_cheese2 (
+        .clk (clk),
+        .addrA(address_wire_c2),
+        .dout (chrgb2)
     );
 
 delay #(
-    .WIDTH (12),
+    .WIDTH (24),
     .CLK_DEL(1)
 ) u_delay_rom_ch (
     .clk (clk),
     .rst (rst),
-    .din (chrgb),
-    .dout (chrgbo)
+    .din ({chrgb1, chrgb2}),
+    .dout ({chrgbo1, chrgbo2})
 );
 
-draw_cheese u_draw_cheese(
+draw_cheese u_draw_cheese1(
     .clk,
     .rst,
-    .pin(cheesep),
-    .data(chrgbo),
+    .pin(cheesep1),
+    .data(chrgbo1),
     .in(drawcheese),
     .out(drawcheeseo),
-    .address(address_wire_c)
+    .address(address_wire_c1)
+
+);
+
+vga_if drawcheese2();
+
+draw_cheese u_draw_cheese2(
+    .clk,
+    .rst,
+    .pin(cheesep2),
+    .data(chrgbo2),
+    .in(drawcheeseo),
+    .out(drawcheese2),
+    .address(address_wire_c2)
 
 );
 
@@ -288,7 +312,7 @@ draw_cheese_counter u_draw_cheese_counter(
     .clk,
     .rst,
     .cheese_ctr(cheese_ctr_wire),
-    .in(drawcheeseo),
+    .in(drawcheese2),
     .out(drawcounter)
 );
 

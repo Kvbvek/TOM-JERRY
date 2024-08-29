@@ -29,9 +29,8 @@ localparam CLK_PERIOD = 25;     // 40 MHz
  */
 
 logic clk, rst;
-logic genr;
-pos_if p();
-
+pos_if p1(), p2();
+logic [1:0] genr;
 /**
  * Clock generation
  */
@@ -50,7 +49,8 @@ randomx_plat dut (
     .clk(clk),
     .rst(rst),
     .rnd_generate(genr),
-    .pout(p)
+    .pout1(p1),
+    .pout2(p2)
 
 );
 
@@ -65,31 +65,31 @@ initial begin
 
     $display("Starting simulation...");
 
-    # 50 genr = 1'b0;
-    # 100 genr = 1'b1;
+    # 50 genr = 2'b01;
+    # 100 genr = 2'b01;
     # 1;
-    $display("genr val - %d, positions: x - %d, y - %d.",genr, p.x, p.y);
-    genr = 1'b0;
+    $display("genr val - %d, positions: x - %d, y - %d.",genr, p1.x, p1.y);
+    genr = 2'b01;
     #100;
-    $display("After few cycles: genr val - %d, positions: x - %d, y - %d.",genr, p.x, p.y);
+    $display("After few cycles: genr val - %d, positions: x - %d, y - %d.",genr, p1.x, p1.y);
 
-    # 5 genr = 1'b0;
-    # 150 genr = 1'b1;
+    # 5 genr = 2'b01;
+    # 150 genr = 2'b01;
     # 1;
 
-    $display("genr val - %d, positions: x - %d, y - %d.",genr, p.x, p.y);
+    $display("genr val - %d, positions: x - %d, y - %d.",genr, p1.x, p1.y);
 
-    # 50 genr = 1'b0;
-    # 150 genr = 1'b1;
+    # 50 genr = 2'b01;
+    # 150 genr = 2'b01;
     # 1;
 
-    $display("genr val - %d, positions: x - %d, y - %d.",genr, p.x, p.y);
+    $display("genr val - %d, positions: x - %d, y - %d.",genr, p1.x, p1.y);
 
-    # 50 genr = 1'b0;
-    # 150 genr = 1'b1;
+    # 50 genr = 2'b01;
+    # 150 genr = 2'b01;
     # 1;
 
-    $display("genr val - %d, positions: x - %d, y - %d.",genr, p.x, p.y);
+    $display("genr val - %d, positions: x - %d, y - %d.",genr, p1.x, p1.y);
 
     // End the simulation.
     $display("Simulation is over, check the waveforms.");
