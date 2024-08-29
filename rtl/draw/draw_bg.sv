@@ -23,6 +23,18 @@ import vga_pkg::*;
 import game_pkg::*;
 
 localparam COLOR_BLACK = 12'h0_0_0;
+localparam PLATFORM_COLOR = 12'h1_1_1;
+localparam COLOR_GREEN = 12'h0_b_0;
+localparam COLOR_BROWN = 12'h8_5_2;
+localparam CLOUD_COLOR = 12'hd_d_d;
+localparam WINDOW_COLOR = 12'hd_d_f;
+localparam ROOF_COLOR = 12'ha_1_0;
+localparam HANDLE_COLOR = 12'he_e_e;
+localparam DOOR_COLOR = 12'h7_4_1;
+localparam WALL_COLOR = 12'hc_c_c;
+localparam CHIMNEY_COLOR = 12'h2_2_2;
+localparam SKY_COLOR = 12'h0_a_f;
+
 /**
  * Local variables and signals
  */
@@ -60,7 +72,7 @@ always_comb begin : bg_comb_blk
     end 
     else begin                              // Active region:
         if (in.vcount == 0 || in.vcount == VER_PIXELS - 1 || in.hcount == 0 || in.hcount == HOR_PIXELS - 1)                    
-            rgb_nxt = 12'h0_0_0;                
+            rgb_nxt = COLOR_BLACK;                
         
         else begin        
             if(
@@ -82,7 +94,7 @@ always_comb begin : bg_comb_blk
             || (in.hcount > P19_X_START) && (in.hcount < P19_X_END) && ((in.vcount > P19_Y_START) && (in.vcount < P19_Y_END))
             )
             begin
-                rgb_nxt = 12'h1_1_1;
+                rgb_nxt = PLATFORM_COLOR;
             end
             
             // the graphical parts of platforms (3d lookalike)
@@ -170,7 +182,7 @@ always_comb begin : bg_comb_blk
             // grass
             else if((in.vcount >= 550) && (in.vcount <= 767) && (in.hcount >= 1) && (in.hcount <= 1023)) begin
                 if(in.vcount == 550) rgb_nxt = COLOR_BLACK;
-                else rgb_nxt = 12'h0_b_0;
+                else rgb_nxt = COLOR_GREEN;
             end
 
             // fence
@@ -187,7 +199,7 @@ always_comb begin : bg_comb_blk
                     rgb_nxt = COLOR_BLACK;
                 end
                 else begin
-                    rgb_nxt = 12'h8_5_2;
+                    rgb_nxt = COLOR_BROWN;
                 end
             end
 
@@ -209,7 +221,7 @@ always_comb begin : bg_comb_blk
                     rgb_nxt = COLOR_BLACK;
                 end
                 else begin
-                    rgb_nxt = 12'h8_5_2;
+                    rgb_nxt = COLOR_BROWN;
                 end
             end
 
@@ -217,7 +229,7 @@ always_comb begin : bg_comb_blk
             else if((in.vcount <= 550) && (in.vcount >= 250) && (in.hcount >= 650) && (in.hcount <= 1023)) begin
                 // roof part
                 if((in.vcount < 300)) begin
-                    rgb_nxt = 12'ha_1_0;
+                    rgb_nxt = ROOF_COLOR;
                 end
                 // kontury
                 else if((in.hcount == 650) || (in.hcount == 1024) || (in.vcount == 300)) begin
@@ -229,7 +241,7 @@ always_comb begin : bg_comb_blk
                         rgb_nxt = COLOR_BLACK;
                     end
                     else begin
-                        rgb_nxt = 12'hd_d_f;
+                        rgb_nxt = WINDOW_COLOR;
                     end
                 end
                 // doors
@@ -240,15 +252,15 @@ always_comb begin : bg_comb_blk
                     else if(((in.vcount >= 448) && (in.vcount <= 451)) && (in.hcount == 915) ||
                     ((in.vcount >= 448) && (in.vcount <= 449)) && (in.hcount >= 915) && (in.hcount <= 925)
                     ) begin
-                        rgb_nxt = 12'he_e_e;
+                        rgb_nxt = HANDLE_COLOR;
                     end
                     else begin
-                        rgb_nxt = 12'h7_4_1;
+                        rgb_nxt = DOOR_COLOR;
                     end
                 end
                 // house wall
                 else begin
-                    rgb_nxt = 12'hc_c_c;
+                    rgb_nxt = WALL_COLOR;
                 end
             end
             
@@ -258,16 +270,16 @@ always_comb begin : bg_comb_blk
                     rgb_nxt = COLOR_BLACK;
                 end
                 else begin
-                    rgb_nxt = 12'ha_1_0;
+                    rgb_nxt = ROOF_COLOR;
                 end
             end
             else if((in.vcount <= 250) && (in.vcount >= 1) && (in.hcount >= 850) && (in.hcount <= 1023)) begin
-                rgb_nxt = 12'ha_1_0;
+                rgb_nxt = ROOF_COLOR;
             end
 
             // chimney
             else if((in.hcount >= 650) && (in.hcount <= 750) && (in.vcount >= 70) && (in.vcount <= 200)) begin
-                rgb_nxt = 12'h2_2_2;
+                rgb_nxt = CHIMNEY_COLOR;
             end
 
             // cloud 1
@@ -284,7 +296,7 @@ always_comb begin : bg_comb_blk
                 (in.vcount == 159) && (in.hcount >= 136-4) && (in.hcount <= 182    ) ||
                 (in.vcount == 160) && (in.hcount >= 139-5) && (in.hcount <= 176    )
                 ) begin
-                rgb_nxt = 12'hd_d_d;
+                rgb_nxt = CLOUD_COLOR;
             end
 
             // cloud 2
@@ -308,7 +320,7 @@ always_comb begin : bg_comb_blk
                 (in.vcount == 66) && (in.hcount >= 436-4) && (in.hcount <= 482    ) ||
                 (in.vcount == 67) && (in.hcount >= 439-5) && (in.hcount <= 476    )
                 ) begin
-                rgb_nxt = 12'hd_d_d;
+                rgb_nxt = CLOUD_COLOR;
             end
 
             // cloud 3
@@ -333,7 +345,7 @@ always_comb begin : bg_comb_blk
                 (in.vcount == 127) && (in.hcount >= 369-5) && (in.hcount <= 516    ) ||
                 (in.vcount == 128) && (in.hcount >= 382  ) && (in.hcount <= 503    )
                 ) begin
-                rgb_nxt = 12'hd_d_d;
+                rgb_nxt = CLOUD_COLOR;
             end
 
             // cloud 4
@@ -350,7 +362,7 @@ always_comb begin : bg_comb_blk
                 (in.vcount == 74) && (in.hcount >= 66-4) && (in.hcount <= 162    ) ||
                 (in.vcount == 75) && (in.hcount >= 79-5) && (in.hcount <= 156    )
                 ) begin
-                rgb_nxt = 12'hd_d_d;
+                rgb_nxt = CLOUD_COLOR;
             end
 
 
@@ -401,11 +413,11 @@ always_comb begin : bg_comb_blk
                 (in.vcount == 13) && (in.hcount >= 57) && (in.hcount <= 64)              ||
                 (in.vcount >= 5) && (in.vcount <= 22) && (in.hcount == 57) 
             ) begin
-                rgb_nxt = 12'h0_0_0;
+                rgb_nxt = COLOR_BLACK;
             end
 
             else begin    // The rest of active display pixels:
-                rgb_nxt = 12'h0_a_f; 
+                rgb_nxt = SKY_COLOR; 
             end
         end
     end

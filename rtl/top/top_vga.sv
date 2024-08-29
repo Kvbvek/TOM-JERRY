@@ -126,7 +126,6 @@ assign j_out = jump_wire;
 
 top u_keyboardTop(
   .clk(clk87),
-  .rst(rst),
   .PS2Clk(kclk),
   .PS2Data(kdata),
   .keyc(keycode)
