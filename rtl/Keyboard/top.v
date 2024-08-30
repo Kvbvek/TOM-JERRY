@@ -19,6 +19,8 @@
 //     Known issue, when multiple buttons are pressed and one is released, the scan code of the one still held down is ometimes re-sent.
 //////////////////////////////////////////////////////////////////////////////////
 
+// Source - https://digilent.com/reference/programmable-logic/basys-3/demos/keyboard?srsltid=AfmBOoqCXNqC-J1kL48tYp05c2OjVxK9Nv66fS1Etd27WubZpC0mWCMF
+
 
 module top(
     input         clk,

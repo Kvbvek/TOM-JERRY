@@ -19,6 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+// Source - https://digilent.com/reference/programmable-logic/basys-3/demos/keyboard?srsltid=AfmBOoqCXNqC-J1kL48tYp05c2OjVxK9Nv66fS1Etd27WubZpC0mWCMF
 
 module debouncer(
     input clk,
