@@ -20,9 +20,9 @@ Aby poprawnie połączyć układy FPGA należy postępować zgodnie z poniższym
 
 * Następnie używając kabli Male-Male wykonać połączenia między płytkami jak poniżej. 
 
-![Hostconn](https://i.imgur.com/Nyl3XME.jpg)
-![Playerconn](https://i.imgur.com/5331tsU.jpg)
-![Host2Player](https://i.imgur.com/mP1lh9u.jpg)
+![Hostconn](https://i.imgur.com/KVaKWrE.jpg)
+![Playerconn](https://i.imgur.com/2RDDMjg.jpg)
+![Host2Player](https://i.imgur.com/0zfIIIV.jpg)
 
 **Oraz**
 * Do płytki Host'a należy podłączyć do wejścia VGA monitor, oraz do wejścia USB klawiaturę z protokołem PS2 
