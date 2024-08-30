@@ -21,7 +21,7 @@ Aby poprawnie połączyć układy FPGA należy postępować zgodnie z poniższym
 * Następnie używając kabli Male-Male wykonać połączenia między płytkami jak poniżej. 
 
 ![Hostconn](https://i.imgur.com/KVaKWrE.jpg)
-![Playerconn](https://i.imgur.com/2RDDMjg.jpg)
+![Playerconn](https://i.imgur.com/8g7dMR3.jpeg)
 ![Host2Player](https://i.imgur.com/0zfIIIV.jpg)
 
 **Oraz**
