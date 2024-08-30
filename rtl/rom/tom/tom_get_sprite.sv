@@ -7,6 +7,8 @@
  * Module to get the current model of Tom depending on which movement state he is in 
  */
 
+ `timescale 1 ns / 1 ps
+
  module tom_get_sprite(
 		input wire clk, // posedge active clock
         input wire rst,

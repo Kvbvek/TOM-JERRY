@@ -9,8 +9,6 @@
 
 `timescale 1 ns / 1 ps
 
-
-
  module host_move_ctrl (
     input  logic clk,
     input  logic rst,
@@ -34,13 +32,11 @@ import functions_tasks_pkg::*;
 // local parameters
 // coords as two lower values, meaning upper y cord and left x cord 
 localparam TOM_X_SPAWN = 500;
-localparam TOM_Y_SPAWN = 768 - 2 - TOM_HEIGHT;
+localparam TOM_Y_SPAWN = 768 - 5 - TOM_HEIGHT;
 localparam JUMP_HEIGHT = 200;
 
 localparam COUNTERX_STOP = 425_000;
 localparam COUNTERX_AIR_STOP = 600_000;
-// localparam COUNTERY_FALL_STOP = 200_000;
-// localparam COUNTERY_JUMP_STOP = 200_000;
 
 localparam STATE_BITS = 2; // number of bits used for state register
 
@@ -60,6 +56,7 @@ logic [9:0] x_tmp, x_nxt;
 logic [9:0] y_tmp, y_jump_start, y_jump_start_nxt, y_nxt;
 logic [6:0] sprite_control_nxt;
 
+// output register with sync reset
 always_ff @(posedge clk) begin
     if (rst) begin
         tom_pos.x <= TOM_X_SPAWN;
@@ -92,7 +89,6 @@ always_ff @(posedge clk) begin
 end
 
 // logic
-
 always_comb begin
     case(state_c)
         IDLE: begin

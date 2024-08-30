@@ -22,14 +22,9 @@
      
  );
  
- // import vga_pkg::*;
  import game_pkg::*;
  
- 
- /**
-  * Local variables and signals
-  */
- 
+// local variables
 logic [11:0] rgb_nxt;
 logic [10:0] address_nxt;
 
@@ -48,6 +43,7 @@ logic vblnk_d, vsync_d, hblnk_d, hsync_d;
         .dout ({vcount_d, vblnk_d, vsync_d, hcount_d, hblnk_d, hsync_d, rgb_d})
     );
 
+ // output register with sync reset
  always_ff @(posedge clk) begin
     if (rst) begin
         out.vcount <= '0;
@@ -86,7 +82,6 @@ logic vblnk_d, vsync_d, hblnk_d, hsync_d;
  end
  
 // logic
-
  always_comb begin
     imag_x_nxt = in.hcount - tom_pos.x;
     imag_y_nxt = in.vcount - tom_pos.y;

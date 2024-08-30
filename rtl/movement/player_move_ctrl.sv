@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////
 /*
  Module name:   host_move_ctrl
  Author:        Tomasz Maslanka, Jakub Brzazgacz
@@ -7,9 +6,8 @@
  Coding style: safe with FPGA sync reset
  Description:  Module for controlling movement of player
  */
-//////////////////////////////////////////////////////////////////////////////
 
-//`timescale 1 ns / 1 ps
+`timescale 1 ns / 1 ps
 
  module player_move_ctrl (
     input  logic clk,
@@ -30,9 +28,7 @@ import game_pkg::*;
 import functions_tasks_pkg::*;
 
 
-//------------------------------------------------------------------------------
 // local parameters
-//------------------------------------------------------------------------------
 // coords as two lower values, meaning upper y cord and left x cord 
 localparam JERRY_X_SPAWN = P6_X_START + 100;
 localparam JERRY_Y_SPAWN = P6_Y_COLLISION - JERRY_HEIGHT - 2;
@@ -40,14 +36,10 @@ localparam JUMP_HEIGHT = 125;
 
 localparam COUNTERX_STOP = 300_000;
 localparam COUNTERX_AIR_STOP = 450_000;
-// localparam COUNTERY_FALL_STOP_MAX = 320_000;
-// localparam COUNTERY_FALL_STOP_MAX = 320_000;
 
 localparam STATE_BITS = 2; // number of bits used for state register
 
-//------------------------------------------------------------------------------
 // local variables
-//------------------------------------------------------------------------------
 typedef enum logic [STATE_BITS-1 :0] {
     IDLE = 2'b00, // idle state
     MOVING = 2'b01,
@@ -62,6 +54,7 @@ logic [9:0] x_tmp, x_nxt;
 logic [9:0] y_tmp, y_jump_start, y_jump_start_nxt, y_nxt;
 logic [6:0] sprite_control_nxt;
 
+// output register with sync reset
 always_ff @(posedge clk) begin
     if (rst) begin
         jerry_pos.x <= JERRY_X_SPAWN;
@@ -94,7 +87,6 @@ always_ff @(posedge clk) begin
 end
 
 // logic
-
 always_comb begin
     case(state_c)
         IDLE: begin

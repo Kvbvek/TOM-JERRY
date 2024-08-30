@@ -7,8 +7,8 @@
  * Write text on screen.
  */
 
-
 `timescale 1 ns / 1 ps
+
  module write #(parameter
     BEGIN_TXT_X = 930,
     BEGIN_TXT_Y = 20,

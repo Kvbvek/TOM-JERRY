@@ -8,7 +8,6 @@
  * Made pseudo random because function $urandom_range() is not supported :(
  */
 
-
  `timescale 1 ns / 1 ps
 
  module randomx_plat (

@@ -7,6 +7,8 @@
  * Module to get the current model of Jerry depending on which movement state he is in
  */
 
+ `timescale 1 ns / 1 ps
+
  module jerry_get_sprite(
 		input logic clk, // posedge active clock
         input logic rst,

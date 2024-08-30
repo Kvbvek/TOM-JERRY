@@ -7,6 +7,8 @@
  * Module for drawing in left upper corner counter of cheeses that Jerry has collected so far.
  */
 
+`timescale 1 ns / 1 ps
+
 module draw_cheese_counter (
     input  logic clk,
     input  logic rst,

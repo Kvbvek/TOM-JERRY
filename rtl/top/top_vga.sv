@@ -50,6 +50,7 @@ vga_if drawcheese();
 vga_if drawcheeseo();
 vga_if drawgameovertom();
 vga_if drawgameoverjerry();
+vga_if drawcheese2();
 
 vga_if drawcounter();
 vga_if in_over();
@@ -84,13 +85,10 @@ wire [7:0] char_pixel_end_jerry;
 
 logic [11:0] data_wire;
 
-
-
 logic [9:0] address_wire_j;
 logic [6:0] sprite_control_wire_j;
 
 logic [11:0] data_wire_j;
-
 
 logic [1:0] is_cheese_taken_wire;
 
@@ -113,7 +111,6 @@ logic [11:0] chrgbo1, chrgbo2;
 /**
  * Signals assignments
  */
-
 assign vs = choosescreen.vsync;
 assign hs = choosescreen.hsync;
 assign {r,g,b} = choosescreen.rgb;
@@ -125,7 +122,6 @@ assign j_out = jump_wire;
 /**
  * Submodules instances
  */
-
 top u_keyboardTop(
   .clk(clk87),
   .PS2Clk(kclk),
@@ -302,8 +298,6 @@ draw_cheese u_draw_cheese1(
 
 );
 
-vga_if drawcheese2();
-
 draw_cheese u_draw_cheese2(
     .clk,
     .rst,
@@ -387,8 +381,6 @@ font_rom u_font_rom_jerry(
     .char_line(char_line_end_jerry)
     
 );
-
-
 
 char_rom_gameover #(
     .TOM(1)

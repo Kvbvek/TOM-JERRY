@@ -22,6 +22,7 @@ module draw_bg (
 import vga_pkg::*;
 import game_pkg::*;
 
+// local parameters
 localparam COLOR_BLACK = 12'h0_0_0;
 localparam PLATFORM_COLOR = 12'h1_1_1;
 localparam COLOR_GREEN = 12'h0_b_0;
@@ -35,17 +36,10 @@ localparam WALL_COLOR = 12'hc_c_c;
 localparam CHIMNEY_COLOR = 12'h2_2_2;
 localparam SKY_COLOR = 12'h0_a_f;
 
-/**
- * Local variables and signals
- */
-
+// local variables
 logic [11:0] rgb_nxt;
 
-
-/**
- * Internal logic
- */
-
+// output register with sync reset
 always_ff @(posedge clk) begin : bg_ff_blk
     if (rst) begin
         out.vcount <= '0;
@@ -66,6 +60,7 @@ always_ff @(posedge clk) begin : bg_ff_blk
     end
 end
 
+// logic
 always_comb begin : bg_comb_blk
     if (in.vblnk || in.hblnk) begin             // Blanking region:
         rgb_nxt = COLOR_BLACK;                    // - make it it black.

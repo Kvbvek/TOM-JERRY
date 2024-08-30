@@ -1,3 +1,14 @@
+/**
+ * Copyright (C) 2023  AGH University of Science and Technology
+ * MTM UEC2
+ * Author: Tomasz Maslanka, Jakub Brzazgacz
+ *
+ * Description:
+ * Module generating gameover text
+ */
+
+`timescale 1 ns / 1 ps
+
 module char_rom_gameover
     #( parameter
     TOM = 1
@@ -8,12 +19,15 @@ module char_rom_gameover
     output logic [6:0] char_code
 );
 
+// local variables
 logic [6:0] data;
 
+// output register with sync reset
 always_ff @(posedge clk) begin
     char_code <= data;
 end
 
+// logic
 always_comb begin
     if(TOM == 1) begin
         case(char_xy) 

@@ -24,20 +24,10 @@ module draw_gameover (
 
 import game_pkg::*;
 
-
-/**
- * Local variables and signals
- */
-
-// logic [11:0] rgb_nxt;
+// local variables
 vga_if intr();
-// vga_if out_over();
 
-/**
- * Internal logic
- * 
- */
-
+// output register with sync reset
 always_ff @(posedge clk) begin
     if (rst) begin
         out.vcount <= '0;
@@ -60,7 +50,7 @@ always_ff @(posedge clk) begin
     end
 end
 
-
+// logic
 always_comb begin
     if(over == 2'b10) begin
         intr.vcount = in_texttom.vcount;

@@ -17,10 +17,7 @@ module vga_timing (
 
 import vga_pkg::*;
 
-
-/**
- * Local variables and signals
- */
+// local variables
 logic [10:0] vcount_nxt;
 logic vsync_nxt;
 logic vblnk_nxt;
@@ -28,9 +25,7 @@ logic [10:0] hcount_nxt;
 logic hsync_nxt;
 logic hblnk_nxt;
 
-/**
- * Internal logic
- */
+// output register with sync reset
  always_ff @(posedge clk) begin
     if (rst) begin
         out.vcount <= '0;
@@ -50,6 +45,7 @@ logic hblnk_nxt;
     end
 end
 
+// logic
 always_comb begin
     if(out.hcount == (HOR_TOTAL_TIME - 1)) begin
         hcount_nxt = '0;
