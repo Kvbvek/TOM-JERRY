@@ -6,8 +6,39 @@
 git clone https://github.com/Kvbvek/TOM-JERRY.git
 ```
 
-**Wszystkie komendy należy wywoływać z głównego folderu projektu** (w tym wypadku `uec2_lab1`).\
+**Wszystkie komendy należy wywoływać z głównego folderu projektu** (w tym wypadku `TOM-JERRY`).\
 _Każdy plik w projekcie posiada nagłówek z krótkim opisem jego funkcji._
+
+## Poprawne połączenie układów FPGA (2x Basys3)
+Aby poprawnie połączyć układy FPGA należy postępować zgodnie z poniższymi instrukcjami
+
+* Należy wybrać główną płytkę (Host), z której będzie przesyłany obraz do monitora. Druga płytka będzie służyła do przesyłania informacji o ruchu (Left, Right, Jump) drugiego gracza (Player) do hosta (Host), który odbiera te informacje.
+
+* Należy zlokalizować piny Pmod JB na obu płytkach
+
+![piny JB na płytce](https://i.imgur.com/O8VOpFR.jpg)
+
+* Następnie używając kabli Male-Male wykonać połączenia między płytkami jak poniżej. 
+
+![Hostconn](https://i.imgur.com/Nyl3XME.jpg)
+![Playerconn](https://i.imgur.com/5331tsU.jpg)
+![Host2Player](https://i.imgur.com/mP1lh9u.jpg)
+
+**Oraz**
+* Do płytki Host'a należy podłączyć do wejścia VGA monitor, oraz do wejścia USB klawiaturę z protokołem PS2 
+* Do płytki Player'a, do wejścia USB podłączyć klawiaturę z protokołem PS2
+
+**Oba układy FPGA muszą zostać zaprogramowane tym samym bitstream'em**
+
+## Rozgrywka
+Po wygenerowaniu bitstreamu i zaprogramowaniu obu układów (instrukcje do tego w sekcjach poniżej) rozpoczyna się rozgrywka. 
+Gracz będący Hostem gra jako Tom, natomiast gracz będący Playerem gra jako Jerry.
+* Celem Tom'a jest złapanie Jerry'ego zanim ten zdobędzie 10 kawałków sera.
+* Celem Jerry'ego jest zdobycie 10 kawałków sera, nie będąc złapanym przez Tom'a.
+
+Gra kończy się, gdy Jerry zdobędzie 10 kawałków sera, lub Tom go złapie. 
+
+**Po zakończeniu gry Host ma możliwość zresetowania gry wciskając przycisk Enter na swojej klawiaturze.**
 
 ## Inicjalizacja środowiska
 
