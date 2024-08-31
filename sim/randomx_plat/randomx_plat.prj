@@ -11,5 +11,5 @@
 
 sv work ../../rtl/package/game_pkg.sv \
         ../../rtl/interface/pos_if.sv \
-        ../../rtl/randomx_plat.sv \
+        ../../rtl/cheese/randomx_plat.sv \
         randomx_plat_tb.sv

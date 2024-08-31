@@ -62,35 +62,34 @@ initial begin
     rst = 1'b0;
     # 30 rst = 1'b1;
     # 30 rst = 1'b0;
+    genr = 2'b00;
 
     $display("Starting simulation...");
+    # 50;
+    $display("genr val - %b, positions ch1: x - %d, y - %d / ch2: x - %d, y - %d.",genr, p1.x, p1.y, p2.x, p2.y);
 
     # 50 genr = 2'b01;
-    # 100 genr = 2'b01;
+    # 100
     # 1;
-    $display("genr val - %d, positions: x - %d, y - %d.",genr, p1.x, p1.y);
-    genr = 2'b01;
+    $display("genr val - %b, positions ch1: x - %d, y - %d / ch2: x - %d, y - %d.",genr, p1.x, p1.y, p2.x, p2.y);
+    genr = 2'b00;
     #100;
-    $display("After few cycles: genr val - %d, positions: x - %d, y - %d.",genr, p1.x, p1.y);
+    // $display("After few cycles: genr val - %d, positions ch1 : x - %d, y - %d.",genr, p1.x, p1.y);
+    $display("genr val - %b, positions ch1: x - %d, y - %d / ch2: x - %d, y - %d.",genr, p1.x, p1.y, p2.x, p2.y);
 
-    # 5 genr = 2'b01;
-    # 150 genr = 2'b01;
-    # 1;
+    # 150 genr = 2'b10;
+    # 150;
+    $display("genr val - %b, positions ch1: x - %d, y - %d / ch2: x - %d, y - %d.",genr, p1.x, p1.y, p2.x, p2.y);
+    genr = 2'b10;
 
-    $display("genr val - %d, positions: x - %d, y - %d.",genr, p1.x, p1.y);
-
-    # 50 genr = 2'b01;
-    # 150 genr = 2'b01;
-    # 1;
-
-    $display("genr val - %d, positions: x - %d, y - %d.",genr, p1.x, p1.y);
-
-    # 50 genr = 2'b01;
-    # 150 genr = 2'b01;
-    # 1;
-
-    $display("genr val - %d, positions: x - %d, y - %d.",genr, p1.x, p1.y);
-
+    # 150;
+    $display("genr val - %b, positions ch1: x - %d, y - %d / ch2: x - %d, y - %d.",genr, p1.x, p1.y, p2.x, p2.y);
+    genr = 2'b00;
+    # 150;
+    $display("genr val - %b, positions ch1: x - %d, y - %d / ch2: x - %d, y - %d.",genr, p1.x, p1.y, p2.x, p2.y);
+    # 150;
+    $display("genr val - %b, positions ch1: x - %d, y - %d / ch2: x - %d, y - %d.",genr, p1.x, p1.y, p2.x, p2.y);
+    
     // End the simulation.
     $display("Simulation is over, check the waveforms.");
     $finish;
