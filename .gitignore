@@ -28,6 +28,7 @@ sim/xsim*
 sim/*.wdb
 sim/.hbs
 
+.dvt
 vivado*
 xvlog*
 xelab*

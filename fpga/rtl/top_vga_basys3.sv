@@ -19,7 +19,6 @@ module top_vga_basys3 (
     input  wire btnC,
     inout  wire PS2Clk,
     inout  wire PS2Data,
-    // output wire RsTx,
     output wire Vsync,
     output wire Hsync,
     output wire [3:0] vgaRed,
@@ -108,7 +107,6 @@ top_vga u_top_vga (
     .j_out(JB7),
     .l_out(JB8),
     .r_out(JB9)
-    // .oflag(RsTx)
     
 );
 
